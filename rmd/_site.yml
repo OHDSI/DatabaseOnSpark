@@ -1,0 +1,28 @@
+name: "OHDSI Databricks User Group"
+output_dir: "../docs"
+output:
+  html_document:
+    theme: cosmo
+    css: style.css
+    includes:
+      in_header: "favicon.html"
+exclude: ["extras"]
+navbar:
+  title: '<div><img src="ohdsi16x16.png"></img> OHDSI Databricks User Group </div>'
+  right:
+    - icon: fa-github
+      href: https://github.com/OHDSI/DatabaseOnSpark
+  left:
+    - text: "Background"
+      icon: fa-landmark
+      href: background.html
+    - text: "Supported OHDSI Tools"
+      icon: fa-list
+      href: supported.html
+    - text: "Getting Started"
+      icon: fa-list
+      menu:
+        - text: "ETL Conventions"
+          href: etl.html
+        - text: "Connecting OHDSI Tools"
+          href: connecting.html
