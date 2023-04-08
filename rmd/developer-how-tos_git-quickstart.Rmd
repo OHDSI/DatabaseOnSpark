@@ -1,0 +1,117 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<p>
+			<h1>Git and Github Quickstart Guide</h1>
+			This is the quick start guid for Git and Git hub.  
+			Git is a version control system that is used by virtually all open source (and other large) projects.  
+			This quick start guide shows how to download and install a Git client, 
+			how to create a Github account,
+			and how to get permissions for an existing Github project (like this one!).   
+			<br/>
+
+			<h3>Summary</h3>
+			The following steps are detail below.  
+			<ul>
+				<li>Install a Git Client</li>
+				<li>Create a Github Account</li>
+				<li>Fork a Project</li>
+				<li>Clone the Project</li>
+				<li>Make Your Updates</li>
+				<li>Commit Your Updates</li>
+				<li>Create a Pull Request</li>
+			</ul>
+
+      <!-- 
+      *
+      * install a client
+      *
+      * -->
+
+			<h2>Install a Git Client</h2>
+			Instructions for installing a Git client are 
+			<a target="gitclient" href = "./developer-how-tos-install-git-client.html">
+				here
+			</a>. 
+			<br/>
+			
+      <!-- 
+      *
+      * create an account
+      *
+      * -->
+
+			<h2>Create a Github Account</h2>
+			Go to <a href="https://github.com/">https://github.com/</a> and select "Sign Up".  
+			Follow the instructions there to create your Github account.  
+			<img width="600px" src="./img/developer-how-tos/git-quickstart/create-account.png" />
+			<br/><br/>
+			<p>
+				Once you've created your account you can check your user name by selecting the icon in the upper right corner 
+				and then selecting "Your Profile" (select the link at the bottom of the screen to skip the tutorial first).  
+				Your user name should be on the left side of the screen.  
+			</p>
+
+      <!-- 
+      *
+      * fork a project
+      *
+      * -->
+
+      <!-- 
+      *
+      * clone
+      *
+      * -->
+
+			<h3>Clone the Repository</h3>
+			<p>
+			"Cloning" the repository just means pulling a copy of the files down to your local machine in a way that 
+			any changes you make can be merged back into the repository.  
+			</p>
+			<p>
+			After you've accepted the invitation you will be sent to the home page of the repository.  
+			Copy the url.  
+			</p>
+			<br/><br/>
+			<img width="600px" src="./img/developer-how-tos/git-quickstart/repository.png" />
+			<br/><br/>
+			<p>
+				You'll want to follow the repository owners instructions for forking and branching, but for now, 
+				lets just look at the case of working directly on the main branch of the existing (unforked) repository (which you should never do... ever).  
+			</p>
+			<p>
+				Open a cmd prompt and navigate to the directory where you would like the project to live.  
+			</p>
+			<p>
+				After you've install the client you will need to issue the following two commands (this is usually a one time thing).  
+				<br/>
+				git config --global user.email "the-email-you-registered-withc@yourhost.com"
+				<br/>
+				git config --global user.name "YOUR_USERNAME"
+			</p>
+			<p>
+				To clone the repository, enter the command:<br/>
+				git clone &lt;paste-repository-name-here&gt;
+			</p>			
+			<img width="800px" src="./img/developer-how-tos/git-quickstart/clone.png" />
+			<br/><br/>
+			<h3>Make Your Updates and Commit</h3>
+			Change to the directory that was downloaded from the clone process.  
+			Make your updates to the files.  
+			When you are done with your updates, commit the changes using the following Git commands. 
+			<br/>
+			<br/>
+			git add -A <br/>
+			git commit -m "a very useful and meaningful message" <br/>
+			git push origin <br/>
+
+</p>
+

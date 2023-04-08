@@ -1,0 +1,40 @@
+---
+title: '<div>OHDSI Databricks User Group: How to Contribute to this Documentation</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<p>
+  To contribute to this documentation follow the steps below. 
+  Links to a detailed description of each step are provided. 
+  <ul>
+    <li>
+      Install R and RStudio if you don't have it already.<br/>
+      [Install R and RStudio Detailed Instructions](developer-how-tos_r-install.html) (Windows)
+    </li>
+    <li>
+      Fork this project from Github and make a local clone.<br/>
+      [Fork Project from Github Detailed Instructions](developer-how-tos_git-quickstart.html) are in the [Git Quickstart Guide](developer-how-tos_git-quickstart.html)
+    </li>
+    <li>
+      Add a new page or edit an existing page.<br/>
+      [Add a New Page Detailed Instructions](developer-how-tos_a-new-page.html)
+    </li>
+    <li>
+      Commit your update to Github.<br/>
+      [Detailed Instrudtions to Commit to Github](developer-how-tos_git-quickstart.html) are in the [Git Quickstart Guide](developer-how-tos_git-quickstart.html)
+    </li>
+    <li>
+      Createe a Github pull request.<br/>
+      [Detailed Instructions to Create a Github Pull Request](developer-how-tos_git-quickstart.html) are in the [Git Quickstart Guide](developer-how-tos_git-quickstart.html)
+    </li>
+  </ul>
+</p>
+
+
+
+  

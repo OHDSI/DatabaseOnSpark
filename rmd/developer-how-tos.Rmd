@@ -1,0 +1,30 @@
+---
+title: '<div>OHDSI Databricks User Group: Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<h2>Documentation and Github</h2>
+
+<table class="table">
+  <tr>
+    <td>Documentation</td>
+    <td>
+      [How to Add to this Documentation](developer-how-tos_documentation.html)<br/>
+      This page describes how to add to the documentation for this project. 
+      This includes forking and cloning the project from Github, 
+      getting started using R Markup (Rmd), 
+      editing and previewing a new page, 
+      and committing the updated documentation back up to Github.  
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+  

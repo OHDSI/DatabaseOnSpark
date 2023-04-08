@@ -22,6 +22,8 @@ navbar:
     - text: "Getting Started"
       icon: fa-list
       menu:
+        - text: "Developer How-tos"
+          href: developer-how-tos.html
         - text: "ETL Conventions"
           href: etl.html
         - text: "Connecting OHDSI Tools"
