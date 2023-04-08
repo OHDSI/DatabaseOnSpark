@@ -1,0 +1,34 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<p>
+			<!-- install r -->			
+			<h3>Install R</h3>
+			R can be downloaded and installed from <a target="r" href="https://cran.r-project.org/bin/windows/base/">https://cran.r-project.org/bin/windows/base/</a>
+			<img width="800px" src="./img/developer-how-tos/r-install/download-r.PNG" />             
+			<br/>			
+
+			<!-- install rtools -->			
+			<h3>Install R Tools</h3>
+			R Tools can be downloaded and installed from <a target="r" href="https://cran.r-project.org/bin/windows/Rtools/rtools40.html">https://cran.r-project.org/bin/windows/Rtools/rtools40.html</a>
+			<img width="800px" src="./img/developer-how-tos/r-install/download-rtools.png" />             
+			<br/>			
+
+			<!-- install rstudio -->			
+			<h3>Install RStudio</h3>
+			R can be downloaded and installed from <a target="r" href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a>
+			<br/>
+			<p style="color: red;">
+				The first time you launch R you will be prompted if you want to install devtools.  Select Yes.  
+			</p>
+			<img width="800px" src="./img/developer-how-tos/r-install/download-rstudio.PNG" />             
+			<br/>			
+
+</p>

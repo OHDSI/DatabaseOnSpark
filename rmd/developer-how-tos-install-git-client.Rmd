@@ -1,0 +1,21 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<p>
+			<h1>Install A Git Client</h1>
+			Follow the instructions at the link below to install a git client.
+			<br/>
+			<a target="git" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> 
+			<br/>
+			<br/>
+			<img width="800px" src="./img/developer-how-tos/git-quickstart/download-git.PNG" />             
+			<br/>
+</p>		
+
