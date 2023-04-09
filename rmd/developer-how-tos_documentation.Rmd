@@ -18,7 +18,7 @@ output:
     </li>
     <li>
       Fork this project from Github and make a local clone.<br/>
-      [Fork Project from Github Detailed Instructions](developer-how-tos_git-quickstart.html) are in the [Git Quickstart Guide](developer-how-tos_git-quickstart.html)
+      See the [Git Quickstart Guide](developer-how-tos_git-quickstart.html) for detailed instructions. 
     </li>
     <li>
       Add a new page or edit an existing page.<br/>
@@ -26,11 +26,11 @@ output:
     </li>
     <li>
       Commit your update to Github.<br/>
-      [Detailed Instrudtions to Commit to Github](developer-how-tos_git-quickstart.html) are in the [Git Quickstart Guide](developer-how-tos_git-quickstart.html)
+      See the [Git Quickstart Guide](developer-how-tos_git-quickstart.html) for detailed instructions. 
     </li>
     <li>
       Createe a Github pull request.<br/>
-      [Detailed Instructions to Create a Github Pull Request](developer-how-tos_git-quickstart.html) are in the [Git Quickstart Guide](developer-how-tos_git-quickstart.html)
+      See the [Git Quickstart Guide](developer-how-tos_git-quickstart.html) for detailed instructions. 
     </li>
   </ul>
 </p>
