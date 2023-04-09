@@ -2,10 +2,10 @@
 title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
 output:
   html_document:
-    toc: FALSE
+    toc: TRUE
     toc_depth: 3
     toc_float:
-    collapsed: false
+      collapsed: FALSE
 ---
 
 <p>
@@ -15,9 +15,8 @@ output:
 			This quick start guide shows how to download and install a Git client, 
 			how to create a Github account,
 			and how to get permissions for an existing Github project (like this one!).   
-			<br/>
 
-			<h3>Summary</h3>
+			<h2>Summary</h2>
 			The following steps are detail below.  
 			<ul>
 				<li>Install a Git Client</li>
@@ -65,27 +64,24 @@ output:
       *
       * -->
 
+			<h2>Fork the Project</h2>
+			Login to Github with the account you would like to use for this work. 
+      Navigate to the project you want to edit, in this case 
+      [https://github.com/OHDSI/DatabaseOnSpark](https://github.com/OHDSI/DatabaseOnSpark). 
+      Select the "Fork" drop down and then select "Create a new fork" as shown below. 
+      <br/>
+      <img width="600px" src="img/developer-how-tos/git-quickstart/fork.PNG" />
+
       <!-- 
       *
       * clone
       *
       * -->
 
-			<h3>Clone the Repository</h3>
+			<h2>Clone the Repository</h2>
 			<p>
-			"Cloning" the repository just means pulling a copy of the files down to your local machine in a way that 
-			any changes you make can be merged back into the repository.  
-			</p>
-			<p>
-			After you've accepted the invitation you will be sent to the home page of the repository.  
-			Copy the url.  
-			</p>
-			<br/><br/>
-			<img width="600px" src="./img/developer-how-tos/git-quickstart/repository.png" />
-			<br/><br/>
-			<p>
-				You'll want to follow the repository owners instructions for forking and branching, but for now, 
-				lets just look at the case of working directly on the main branch of the existing (unforked) repository (which you should never do... ever).  
+  			"Cloning" the repository just means pulling a copy of the files down to your local machine in a way that 
+  			any changes you make can be merged back into the repository.  
 			</p>
 			<p>
 				Open a cmd prompt and navigate to the directory where you would like the project to live.  
@@ -100,10 +96,11 @@ output:
 			<p>
 				To clone the repository, enter the command:<br/>
 				git clone &lt;paste-repository-name-here&gt;
-			</p>			
+			</p>
+			
 			<img width="800px" src="./img/developer-how-tos/git-quickstart/clone.png" />
-			<br/><br/>
-			<h3>Make Your Updates and Commit</h3>
+			<br/>
+			<h2>Make Your Updates and Commit</h2>
 			Change to the directory that was downloaded from the clone process.  
 			Make your updates to the files.  
 			When you are done with your updates, commit the changes using the following Git commands. 
@@ -113,5 +110,38 @@ output:
 			git commit -m "a very useful and meaningful message" <br/>
 			git push origin <br/>
 
+  <h2>Configuring Client Security</h2>
+  <p>
+    The first time you try to push your updates you will be asked for a username and a password. 
+    Your username/password will not work as github has moved to only allowing token based authentication for this activity. 
+    To get a token follow the [Create Token](developer-how-tos_git-create-token.html) instructions. 
+    Then use your username for the username and the token for the password. 
+    Note that pasting the token in as the password can be a little tricky as the cmd prompt does not change when you do the paste. 
+    I find the best way to do this is to click the top border of the cmd window to set the focus to that window. 
+    Then, right click in the window (this does the paste). 
+    Then, press enter. 
+  </p>
+
+  <h2>Changing Client User</h2>
+  After the first time you authenticate to the server the git client saves your credentials. 
+  This way you do not have to re-authenticate every time you would like to push new changes to the server. 
+  To change the user that git uses to authenticate is a little tricky. 
+  You need to open "Credential Manager" (search under windows). 
+  <br/>
+  <img border="1px" width="600px" src="./img/developer-how-tos/git-quickstart/credential-manager-01.PNG" />
+  <br/>
+  <br/>
+  Then select the Windows option. 
+  <br/>
+  <img width="600px" src="./img/developer-how-tos/git-quickstart/credential-manager-02.PNG" />
+  <br/>
+  <br/>
+  Then scroll to the git:https://github.com entry and select remove.
+  <br/>
+  <img width="600px" src="./img/developer-how-tos/git-quickstart/credential-manager-03.PNG" />
+  <br/>
+  <br/>
+  The next time you try to push code to the server you will be asked to enter your username/password 
+  (which is really username/token). 
 </p>
 
