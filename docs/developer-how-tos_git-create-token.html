@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -226,75 +223,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -302,16 +230,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -387,152 +305,28 @@ How-tos</h1>
 
 <p>
 <h1>
-Git and Github Quickstart Guide
+Git: Create a Github Token
 </h1>
-<p>This is the quick start guid for Git and Git hub.<br />
-Git is a version control system that is used by virtually all open
-source (and other large) projects.<br />
-This quick start guide shows how to download and install a Git client,
-how to create a Github account, and how to get permissions for an
-existing Github project (like this one!).</p>
-<h2>
-Summary
-</h2>
-The following steps are detail below.<br />
-
-<ul>
-<li>
-Install a Git Client
-</li>
-<li>
-Create a Github Account
-</li>
-<li>
-Fork a Project
-</li>
-<li>
-Clone the Project
-</li>
-<li>
-Make Your Updates
-</li>
-<li>
-Commit Your Updates
-</li>
-<li>
-Create a Pull Request
-</li>
-</ul>
-<!-- 
-      *
-      * install a client
-      *
-      * -->
-<h2>
-Install a Git Client
-</h2>
-<p>Instructions for installing a Git client are
-<a target="gitclient" href = "./developer-how-tos-install-git-client.html">
-here </a>. <br/></p>
-<!-- 
-      *
-      * create an account
-      *
-      * -->
-<h2>
-Create a Github Account
-</h2>
-Go to <a href="https://github.com/">https://github.com/</a> and select
-“Sign Up”.<br />
-Follow the instructions there to create your Github account.<br />
-<img width="600px" src="img/developer-how-tos/git-quickstart/create-account.png" />
-<br/><br/>
 <p>
-Once you’ve created your account you can check your user name by
-selecting the icon in the upper right corner and then selecting “Your
-Profile” (select the link at the bottom of the screen to skip the
-tutorial first).<br />
-Your user name should be on the left side of the screen.<br />
-
-</p>
-<!-- 
-      *
-      * fork a project
-      *
-      * -->
-<h2>
-Fork the Project
-</h2>
-<p>Login to Github with the account you would like to use for this work.
-Navigate to the project you want to edit, in this case <a
-href="https://github.com/OHDSI/DatabaseOnSpark">https://github.com/OHDSI/DatabaseOnSpark</a>.
-Select the “Fork” drop down and then select “Create a new fork” as shown
-below. <br/>
-<img src="img/developer-how-tos/git-quickstart/fork.PNG" /></p>
-<!-- 
-      *
-      * clone
-      *
-      * -->
-<h2>
-Clone the Repository
-</h2>
-<p>
-“Cloning” the repository just means pulling a copy of the files down to
-your local machine in a way that any changes you make can be merged back
-into the repository.<br />
-
-</p>
-<p>
-Open a cmd prompt and navigate to the directory where you would like the
-project to live.<br />
-
-</p>
-<p>
-After you’ve install the client you will need to issue the following two
-commands (this is usually a one time thing).<br />
-<br/> git config –global user.email “<a
-href="mailto:the-email-you-registered-withc@yourhost.com"
-class="email">the-email-you-registered-withc@yourhost.com</a>” <br/> git
-config –global user.name “YOUR_USERNAME”
-</p>
-<p>
-To clone the repository, enter the command:<br/> git clone
-&lt;paste-repository-name-here&gt;
-</p>
-<img width="800px" src="img/developer-how-tos/git-quickstart/clone.png" />
+To create a github token, log into the github account you want the token
+for and select settings from the gear menu in the upper right hand
+corner of the page as shown below.<br />
+When an option is given, select the clasic option if it is available.
 <br/>
-<h2>
-Make Your Updates and Commit
-</h2>
-<p>Change to the directory that was downloaded from the clone
-process.<br />
-Make your updates to the files.<br />
-When you are done with your updates, commit the changes using the
-following Git commands. <br/> <br/> git add -A <br/> git commit -m “a
-very useful and meaningful message” <br/> git push origin <br/></p>
-<h3>
-Configuring Security
-</h3>
-<p>
-The first time you try to push your updates you will be asked for a
-username and a password. Your username/password will not work as github
-has moved to only allowing token based authentication for this activity.
-To get a token follow the <a
-href="developer-how-tos_git-create-token.html">Create Token</a>
-instructions. Then use your username for the username and the token for
-the password. Note that pasting the token in as the password can be a
-little tricky as the cmd prompt does not change when you do the paste. I
-find the best way to do this is to click the top border of the cmd
-window to set the focus to that window. Then, right click in the window
-(this does the paste). Then, press enter.
+<img width="800px" src="img/developer-how-tos/git-quickstart/token/select-settings.png" />
+<br/><br/> Select “Developer settings” from the menu on the left.<br />
+<br/>
+<img width="800px" src="img/developer-how-tos/git-quickstart/token/developer-settings.png" />
+<br/><br/> Select “Personal access tokens”, “Tokens (clasic)”, then
+“Generate new token”.<br />
+<br/>
+<img width="800px" src="img/developer-how-tos/git-quickstart/token/generate-token.png" />
+<br/><br/> Copy the token and save it in a text file someplace safe.
 </p>
 </p>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -565,35 +359,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

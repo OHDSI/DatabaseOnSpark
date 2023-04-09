@@ -1,0 +1,31 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+			<h1>Git: Create a Github Token</h1>
+			<p>
+				To create a github token, log into the github account you want the token for and 
+				select settings from the gear menu in the upper right hand corner of the page as shown below.  
+				When an option is given, select the clasic option if it is available. 
+				<br/>
+				<img width="800px" src="./img/developer-how-tos/git-quickstart/token/select-settings.png" />
+				<br/><br/>
+				Select "Developer settings" from the menu on the left.  
+				<br/>
+				<img width="800px" src="./img/developer-how-tos/git-quickstart/token/developer-settings.png" />
+				<br/><br/>
+				Select "Personal access tokens", "Tokens (clasic)", then "Generate new token".  
+				<br/>
+				<img width="800px" src="./img/developer-how-tos/git-quickstart/token/generate-token.png" />
+				<br/><br/>
+				Copy the token and save it in a text file someplace safe.
+			</p>
+
+</p>
