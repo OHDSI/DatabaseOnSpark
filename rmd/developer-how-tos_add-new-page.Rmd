@@ -1,0 +1,54 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+			<h1>Documentation: Add a New Page</h1>
+      <p>
+        After you've forked and checked out 
+        <a href="https://github.com/OHDSI/DatabaseOnSpark">this</a>
+        project from Github, you should have a directory structure that looks similar to the following. 
+        <br/>
+        <img width="600px" src="./img/developer-how-tos/new-page/01-checked-out-dir.png" />
+        <br/>
+        <br/>
+        The source files for the documentation are in the rmd directory. 
+        <br/>
+        <img width="600px" src="./img/developer-how-tos/new-page/02-rmd-dir.png" />
+        <br/>
+        <br/>
+        The top level menue structure for the application is in the "_site.yml" file. 
+        <br/>
+        <img width="600px" src="./img/developer-how-tos/new-page/03-site-yml.png" />
+        <br/>
+        <br/>
+        To create a new page, add a new .Rmd file to the rmd folder. 
+        <br/>
+        <img width="600px" src="./img/developer-how-tos/new-page/04-create-new-rmd.png" />
+        <br/>
+        <br/>
+        Add content to the page using R-markdown and HTML. 
+        To preview a page, press the "Knit" button at the top of the RStudio UI. 
+        The entire web site can be build by setting the working directory 
+        and then running rmarkdown::render_site(). 
+        <br/>
+        <img width="600px" src="./img/developer-how-tos/new-page/05-src-file.png" />
+        <br/>
+        <br/>
+        After rmarkdown::render_site() has been run, the site can be browsed 
+        by opening one of the html files in the ./docs folder using a web browser. 
+        <img width="600px" src="./img/developer-how-tos/new-page/06-browse.png" />
+        <br/>
+        <br/>
+        When you're done with your edits run rmarkdown::render_site(), commit your work, and create a pull request 
+        (see the <a href="./developer-how-tos_git-quickstart.html">Git Quickstart Guide</a> 
+        for instructions on committing and creating a pull request). 
+      </p>
+			
+</p>
