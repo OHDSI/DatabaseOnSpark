@@ -70,7 +70,7 @@ output:
       [https://github.com/OHDSI/DatabaseOnSpark](https://github.com/OHDSI/DatabaseOnSpark). 
       Select the "Fork" drop down and then select "Create a new fork" as shown below. 
       <br/>
-      <img src="img/developer-how-tos/git-quickstart/fork.PNG" />
+      <img width="600px" src="img/developer-how-tos/git-quickstart/fork.PNG" />
 
       <!-- 
       *
@@ -110,7 +110,7 @@ output:
 			git commit -m "a very useful and meaningful message" <br/>
 			git push origin <br/>
 
-  <h3>Configuring Security</h3>
+  <h2>Configuring Client Security</h2>
   <p>
     The first time you try to push your updates you will be asked for a username and a password. 
     Your username/password will not work as github has moved to only allowing token based authentication for this activity. 
@@ -122,5 +122,26 @@ output:
     Then, press enter. 
   </p>
 
+  <h2>Changing Client User</h2>
+  After the first time you authenticate to the server the git client saves your credentials. 
+  This way you do not have to re-authenticate every time you would like to push new changes to the server. 
+  To change the user that git uses to authenticate is a little tricky. 
+  You need to open "Credential Manager" (search under windows). 
+  <br/>
+  <img border="1px" width="600px" src="./img/developer-how-tos/git-quickstart/credential-manager-01.PNG" />
+  <br/>
+  <br/>
+  Then select the Windows option. 
+  <br/>
+  <img width="600px" src="./img/developer-how-tos/git-quickstart/credential-manager-02.PNG" />
+  <br/>
+  <br/>
+  Then scroll to the git:https://github.com entry and select remove.
+  <br/>
+  <img width="600px" src="./img/developer-how-tos/git-quickstart/credential-manager-03.PNG" />
+  <br/>
+  <br/>
+  The next time you try to push code to the server you will be asked to enter your username/password 
+  (which is really username/token). 
 </p>
 

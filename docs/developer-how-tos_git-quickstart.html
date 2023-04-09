@@ -468,7 +468,7 @@ Navigate to the project you want to edit, in this case <a
 href="https://github.com/OHDSI/DatabaseOnSpark">https://github.com/OHDSI/DatabaseOnSpark</a>.
 Select the “Fork” drop down and then select “Create a new fork” as shown
 below. <br/>
-<img src="img/developer-how-tos/git-quickstart/fork.PNG" /></p>
+<img width="600px" src="img/developer-how-tos/git-quickstart/fork.PNG" /></p>
 <!-- 
       *
       * clone
@@ -511,9 +511,9 @@ Make your updates to the files.<br />
 When you are done with your updates, commit the changes using the
 following Git commands. <br/> <br/> git add -A <br/> git commit -m “a
 very useful and meaningful message” <br/> git push origin <br/></p>
-<h3>
-Configuring Security
-</h3>
+<h2>
+Configuring Client Security
+</h2>
 <p>
 The first time you try to push your updates you will be asked for a
 username and a password. Your username/password will not work as github
@@ -527,6 +527,22 @@ find the best way to do this is to click the top border of the cmd
 window to set the focus to that window. Then, right click in the window
 (this does the paste). Then, press enter.
 </p>
+<h2>
+Changing Client User
+</h2>
+After the first time you authenticate to the server the git client saves
+your credentials. This way you do not have to re-authenticate every time
+you would like to push new changes to the server. To change the user
+that git uses to authenticate is a little tricky. You need to open
+“Credential Manager” (search under windows). <br/>
+<img border="1px" width="600px" src="img/developer-how-tos/git-quickstart/credential-manager-01.PNG" />
+<br/> <br/> Then select the Windows option. <br/>
+<img width="600px" src="img/developer-how-tos/git-quickstart/credential-manager-02.PNG" />
+<br/> <br/> Then scroll to the <a href="git:https://github.com"
+class="uri">git:https://github.com</a> entry and select remove. <br/>
+<img width="600px" src="img/developer-how-tos/git-quickstart/credential-manager-03.PNG" />
+<br/> <br/> The next time you try to push code to the server you will be
+asked to enter your username/password (which is really username/token).
 </p>
 
 
