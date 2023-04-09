@@ -1,5 +1,5 @@
 ---
-title: '<div><img src="ohdsi40x40.png"></img> OHDSI Databricks User Group </div>'
+title: '<div><img src="ohdsi40x40.png"></img> <b>OHDSI Databricks User Group</b> </div>'
 output:
    html_document:
         toc: TRUE
@@ -8,34 +8,89 @@ output:
           collapsed: false
 ---
 
+<h2>Problem Space and Goals</h2>
+<p>
+  Databricks and Spark are new, quickly evolving data management systems (database, data lake, data warehouse) that can provide high performance solutions for large and very large data sets. 
+  This group is dedicated to creating, documenting, supporting, and promoting OHDSI on Databricks/Spark. 
+</p>
+<p>
+  Information is provided below on how to join our group. 
+</p>
+<p>
+  If you have specific OHDSI on Databricks/Spark please reach out to us on the 
+  <a href="https://forums.ohdsi.org/c/implementers/6">OHDSI Implementers Forum</a> and include "Databricks/Spark" in the topic of your post. 
+</p>
 
-# **Problem Space and Goals**
+<h2>MS Teams Resources</h2>
+
+Below are links to our main Microsoft Teams resources.
+<br/>
+<br/>
+<table claSS="table">
+  <tr>
+    <td>Databricks User Group</td>
+    <td>
+      <a href="https://teams.microsoft.com/l/channel/19%3a54e0717f78fb428ea842ca1d5fec53dc%40thread.tacv2/Databricks%2520Users%2520Group?groupId=3c4549e9-9de8-4827-9813-e751120326ad&tenantId=a30f0094-9120-4aab-ba4c-e5509023b2d5">Databricks User Group</a>
+      <br/>
+      This is the main MS Teams Channel for the Databricks User Group.  
+    </td>
+  </tr>
+
+  <tr>
+    <td>Objectives and Key Results (2023)</td>
+    <td>
+      <a href="https://ohdsiorg.sharepoint.com/:f:/r/sites/Workgroup-Open-SourceCommunity/Shared%20Documents/Databricks%20Users%20Group/OKR-2023?csf=1&web=1&e=avdr2R">Objectives and Key Results</a>
+      <br/>
+      This is where our Objectives and Key Results (OKR) document can be found.
+    </td>
+  </tr>
+
+  <tr>
+    <td>Recordings</td>
+    <td>
+      <a href="https://ohdsiorg.sharepoint.com/:f:/r/sites/Workgroup-Open-SourceCommunity/Shared%20Documents/Databricks%20Users%20Group/Recordings?csf=1&web=1&e=n9KDfM">Recordings</a>
+      <br/>
+      This is where recordings of previous meetings can be found in MS Teams.
+    </td>
+  </tr>
+
+</table>
+
+<h2>Meeting Schedule</h2>
+
+<p>
+  The Databricks User Group meets weekly alternating between our strategic/governance meeting 
+  and our tactical/technical meeting. 
+  The strategic meeting focuses on long term goals and strategy. 
+  The tactical meeting focuses on technical issues, coding, live demos and trouble shooting specific issues. 
+  <br/>
+  <br/>
+  Metting details are available at the 
+  <a href="">OHDSI</a> page for <a href="https://ohdsi.org/upcoming-working-group-calls/">Upcoming Working Group Calls</a>
+  
+  
+  Data Bricks User Group Technical Forum: Mondays at 11am ET ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3a54e0717f78fb428ea842ca1d5fec53dc%40thread.tacv2/1678125983626?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22df92a21b-7fa5-4c86-9f81-9f6ec39e042c%22%7d))
+  <br/>
+  Meetings are traditionally scheduled for every other Monday at 11am ET  
+  
+  Data Bricks User Group Meeting: Mondays at 11am ET ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3a54e0717f78fb428ea842ca1d5fec53dc%40thread.tacv2/1678125905884?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22df92a21b-7fa5-4c86-9f81-9f6ec39e042c%22%7d))
+  <br/>
+  Meetings are traditionally scheduled for every other Monday at 11am ET
+  
+</p>
+
+<h2>Roadmap</h2>
 
 TODO
 
 <br>
 
-##   **Meeting Schedule**
+<h2>Get Involved</h2>
+To join the OHDSI Databricks User Group sign up using the 
+<a href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">OHDSI Workgroups Sign Up page</a>. 
 
-TODO
 
-<br>
+<h2>Publications/Presentation</h2>
+Please contact us with OHDSI Databricks publication you would like to share here.  
 
-## **Roadmap**
-
-TODO
-
-<br>
-
-## **Get Involved**
-
-TODO
-
-<br> 
-
-## **Publications/Presentation**
-
-TODO
-
-<br>
 
