@@ -143,5 +143,27 @@ output:
   <br/>
   The next time you try to push code to the server you will be asked to enter your username/password 
   (which is really username/token). 
+
+  <!-- 
+  *
+  * create a pull request
+  *
+  * -->
+  
+  <h2>Create a Pull Request</h2>
+  A pull request is the mechanism that is used to let the owner of a repository know 
+  you have committed changes to your fork that you would like pulled into the main repository for the project. 
+  To create a pull request, navigate to your copy (fork) of the repository (see below). 
+  Select the link that indicates you have made changes to this code base 
+  (in this case, the link that reads "3 commits ahead")
+  <br/>
+  <img width="600px" src="./img/developer-how-tos/git-quickstart/pull-request-01.PNG" />
+  <br/>
+  <br/>
+  If everything looks good, press the create pull request button. 
+  <br/>
+  <img width="600px" src="./img/developer-how-tos/git-quickstart/pull-request-02.PNG" />
+
+
 </p>
 
