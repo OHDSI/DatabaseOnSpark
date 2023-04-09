@@ -22,7 +22,7 @@ output:
     </li>
     <li>
       Add a new page or edit an existing page.<br/>
-      [Add a New Page Detailed Instructions](developer-how-tos_a-new-page.html)
+      [Add a New Page Detailed Instructions](developer-how-tos_add-new-page.html)
     </li>
     <li>
       Commit your update to Github.<br/>
