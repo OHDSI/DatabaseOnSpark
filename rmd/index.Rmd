@@ -17,8 +17,14 @@ output:
   Information is provided below on how to join our group. 
 </p>
 <p>
-  If you have specific OHDSI on Databricks/Spark please reach out to us on the 
+  If you have specific OHDSI on Databricks/Spark issues or questions please reach out to us on the 
   <a href="https://forums.ohdsi.org/c/implementers/6">OHDSI Implementers Forum</a> and include "Databricks/Spark" in the topic of your post. 
+</p>
+
+<p>
+  Our current Objectives and Key Results (OKRs) include the following. 
+  For more details see our 
+  <a href="https://ohdsiorg.sharepoint.com/:f:/r/sites/Workgroup-Open-SourceCommunity/Shared%20Documents/Databricks%20Users%20Group/OKR-2023?csf=1&web=1&e=avdr2R">OKR document</a>.
 </p>
 
 <h2>MS Teams Resources</h2>
