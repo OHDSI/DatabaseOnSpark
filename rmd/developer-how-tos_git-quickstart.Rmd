@@ -150,20 +150,38 @@ output:
   *
   * -->
   
-  <h2>Create a Pull Request</h2>
-  A pull request is the mechanism that is used to let the owner of a repository know 
-  you have committed changes to your fork that you would like pulled into the main repository for the project. 
-  To create a pull request, navigate to your copy (fork) of the repository (see below). 
-  Select the link that indicates you have made changes to this code base 
-  (in this case, the link that reads "3 commits ahead")
-  <br/>
-  <img width="600px" src="./img/developer-how-tos/git-quickstart/pull-request-01.PNG" />
-  <br/>
-  <br/>
-  If everything looks good, press the create pull request button. 
-  <br/>
-  <img width="600px" src="./img/developer-how-tos/git-quickstart/pull-request-02.PNG" />
+  <p>
+    <h2>Create a Pull Request</h2>
+    A pull request is the mechanism that is used to let the owner of a repository know 
+    you have committed changes to your fork that you would like pulled into the main repository for the project. 
+    To create a pull request, navigate to your copy (fork) of the repository (see below). 
+    Select the link that indicates you have made changes to this code base 
+    (in this case, the link that reads "3 commits ahead")
+    <br/>
+    <img width="600px" src="./img/developer-how-tos/git-quickstart/pull-request-01.PNG" />
+    <br/>
+    <br/>
+    If everything looks good, press the create pull request button. 
+    <br/>
+    <img width="600px" src="./img/developer-how-tos/git-quickstart/pull-request-02.PNG" />
+  </p>
 
+  <p>
+    <h2>Update Your Fork</h2>
+    After your (or any) pull request has been accepted your fork will have a link indicating that you are behind the original (source) repository. 
+    (e.g. the link "1 commit behind" in the screen shot below). 
+    To get your repository upto date, do NOT click on the link. 
+    Click on the "Sync Fork" button shown in the screen shot below. 
+    <br/>
+    <img width="600px" src="./img/developer-how-tos/git-quickstart/behind.png" />
+    <br/>
+    <br/>
+    The run "git pull" on your local host. 
+    <br/>
+    <img width="600px" src="./img/developer-how-tos/git-quickstart/local-pull.png" />
+    
+    
+  </p>
 
 </p>
 
