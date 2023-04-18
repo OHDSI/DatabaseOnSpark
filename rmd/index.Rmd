@@ -8,6 +8,12 @@ output:
           collapsed: false
 ---
 
+<!--
+*
+* problem space and goals
+*
+-->
+
 <h2>Problem Space and Goals</h2>
 <p>
   Databricks and Spark are new, quickly evolving data management systems (database, data lake, data warehouse) that can provide high performance solutions for large and very large data sets. 
@@ -20,6 +26,12 @@ output:
   If you have specific OHDSI on Databricks/Spark issues or questions please reach out to us on the 
   <a href="https://forums.ohdsi.org/c/implementers/6">OHDSI Implementers Forum</a> and include "Databricks/Spark" in the topic of your post. 
 </p>
+
+<!--
+*
+* current objectives
+*
+-->
 
 <p>
   Our current Objectives and Key Results (OKRs) include the following. 
@@ -59,12 +71,31 @@ output:
 
 </p>
 
+<!--
+*
+* teams
+*
+-->
+
 <h2>MS Teams Resources</h2>
 
-Below are links to our main Microsoft Teams resources.
-<br/>
+Below are links to our main Microsoft Teams resources. 
+Before you can access the Databricks User Group Teams resources you'll need to sign up for the group. 
+To join the OHDSI Databricks User Group sign up using the 
+<a href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">OHDSI Workgroups Sign Up page</a>. 
+Sign up for the Open Source Community (the Databricks User Group is a subgroup of the Open Source Community). 
+
 <br/>
 <table claSS="table">
+  <tr>
+    <td>Quick Start</td>
+    <td>
+      <a href="./index-ms-teams.html">Databricks User Group Teams Quick Start Guide</a>
+      <br/>
+      A Quick Start document is provided here to help get you oriented to our Teams site.  
+    </td>
+  </tr>
+
   <tr>
     <td>Databricks User Group</td>
     <td>
@@ -94,6 +125,12 @@ Below are links to our main Microsoft Teams resources.
 
 </table>
 
+<!--
+*
+* meeting schedules
+*
+-->
+
 <h2>Meeting Schedule</h2>
 
 <p>
@@ -104,7 +141,7 @@ Below are links to our main Microsoft Teams resources.
   <br/>
   <br/>
   Metting details are available at the 
-  <a href="">OHDSI</a> page for <a href="https://ohdsi.org/upcoming-working-group-calls/">Upcoming Working Group Calls</a>
+  OHDSI page for <a href="https://ohdsi.org/upcoming-working-group-calls/">Upcoming Working Group Calls</a>
   
   
   Data Bricks User Group Technical Forum: Mondays at 11am ET ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3a54e0717f78fb428ea842ca1d5fec53dc%40thread.tacv2/1678125983626?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22df92a21b-7fa5-4c86-9f81-9f6ec39e042c%22%7d))
@@ -118,10 +155,24 @@ Below are links to our main Microsoft Teams resources.
 </p>
 
 
+<!--
+*
+* get involved
+*
+-->
+
 <h2>Get Involved</h2>
 To join the OHDSI Databricks User Group sign up using the 
 <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">OHDSI Workgroups Sign Up page</a>. 
+Sign up for the Open Source Community (the Databricks User Group is a subgroup of the Open Source Community). 
+<br/>
+<img width="800px" src="./img/index/open-source-signup.png" />
 
+<!--
+*
+* publications
+*
+-->
 
 <h2>Publications/Presentation</h2>
 Please contact us with OHDSI Databricks publication you would like to share here.  
