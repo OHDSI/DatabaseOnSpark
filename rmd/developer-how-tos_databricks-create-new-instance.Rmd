@@ -1,0 +1,39 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+  <h1>Documentation: Create a New Databricks Instance</h1>
+  Databricks provides a 14 day trial version of Databricks. 
+  This free version will require a host such as AWS, Azure, or Google Cloud. 
+  This documentation uses AWS but should be vaild for the most part for Azure and Google Cloud. 
+  This document will walk you through the steps to create a new free 14 day trial version of Databricks. 
+  <br/><br/>
+  
+  To get started creating your new Databricks instance go to 
+  <a href="https://www.databricks.com/try-databricks">
+    https://www.databricks.com/try-databricks
+  </a> and follow the steps presented there. 
+  These steps are detailed below.
+  <br/><br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/00-new-account.png" />
+  
+  <br/><br/>
+  For this demo, we will be using Amazon.  Select Amazon as the provider in this step.
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/01-select-amazon.png" />
+
+  <br/><br/>
+  After this initial registration, you should get an email.  Click on the link in the email to continue the registration process.
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/02-email.png" />
+  <br/><br/>
+  
+
+</p>

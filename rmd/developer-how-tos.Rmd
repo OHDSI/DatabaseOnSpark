@@ -8,7 +8,7 @@ output:
     collapsed: false
 ---
 
-<h2>Documentation and Github</h2>
+<h2>Developer How-tos</h2>
 
 <table class="table">
   <tr>
@@ -20,6 +20,18 @@ output:
       getting started using R Markup (Rmd), 
       editing and previewing a new page, 
       and committing the updated documentation back up to Github.  
+    </td>
+  </tr>
+  <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-create-new-instance.html">
+        How to Create a New Databricks Instance
+      </a>
+      <br/>
+      Databricks provides a 14 day trial version of Databricks. 
+      This free version will require a host such as AWS, Azure, or Google Cloud. 
+      This documentation uses AWS but should be vaild for the most part for Azure and Google Cloud. 
     </td>
   </tr>
   <tr>
