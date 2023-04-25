@@ -52,6 +52,16 @@ output:
     </td>
   </tr>
   <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-enable-dbfs.html">Enable DBFS</a>
+      <br/>
+      By default, Databricks does not enable file browsing. 
+      We will want to browse the files we upload to make sure we've uploaded what we think we've uploaded. 
+      This guide shows how to enable file browsing. 
+    </td>
+  </tr>
+  <tr>
     <td></td>
     <td></td>
   </tr>

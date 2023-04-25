@@ -1,0 +1,33 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Enable Databricks DBFS</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+  By default, Databricks does not enable file browsing. 
+  We will want to browse the files we upload to make sure we've uploaded what we think we've uploaded. 
+  This guide shows how to enable file browsing. 
+  <br/>
+  <br/>
+  To get started, log into Databricks and select the drop down for your user name in the upper right corner and then select Admin Settings.
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/26a-enable-dbfs-admin-settings.png" />
+  <br/><br/>
+  Select Workspace Settings
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/26b-enable-dbfs-workspace-settings.png" />
+  <br/><br/>
+  Turn on the switch for DBFS File Browser: Enabled
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/26c-enable-dbfs-workspace-enable.png" />
+  <br/><br/>
+  You should now see a DBFS button at the top of the Data page when you select the Data tab on the left side tabs.
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/26d-enable-dbfs-browse-dbfs.png" />
+  <br/><br/>
+</p>

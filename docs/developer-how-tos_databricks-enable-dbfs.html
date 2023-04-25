@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group: Developer How-tos</title>
+<title>OHDSI Databricks User Group Developer How-tos: Enable Databricks DBFS</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -297,82 +297,29 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">OHDSI Databricks User Group: Developer
-How-tos</h1>
+<h1 class="title toc-ignore">OHDSI Databricks User Group Developer
+How-tos:<br/>Enable Databricks DBFS</h1>
 
 </div>
 
 
-<h2>
-Developer How-tos
-</h2>
-<table class="table">
-<tr>
-<td>
-Documentation
-</td>
-<td>
-<a href="developer-how-tos_documentation.html">How to Add to this
-Documentation</a><br/> This page describes how to add to the
-documentation for this project. This includes forking and cloning the
-project from Github, getting started using R Markup (Rmd), editing and
-previewing a new page, and committing the updated documentation back up
-to Github.<br />
-
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-create-new-instance.html"> How to
-Create a New Databricks Instance </a> <br/> Databricks provides a 14 day
-trial version of Databricks. This free version will require a host such
-as AWS, Azure, or Google Cloud. This documentation uses AWS but should
-be vaild for the most part for Azure and Google Cloud.
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-token.html">Create a Databricks
-Token</a> <br/> Use this guide to create a Databricks token. This token
-will be used as a password for the URL we will use to connect to our
-Databricks instance using JDBC.
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-jdbc.html">Getting Started with
-JDBC</a> <br/> This guide shows where to find and how to use the JDBC
-connection string and other resources required to connect to Databricks
-using JDBC.
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-enable-dbfs.html">Enable DBFS</a>
-<br/> By default, Databricks does not enable file browsing. We will want
-to browse the files we upload to make sure we’ve uploaded what we think
-we’ve uploaded. This guide shows how to enable file browsing.
-</td>
-</tr>
-<tr>
-<td>
-</td>
-<td>
-</td>
-</tr>
-</table>
+<p>
+By default, Databricks does not enable file browsing. We will want to
+browse the files we upload to make sure we’ve uploaded what we think
+we’ve uploaded. This guide shows how to enable file browsing. <br/>
+<br/> To get started, log into Databricks and select the drop down for
+your user name in the upper right corner and then select Admin Settings.
+<br/>
+<img src="img/developer-how-tos/new-databricks-instance/26a-enable-dbfs-admin-settings.png" />
+<br/><br/> Select Workspace Settings <br/>
+<img src="img/developer-how-tos/new-databricks-instance/26b-enable-dbfs-workspace-settings.png" />
+<br/><br/> Turn on the switch for DBFS File Browser: Enabled <br/>
+<img src="img/developer-how-tos/new-databricks-instance/26c-enable-dbfs-workspace-enable.png" />
+<br/><br/> You should now see a DBFS button at the top of the Data page
+when you select the Data tab on the left side tabs. <br/>
+<img src="img/developer-how-tos/new-databricks-instance/26d-enable-dbfs-browse-dbfs.png" />
+<br/><br/>
+</p>
 
 
 
