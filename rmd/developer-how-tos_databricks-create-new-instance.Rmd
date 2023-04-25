@@ -1,5 +1,5 @@
 ---
-title: '<div>OHDSI Databricks User Group Developer How-tos:<br/> Create a New Databricks Instance</div>'
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Create a New Databricks Instance</div>'
 output:
   html_document:
     toc: FALSE
@@ -9,7 +9,6 @@ output:
 ---
 
 <p>
-  <h1>Create a New Databricks Instance</h1>
   Databricks provides a 14 day trial version of Databricks. 
   This free version will require a host such as AWS, Azure, or Google Cloud. 
   This documentation uses AWS but should be vaild for the most part for Azure and Google Cloud. 

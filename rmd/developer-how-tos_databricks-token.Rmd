@@ -1,5 +1,5 @@
 ---
-title: '<div>OHDSI Databricks User Group Developer How-tos:<br/> Create a Databricks Token</div>'
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Create a Databricks Token</div>'
 output:
   html_document:
     toc: FALSE
