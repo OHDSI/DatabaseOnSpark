@@ -11,7 +11,7 @@
 
 
 
-<title> OHDSI Databricks User Group</title>
+<title>OHDSI Databricks User Group</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -226,75 +223,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -302,16 +230,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -393,20 +311,163 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI
-Databricks User Group</h1>
+<h1 class="title toc-ignore">OHDSI Databricks User Group</h1>
 
 </div>
 
 
-<div id="databricks-user-group-background" class="section level1">
-<h1>Databricks User Group Background</h1>
-</div>
+<h2>
+Our Team
+</h2>
+<p>This is our team so far with a little information about where we each
+are with our OHDSI and Databricks journies as of April of 2023. If you
+would like to be added or have any content already here updated, please
+open an issue in our
+<a href="https://github.com/OHDSI/DatabaseOnSpark/issues">GitHub
+Issues</a></p>
+<table class="table">
+<tr>
+<th>
+Name
+</th>
+<th>
+Organization
+</th>
+<th>
+OHDSI and Databricks Background
+</th>
+</tr>
+<tr>
+<td>
+John<br/>Gresh
+</td>
+<td>
+NACHC (National Association of Community Health Centers
+</td>
+<td>
+Started working with Databricks about 3 years ago and built our NACHC’s
+enterprise informatics system on Databricks. New(ish) to OHDSI (started
+working with OHDSI just over a year ago). Background is primarily
+software engineering and solution architecture. Java, RDMS (SQL, Oracle,
+MySql, MS Sql Server, some PostgreSql). Large and small team experience
+(Pfizer and United Healthcare and I was the 27th employee at Modernizing
+Medicine).
+</td>
+</tr>
+<tr>
+<td>
+Thomas<br/>White
+</td>
+<td>
+MedstarHealth (10 hospital env in DC area)
+</td>
+<td>
+Actively working on getting their OHDSI implementation stood up. Working
+through some JDBC and/or config and some potential R/Java
+interoperability. Making great progress. MD Informatisist (not R, but
+SAS, Python, etc. Project manager for standing up OHDSI) Involved in
+extending OHDSI to other users. Built majority of ETL. Have Python
+pipeline that they are using for ETL. Lots of part time peoples working
+on project (about 10-20% of about 10 people). <br/>
+</td>
+</tr>
+<tr>
+<td>
+Brad<br/>Rechkemmer
+</td>
+<td>
+Amgen
+</td>
+<td>
+Activly working on getting thir OHDSI implementation. Been working on
+Databricks/OHDSI for about a year. Working on pipline process to go from
+Atlas to Databricks. Biostats experience R and SAS.
+</td>
+</tr>
+<tr>
+<td>
+Elina<br/>Hadelia
+</td>
+<td>
+Tufts
+</td>
+<td>
+OHDSI/Databricks started at Tufts. Works with Andrew. Software
+development analysist (biochem and bioinf) Started at Tufts last summer.
+R, SQL, Python.
+</tr>
+<tr>
+<td>
+Janos<br/>Hajagos
+</td>
+<td>
+Stonybrook University
+</td>
+<td>
+Working with OHDSI (data transformation) 5-6 years. Research asst. prof.
+ETL processes (moved to Spark/Databricks)
+</td>
+</tr>
+<tr>
+<td>
+Kyle<br/><nobr>Zollo-Venecek</nobr>
+</td>
+<td>
+Tufts
+</td>
+<td>
+Software developer (started in env research) OHDSI/Databricks recent.
+Moving from Epic Clairity into OMOP. QA on ETL. Co-lead of gis group.
+Looking to get more involved in GIS. R, Sql, Python.<br />
+
+</td>
+</tr>
+<tr>
+<td>
+Sathya<br/>Sanipina
+</td>
+<td>
+Amgen
+</td>
+<td>
+Developer at Amgen (works with Brad). Working on pipeline process (ETL).
+Trying to move whole process to Databricks (working off of Gitlab
+pipeline). Pulling tagging information using API. SAS, Sql, Python. R is
+not enable (due to security, being fixed?)
+</td>
+</tr>
+<tr>
+<td>
+Stephanie<br/>Hong
+</td>
+<td>
+Johns Hopkins
+</td>
+<td>
+Harminizing/Ingesting data from external sources (n3c, pcornet) etl
+state of MD Covid (crisp) data in to SPARK/Databricks env. Lots of work
+on mapping concepts to standard concepts.<br />
+
+</td>
+</tr>
+<tr>
+<td>
+Callum<br/>Harding
+</td>
+<td>
+Holmusk
+</td>
+<td>
+Out of New York and Singapore. OHDSI about a year ago. ETL data
+engineer. Replatforming from PostgreSql to Databricks. Python, Sql,
+Java.<br />
+
+</td>
+</tr>
+</table>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -439,35 +500,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
