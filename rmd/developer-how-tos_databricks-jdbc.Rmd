@@ -9,5 +9,28 @@ output:
 ---
 
 <p>
+  The Broadsea distribution and other OHDSI software use JDBC connection strings to connect to the CDM. 
+  This document shows how to get started with JDBC and Databricks. 
+  <br/>
+  <br/>
+  First, we're going to need a JDBC connection string. 
+  Start by loging into Databricks and select the Compute tab on the left side of the screen.
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/18-compute.png" />
+  <br/><br/>
+  Select Advanced Options at the bottom of the page.
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/19-select-advanced-options.png" />
+  <br/><br/>
+  Select the JDBC/ODBC tab.
+  <img src="./img/developer-how-tos/new-databricks-instance/20-select-jdbc.png" />
+  <br/><br/>
+  Copy and save the JDBC URL.
+  <img src="./img/developer-how-tos/new-databricks-instance/21-get-jdbc-url.png" />
+  <br/><br/>
+  We can now use this url and the token generated in the <a href="developer-how-tos_databricks-token.html">Create a Databricks Token</a> section to create a complete valid JDBC url by replacing &lt;personal-access-token&gt; with that token. The complete url for the demo instance created here is shown below.
+  <br/>
+  <br/>
+  jdbc:spark://dbc-e50d1713-1617.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/8143606694705459/0423-153323-uwnabn2j;AuthMech=3;UID=token;PWD=dapi9fb7efRedactedMiddleOfTheToken2c1
 
 </p>

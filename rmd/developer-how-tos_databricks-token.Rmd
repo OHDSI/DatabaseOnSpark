@@ -9,5 +9,30 @@ output:
 ---
 
 <p>
-
+  Databricks uses tokens as a mechanism for authentication. 
+  You'll need a token if you plan on connecting to Databricks using JDBC. 
+  This document shows how to generate a token for Databricks. 
+  <br/>
+  <br/>
+  Start by loging into Databricks and select the Compute tab on the left side of the screen. 
+  <br/>
+  <img src="./img/developer-how-tos/new-databricks-instance/18-compute.png" />
+  <br/><br/>
+  Select the drop down for your user name in the upper right corner of the screen. Then select User Settings.
+  <img src="./img/developer-how-tos/new-databricks-instance/22-user-settings.png" />
+  <br/><br/>
+  Select the Access tokens tab. 
+  <img src="./img/developer-how-tos/new-databricks-instance/23-generate-token.png" />
+  <br/><br/>
+  Give the token a name and select Generate.
+  <img src="./img/developer-how-tos/new-databricks-instance/24-new-token-name.png" />
+  <br/><br/>
+  Copy the token and save it in a safe place.
+  <img src="./img/developer-how-tos/new-databricks-instance/25-copy-token.png" />
+  <br/><br/>
+  You now have a token you can use to authenticate to Databricks. 
+  For next steps see:
+  <br/>
+  <a href="developer-how-tos_databricks-jdbc.html">Getting Started with JDBC</a>
 </p>
+
