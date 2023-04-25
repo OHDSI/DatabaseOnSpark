@@ -35,8 +35,28 @@ output:
     </td>
   </tr>
   <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-token.html">Create a Databricks Token</a>
+      <br/>
+      Use this guide to create a Databricks token. 
+      This token will be used as a password for the URL we will use to connect to our Databricks instance using JDBC.
+    </td>
+  </tr>
+  <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-jdbc.html">Getting Started with JDBC</a>
+      <br/>
+      This guide shows where to find and how to use the JDBC connection string and other resources required to connect to Databricks using JDBC.
+    </td>
+  </tr>
+  <tr>
     <td></td>
     <td></td>
   </tr>
 </table>
+  
+  
+  
   
