@@ -28,3 +28,8 @@ navbar:
           href: etl.html
         - text: "Connecting OHDSI Tools"
           href: connecting.html
+    - text: "About"
+      icon: fa-list
+      menu:
+        - text: "Our Team"
+          href: roster.html

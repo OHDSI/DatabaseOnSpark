@@ -1,0 +1,102 @@
+---
+title: '<div>OHDSI Databricks User Group</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<h2>Our Team</h2>
+
+This is our team so far with a little information about where we each are with our OHDSI and Databricks journies as of April of 2023. 
+If you would like to be added or have any content already here updated, please open an issue in our 
+<a href="https://github.com/OHDSI/DatabaseOnSpark/issues">GitHub Issues</a>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Organization</th>
+    <th>OHDSI and Databricks Background</th>
+  </tr>
+  <tr>
+    <td>John<br/>Gresh</td>
+    <td>NACHC (National Association of Community Health Centers</td>
+    <td>
+      Started working with Databricks about 3 years ago and built our NACHC's enterprise informatics system on Databricks. 
+      New(ish) to OHDSI (started working with OHDSI just over a year ago). 
+      Background is primarily software engineering and solution architecture. Java, RDMS (SQL, Oracle, MySql, MS Sql Server, some PostgreSql).  Large and small team experience (Pfizer and United Healthcare and I was the 27th employee at Modernizing Medicine).
+    </td>
+  </tr>
+  <tr>
+    <td>Thomas<br/>White</td>
+    <td>MedstarHealth (10 hospital env in DC area)</td>
+    <td>
+      Actively working on getting their OHDSI implementation stood up.  Working through some JDBC and/or config and some potential R/Java interoperability.  Making great progress. 
+      MD Informatisist (not R, but SAS, Python, etc. Project manager for standing up OHDSI) Involved in extending OHDSI to other users. Built majority of ETL.  Have Python pipeline that they are using for ETL.  Lots of part time peoples working on project (about 10-20% of about 10 people). 
+      <br/>
+    </td>
+  </tr>
+  <tr>
+    <td>Brad<br/>Rechkemmer</td>
+    <td>Amgen</td>
+    <td>
+      Activly working on getting thir OHDSI implementation. 
+      Been working on Databricks/OHDSI for about a year. Working on pipline process to go from Atlas to Databricks. 
+      Biostats experience R and SAS.
+    </td>
+  </tr>
+  <tr>
+    <td>Elina<br/>Hadelia</td>
+    <td>Tufts</td>
+    <td>
+      OHDSI/Databricks started at Tufts. 
+      Works with Andrew. Software development analysist (biochem and bioinf) Started at Tufts last summer. R, SQL, Python.
+  </tr>
+  <tr>
+    <td>Janos<br/>Hajagos</td>
+    <td>Stonybrook University</td>
+    <td>
+      Working with OHDSI (data transformation) 5-6 years. 
+      Research asst. prof. ETL processes (moved to Spark/Databricks)
+    </td>
+  </tr>
+  <tr>
+    <td>Kyle<br/><nobr>Zollo-Venecek</nobr></td>
+    <td>Tufts</td>
+    <td>
+      Software developer (started in env research) OHDSI/Databricks recent. Moving from Epic Clairity into OMOP. QA on ETL. 
+      Co-lead of gis group. Looking to get more involved in GIS. R, Sql, Python.  
+    </td>
+  </tr>
+  <tr>
+    <td>Sathya<br/>Sanipina</td>
+    <td>Amgen</td>
+    <td>
+      Developer at Amgen (works with Brad). 
+      Working on pipeline process (ETL).  Trying to move whole process to Databricks (working off of Gitlab pipeline).  Pulling tagging information using API.  SAS, Sql, Python.  R is not enable (due to security, being fixed?)
+    </td>
+  </tr>
+  <tr>
+    <td>Stephanie<br/>Hong</td>
+    <td>Johns Hopkins</td>
+    <td>
+      Harminizing/Ingesting data from external sources (n3c, pcornet) etl state of MD Covid (crisp) data in to SPARK/Databricks env. 
+      Lots of work on mapping concepts to standard concepts.  
+    </td>
+  </tr>
+  <tr>
+    <td>Callum<br/>Harding</td>
+    <td>Holmusk</td>
+    <td>
+      Out of New York and Singapore.  OHDSI about a year ago. 
+      ETL data engineer.  Replatforming from PostgreSql to Databricks.  Python, Sql, Java.  
+    </td>
+  </tr>
+
+</table>
+  
+  
+  
+  

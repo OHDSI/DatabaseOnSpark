@@ -8,7 +8,7 @@ output:
     collapsed: false
 ---
 
-<h2>Documentation and Github</h2>
+<h2>Developer How-tos</h2>
 
 <table class="table">
   <tr>
@@ -23,8 +23,50 @@ output:
     </td>
   </tr>
   <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-create-new-instance.html">
+        How to Create a New Databricks Instance
+      </a>
+      <br/>
+      Databricks provides a 14 day trial version of Databricks. 
+      This free version will require a host such as AWS, Azure, or Google Cloud. 
+      This documentation uses AWS but should be vaild for the most part for Azure and Google Cloud. 
+    </td>
+  </tr>
+  <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-token.html">Create a Databricks Token</a>
+      <br/>
+      Use this guide to create a Databricks token. 
+      This token will be used as a password for the URL we will use to connect to our Databricks instance using JDBC.
+    </td>
+  </tr>
+  <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-jdbc.html">Getting Started with JDBC</a>
+      <br/>
+      This guide shows where to find and how to use the JDBC connection string and other resources required to connect to Databricks using JDBC.
+    </td>
+  </tr>
+  <tr>
+    <td>Databricks</td>
+    <td>
+      <a href="developer-how-tos_databricks-enable-dbfs.html">Enable DBFS</a>
+      <br/>
+      By default, Databricks does not enable file browsing. 
+      We will want to browse the files we upload to make sure we've uploaded what we think we've uploaded. 
+      This guide shows how to enable file browsing. 
+    </td>
+  </tr>
+  <tr>
     <td></td>
     <td></td>
   </tr>
 </table>
+  
+  
+  
   
