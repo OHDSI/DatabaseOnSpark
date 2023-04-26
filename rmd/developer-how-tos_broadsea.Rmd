@@ -1,0 +1,18 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+			<h1>Implementing OHDSI on Databricks Using Broadsea</h1>
+      <p>
+        This guide will walk through the creation of a new OHDSI stack using 
+        <a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using Databricks for the CDM. 
+      </p>
+			
+</p>
