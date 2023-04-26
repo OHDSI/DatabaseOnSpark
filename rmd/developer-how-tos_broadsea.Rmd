@@ -117,6 +117,16 @@ SELECT nextval('webapi.source_daimon_sequence'), 2, 2, 'demo_cdm_results', 0
 <pre class="prescrollable">
 docker compose --profile default down 
 docker compose pull && docker-compose --profile default up -d
-</pre>    
+</pre> 
+        <br/>
+        Open <a href="http://127.0.0.1/atlas">http://127.0.0.1/atlas</a> in a browser and navigate to Data Sources. 
+        Select your data source (in this case "Databricks Demo" and then select a report). 
+        If you have not run Achilles, the application will simply show the "Loading report" screen as shown below. 
+        When you do this you should not see any errors in the Docker output for webapi as shown below. 
+        <br/>
+        <img src="img/developer-how-tos/broadsea/05-loading-report.png" />
+        <br/>
+        <br/>
+        <img src="img/developer-how-tos/broadsea/06-docker-after-loading-reports.png" />
       </p>
 </p>
