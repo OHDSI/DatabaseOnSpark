@@ -424,7 +424,17 @@ INSERT INTO webapi.source_daimon (source_daimon_id, source_id, daimon_type, tabl
 SELECT nextval('webapi.source_daimon_sequence'), 2, 2, 'demo_cdm_results', 0
 ;
 </pre>
-<br/> Restart Docker:
+<h3>
+Note on SSL
+</h3>
+The default configuration of Broadsea does not include resources for
+SSL. The JDBC connection string provided by Databricks has SSL enabled
+by including “ssl=1;” in the URL. This can be resolved by changing the
+ssl setting to “ssl=0;”.
+<h3>
+Restart Docker and Launch Atlas
+</h3>
+Restart Docker:
 <pre class="prescrollable">
 docker compose --profile default down 
 docker compose pull && docker-compose --profile default up -d
