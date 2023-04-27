@@ -62,6 +62,15 @@ output:
     </td>
   </tr>
   <tr>
+    <td>Broadsea</td>
+    <td>
+      <a href="./developer-how-tos_broadsea.html">Broadsea on Databricks</a>
+      <br/>
+      This document describes how to standup OHDSI on Databricks using 
+      <a href="https://github.com/OHDSI/Broadsea">Broadsea</a>.
+    </td>
+  </tr>
+  <tr>
     <td></td>
     <td></td>
   </tr>
