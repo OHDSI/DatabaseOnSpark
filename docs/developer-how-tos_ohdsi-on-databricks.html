@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group: Developer How-tos</title>
+<title>OHDSI Databricks User Group Developer How-tos: OHDSI on Databricks</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -311,106 +311,86 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">OHDSI Databricks User Group: Developer
-How-tos</h1>
+<h1 class="title toc-ignore">OHDSI Databricks User Group Developer
+How-tos:<br/>OHDSI on Databricks</h1>
 
 </div>
 
 
+<p>
 <h2>
-Developer How-tos
+Introduction
 </h2>
-<table class="table">
-<tr>
-<td>
-Documentation
-</td>
-<td>
-<a href="developer-how-tos_documentation.html">How to Add to this
-Documentation</a><br/> This page describes how to add to the
-documentation for this project. This includes forking and cloning the
-project from Github, getting started using R Markup (Rmd), editing and
-previewing a new page, and committing the updated documentation back up
-to Github.<br />
-
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-create-new-instance.html"> How to
-Create a New Databricks Instance </a> <br/> Databricks provides a 14 day
-trial version of Databricks. This free version will require a host such
-as AWS, Azure, or Google Cloud. This documentation uses AWS but should
-be vaild for the most part for Azure and Google Cloud.
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-token.html">Create a Databricks
-Token</a> <br/> Use this guide to create a Databricks token. This token
-will be used as a password for the URL we will use to connect to our
-Databricks instance using JDBC.
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-jdbc.html">Getting Started with
-JDBC</a> <br/> This guide shows where to find and how to use the JDBC
-connection string and other resources required to connect to Databricks
-using JDBC.
-</td>
-</tr>
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-enable-dbfs.html">Enable DBFS</a>
-<br/> By default, Databricks does not enable file browsing. We will want
-to browse the files we upload to make sure we’ve uploaded what we think
-we’ve uploaded. This guide shows how to enable file browsing.
-</td>
-</tr>
-<tr>
-<td>
-<nobr>OHDSI on</nobr><br/> Databricks
-</td>
-<td>
-<a href="./developer-how-tos_ohdsi-on-databricks.html">OHDSI on
-Databricks</a> <br/> This document describes how to create a complete
-OHDSI on Databricks implementation. This can be used to connect an
-existing CDM instance (e.g. from your elt process). Methods to create a
-test database are also included. The implementation described here does
-not use Docker/Broadsea and assumes that you have installed basic
-development/implementation software such as Java and PostgreSql.
-</td>
-</tr>
-<tr>
-<td>
-<nobr>Broadsea on</nobr><br/> Databricks
-</td>
-<td>
-<a href="./developer-how-tos_broadsea.html">Broadsea on Databricks</a>
-<br/> This document describes how to standup OHDSI on Databricks using
-<a href="https://github.com/OHDSI/Broadsea">Broadsea</a>.
-</td>
-</tr>
-<tr>
-<td>
-</td>
-<td>
-</td>
-</tr>
-</table>
+This implementation guide demonstrates an end to end solution for
+connecting an existing Common Data Model (CDM) to OHDSI. This guide is
+base on an automated process implemented in the Ponos project. The Ponos
+tool can be used to perform all of the steps required to OHDSI enable a
+CDM instance in Databricks. The Ponos tool also includes a solution to
+create an instance of the Broadsea DEMO_CDM instance in databricks. This
+guide is intended to provide the following.
+<ol>
+<li>
+<i>An automated build</i><br/> The Ponos tool is provided to automate
+the process of getting an OHDSI instane set up in Databricks. This tool
+can be used to create an instance of the Broadsea DEMO_CDM in
+Databricks. This tool can be used to connect any instance of the CDM in
+Databricks to OHDSI including development, test, and production
+instances.
+</li>
+<li>
+<i>A reference implementation</i><br/> The information provided here can
+be used as a reference implementation. There are other ways the work
+done by the Ponos tool can be implemented. The Ponos tool represents a
+know working example of how to create an OHDSI instance from a CDM in
+Databricks.
+</li>
+<li>
+<i>Testing/Validation</i><br/> The Ponos tool creates a working OHDSI
+instance in Databricks and thereby provides a successful test and
+validation of the underlying tools used to do so.
+</li>
+<li>
+<i>Insight into the process</i><br/> The code used by Ponos is available
+in github. The code can be run from an IDE such as Eclipse and can be
+revied and stepped through to gain insight in to the process and tools
+used here to create an instance of OHDSI using Databricks.
+</li>
+</ol>
+<h2>
+Prerequisites
+</h2>
+This guide is for a solution that is not based on Broadsea. This guide
+assumes the following:
+<ul>
+<li>
+<i>An instance of a CDM in Databricks (Optional)</i><br/> This is
+actually optional, if you don’t have an existing CDM the Ponos tool can
+be used to generate a demo CDM)
+</li>
+<li>
+<i>PostgreSql</i><br/>A local instance of PostgreSql is used for the
+webapi schema
+</li>
+<li>
+<i>Basic developer software</i><br/>Java 11 is required. Other software
+such as Maven and an IDE are useful if your interested in the details of
+how everything works.
+</li>
+</ul>
+<h2>
+Overview
+</h2>
+Enabling an instance of a CDM consists of the following high level
+steps. Each of these steps are detailed in this guide. This entire
+process has been automated by the Ponos tool using two steps. One step
+to create the DEMO_DB instance in Databricks (db-demo) and one step to
+do all of the work shown below required to get a CDM instance OHDSI
+enabled.
+<ul>
+<li>
+</li>
+</ul>
+</p>
 
 
 

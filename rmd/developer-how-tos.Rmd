@@ -62,7 +62,20 @@ output:
     </td>
   </tr>
   <tr>
-    <td>Broadsea</td>
+    <td><nobr>OHDSI on</nobr><br/> Databricks</td>
+    <td>
+    <a href="./developer-how-tos_ohdsi-on-databricks.html">OHDSI on Databricks</a>
+    <br/>
+      This document describes how to create a complete OHDSI on Databricks implementation. 
+      This can be used to connect an existing CDM instance (e.g. from your elt process). 
+      Methods to create a test database are also included. 
+      The implementation described here does not use Docker/Broadsea 
+      and assumes that you have installed basic development/implementation software 
+      such as Java and PostgreSql. 
+    </td>
+  </tr>
+  <tr>
+    <td><nobr>Broadsea on</nobr><br/> Databricks</td>
     <td>
       <a href="./developer-how-tos_broadsea.html">Broadsea on Databricks</a>
       <br/>

@@ -1,0 +1,66 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>OHDSI on Databricks</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+  <h2>Introduction</h2>
+  This implementation guide demonstrates an end to end solution for connecting an existing Common Data Model (CDM) to OHDSI. 
+  This guide is base on an automated process implemented in the Ponos project. 
+  The Ponos tool can be used to perform all of the steps required to OHDSI enable a CDM instance in Databricks. 
+  The Ponos tool also includes a solution to create an instance of the Broadsea DEMO_CDM instance in databricks. 
+  This guide is intended to provide the following. 
+  <ol>
+    <li>
+      <i>An automated build</i><br/>
+      The Ponos tool is provided to automate the process of getting an OHDSI instane set up in Databricks. 
+      This tool can be used to create an instance of the Broadsea DEMO_CDM in Databricks. 
+      This tool can be used to connect any instance of the CDM in Databricks to OHDSI including development, test, and production instances. 
+    </li>
+    <li>
+      <i>A reference implementation</i><br/>
+      The information provided here can be used as a reference implementation. 
+      There are other ways the work done by the Ponos tool can be implemented. 
+      The Ponos tool represents a know working example of how to create an OHDSI instance from a CDM in Databricks. 
+    </li>
+    <li>
+      <i>Testing/Validation</i><br/>
+      The Ponos tool creates a working OHDSI instance in Databricks and thereby provides a successful test and validation of the underlying tools used to do so. 
+    </li>
+    <li>
+      <i>Insight into the process</i><br/>
+      The code used by Ponos is available in github. 
+      The code can be run from an IDE such as Eclipse and can be revied and stepped through to gain insight in to the process and tools used here to create an instance of OHDSI using Databricks. 
+    </li>
+  </ol>
+  
+  
+  <h2>Prerequisites</h2>
+  This guide is for a solution that is not based on Broadsea. 
+  This guide assumes the following: 
+  <ul>
+    <li><i>An instance of a CDM in Databricks (Optional)</i><br/> This is actually optional, if you don't have an existing CDM the Ponos tool can be used to generate a demo CDM)</li>
+    <li><i>PostgreSql</i><br/>A local instance of PostgreSql is used for the webapi schema</li>
+    <li><i>Basic developer software</i><br/>Java 11 is required. Other software such as Maven and an IDE are useful if your interested in the details of how everything works.</li>
+  </ul>
+  
+  <h2>Overview</h2>
+  Enabling an instance of a CDM consists of the following high level steps. 
+  Each of these steps are detailed in this guide. 
+  This entire process has been automated by the Ponos tool using two steps. 
+  One step to create the DEMO_DB instance in Databricks (db-demo) 
+  and one step to do all of the work shown below required to get a CDM instance OHDSI enabled. 
+  <ul>
+    <li>
+      
+    </li>
+  </ul>
+  
+  
+  
+</p>
