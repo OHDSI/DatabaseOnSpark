@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group Developer How-tos: OHDSI on Databricks</title>
+<title>OHDSI Databricks User Group Developer How-tos: OHDSI on Databricks Quick Start Guide</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -312,92 +312,93 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">OHDSI Databricks User Group Developer
-How-tos:<br/>OHDSI on Databricks</h1>
+How-tos:<br/>OHDSI on Databricks Quick Start Guide</h1>
 
 </div>
 
 
 <p>
 <h2>
-Quick Start Guide
-</h2>
-A <a href="./">Quick Start Guide</a> is provided if you are just
-interested in running the Ponos tool to create a test instance of the
-CDM in Databricks and/or connect an existing instance of a CDM in
-Databricks to OHDSI.
-<h2>
 Introduction
 </h2>
-This implementation guide demonstrates an end to end solution for
-connecting an existing Common Data Model (CDM) to OHDSI. This guide is
-base on an automated process implemented in the Ponos project. The Ponos
-tool can be used to perform all of the steps required to OHDSI enable a
-CDM instance in Databricks. The Ponos tool also includes a solution to
-create an instance of the Broadsea DEMO_CDM instance in databricks. This
-guide is intended to provide the following.
-<ol>
-<li>
-<i>An automated build</i><br/> The Ponos tool is provided to automate
-the process of getting an OHDSI instane set up in Databricks. This tool
-can be used to create an instance of the Broadsea DEMO_CDM in
-Databricks. This tool can be used to connect any instance of the CDM in
-Databricks to OHDSI including development, test, and production
-instances.
-</li>
-<li>
-<i>A reference implementation</i><br/> The information provided here can
-be used as a reference implementation. There are other ways the work
-done by the Ponos tool can be implemented. The Ponos tool represents a
-know working example of how to create an OHDSI instance from a CDM in
-Databricks.
-</li>
-<li>
-<i>Testing/Validation</i><br/> The Ponos tool creates a working OHDSI
-instance in Databricks and thereby provides a successful test and
-validation of the underlying tools used to do so.
-</li>
-<li>
-<i>Insight into the process</i><br/> The code used by Ponos is available
-in github. The code can be run from an IDE such as Eclipse and can be
-revied and stepped through to gain insight in to the process and tools
-used here to create an instance of OHDSI using Databricks.
-</li>
-</ol>
+This quick start guide gives the basics for how to create a test
+(demo_cdm) instnace of the CDM in Databricks and then how to get an
+existing CDM in Databricks connected to OHDSI.
 <h2>
-Prerequisites
+Download and Install Ponos
 </h2>
-This guide is for a solution that is not based on Broadsea. This guide
-assumes the following:
-<ul>
-<li>
-<i>An instance of a CDM in Databricks (Optional)</i><br/> This is
-actually optional, if you don’t have an existing CDM the Ponos tool can
-be used to generate a demo CDM)
-</li>
-<li>
-<i>PostgreSql</i><br/>A local instance of PostgreSql is used for the
-webapi schema
-</li>
-<li>
-<i>Basic developer software</i><br/>Java 11 is required. Other software
-such as Maven and an IDE are useful if your interested in the details of
-how everything works.
-</li>
-</ul>
-<h2>
-Overview
-</h2>
-Enabling an instance of a CDM consists of the following high level
-steps. Each of these steps are detailed in this guide. This entire
-process has been automated by the Ponos tool using two steps. One step
-to create the DEMO_DB instance in Databricks (db-demo) and one step to
-do all of the work shown below required to get a CDM instance OHDSI
-enabled.
-<ul>
-<li>
-<b>Create a test instance of the CDM in Databricks</b><br/>
-</li>
-</ul>
+Ponos can be downloaded from
+<a ref="https://github.com/NACHC-CAD/ponos">https://github.com/NACHC-CAD/ponos</a>.
+Click the “Latest” link under Releases and download the zip file found
+there (e.g. ponos-1.0.002.zip). <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-git.png" />
+<br/> <br/> Download and extract the zip file. After unzipping the file,
+you should have a ponos folder with and auth sub-folder and a lib
+sub-folder. The lib sub-folders should contain the database drivers for
+Databricks and PostgreSql. The auth folder should contain a single file
+called app-databricks.properties file. The app-databricks.properties
+file contains only the fully qualified path to the actual properties
+file to be used by the application. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-zip.png" />
+<br/> <br/> You will need your own properties file. Down load this
+<a download href="./img/developer-how-tos/ponos/quickstart/databricks-public-demo.properties">databricks-public-demo.properties</a>
+file as a starting point and modify to use your parameters. Modify the
+ponos/auth/app-databricks.properties file to point to the location of
+the properties file you intend to use (e.g. the
+databricks-public-demo.properties) we just downloaded. For this example,
+we’ve put the databricks-public-demo.properties file in the ponos
+directory and modified the auth/app-databricks.properties file
+accordingly. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-dir.png" />
+<br/> <br/> Our auth/app-databricks.properties file now looks like this:
+<br/>
+<pre class="prescrollable">
+D:\temp\ponos-1.0.002\ponos\app-databricks.properties
+</pre>
+The databricks-public-demo.properties file looks like this:
+<pre class="prescrollable">
+# ---
+#
+# DEMO
+# This config file points to a temporary free Databricks instance created for this demo.  
+#
+# ---
+
+# REST properties
+RestUrl=https://dbc-9c1b9c59-a942.cloud.databricks.com//api/2.0
+DatabricksUploadRoot=/FileStore/tables/prod
+DatabricksFilesRoot=ohdsi/ponos/demo_cdm
+
+# DB properties
+JdbcUrl=jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
+Token=dapi8ae48c35e859579a5531ff2005907544
+
+# Schema properties
+SchemaName=demo_cdm
+VocabSchemaName=demo_cdm
+AchillesTempSchemaName=demo_cdm_ach_tmp
+AchillesResultsSchemaName=demo_cdm_ach_res
+
+# WebApi properties 
+WebApiJdbcUrl=jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=ohdsi&currentSchema=OHDSI
+WebApiBootStrapJdbcUrl=jdbc:postgresql://localhost:5432/?user=postgres&password=ohdsi
+WebApiDatabase=OHDSI
+WebApiSchema=webapi
+WebApiKey=DATABRICKS_PUBLIC_DEMO
+WebApiName=Databricks Public Demo
+
+# WebApi users properties
+OhdsiAdminUserUid=ohdsi_admin_user
+OhdsiAdminUserPwd=app1
+OhdsiAdminUid=ohdsi_admin
+OhdsiAdminPwd=app1
+OhdsiAppUserUid=ohdsi_app_user
+OhdsiAppUserPwd=app1
+OhdsiAppUid=ohdsi_app
+OhdsiAppPwd=app1
+
+</pre>
+<br/><br/><br/><br/><br/> <br/><br/><br/><br/><br/>
 </p>
 
 
