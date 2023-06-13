@@ -158,7 +158,13 @@ run-ponos.bat db-init
           Run Achillies
         </li>
         <li>
-          Create the appropriate source and source_daimon records in webapi
+          Create the appropriate source and source_daimon records in webapi. 
+          <br/>
+          Note: The code executed here adds the "UseNative=1;" parameter to the JDBC URL inserted into the source table if it is not already there 
+          (as described in the 
+          <a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the Databricks URL, SSL, and UseNative</a>
+          ). 
+          This allows the user to use the JDBC URL provided by Databricks "as-is". 
         </li>
       </ul>
     </li>

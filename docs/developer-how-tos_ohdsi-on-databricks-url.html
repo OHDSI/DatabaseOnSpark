@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group Developer How-tos: OHDSI on Databricks</title>
+<title>OHDSI Databricks User Group Developer How-tos: Notes on the Databricks URL, SSL, and UseNative</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -312,223 +312,15 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">OHDSI Databricks User Group Developer
-How-tos:<br/>OHDSI on Databricks</h1>
+How-tos:<br/>Notes on the Databricks URL, SSL, and UseNative</h1>
 
 </div>
 
 
 <p>
 <h2>
-Quick Start Guide
+Notes on the Databricks URL, SSL, and UseNative
 </h2>
-A
-<a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">Quick
-Start Guide</a> is provided if you are just interested in running the
-Ponos tool to create a test instance of the CDM in Databricks and/or
-connect an existing instance of a CDM in Databricks to OHDSI. This quick
-start guide is for a standalone Tomcat instance of OHDSI (i.e. not
-Broadsea). For guidance on setting up a Databricks CDM instance using
-Broadsea, consult the <a href="developer-how-tos_broadsea.html">Broadsea
-Implementation Guide</a>.
-<h2>
-Introduction
-</h2>
-This implementation guide demonstrates an end to end solution for
-connecting an existing Common Data Model (CDM) to OHDSI. This guide is
-base on an automated process implemented in the Ponos project. The Ponos
-tool can be used to perform all of the steps required to OHDSI enable a
-CDM instance in Databricks. The Ponos tool also includes a solution to
-create an instance of the Broadsea DEMO_CDM instance in databricks. This
-guide is intended to provide the following.
-<ol>
-<li>
-<i>An automated build</i><br/> The Ponos tool is provided to automate
-the process of getting an OHDSI instane set up in Databricks. This tool
-can be used to create an instance of the Broadsea DEMO_CDM in
-Databricks. This tool can be used to connect any instance of the CDM in
-Databricks to OHDSI including development, test, and production
-instances.
-</li>
-<li>
-<i>A reference implementation</i><br/> The information provided here can
-be used as a reference implementation. There are other ways the work
-done by the Ponos tool can be implemented. The Ponos tool represents a
-know working example of how to create an OHDSI instance from a CDM in
-Databricks.
-</li>
-<li>
-<i>Testing/Validation</i><br/> The Ponos tool creates a working OHDSI
-instance in Databricks and thereby provides a successful test and
-validation of the underlying tools used to do so.
-</li>
-<li>
-<i>Insight into the process</i><br/> The code used by Ponos is available
-in github. The code can be run from an IDE such as Eclipse and can be
-revied and stepped through to gain insight in to the process and tools
-used here to create an instance of OHDSI using Databricks.
-</li>
-</ol>
-<h2>
-Prerequisites
-</h2>
-This guide is for a solution that is not based on Broadsea. This guide
-assumes the following:
-<ul>
-<li>
-<i>An instance of a CDM in Databricks (Optional)</i><br/> This is
-actually optional, if you don’t have an existing CDM the Ponos tool can
-be used to generate a demo CDM)
-</li>
-<li>
-<i>PostgreSql</i><br/> A local instance of PostgreSql is used for the
-webapi schema
-</li>
-<li>
-<i>Basic developer software</i><br/> Java 11 is required. Other software
-such as Maven and an IDE are useful if your interested in the details of
-how everything works.
-</li>
-<li>
-<i>A Full Install of Atlas and Underlying Software</i><br/> A full
-install of Atlas is required as a prerequisite for this process. An
-automated process for installing Atlas and all of its dependencies is
-described
-<a href="https://nachc-cad.github.io/fhir-to-omop/pages/navbar/getting-started/start-here/StartHere.html">here</a>.
-</li>
-</ul>
-<h2>
-Overview
-</h2>
-Code for the Ponos project is open source (Apache 2 license) and is
-available in github at
-<a href="https://github.com/NACHC-CAD/ponos">https://github.com/NACHC-CAD/ponos</a>.
-This project is just the user interface for the actual functionality.
-The functionality for Ponos is implemented in the fhir-to-omop tool
-suite which is also open source (Apache 2 license) and is available at
-<a href="https://github.com/NACHC-CAD/fhir-to-omop">https://github.com/NACHC-CAD/fhir-to-omop</a>.
-Enabling an instance of a CDM consists of the following high level
-steps. Each of these steps are detailed in this guide. This entire
-process has been automated by the Ponos tool using two steps. One step
-to create the DEMO_DB instance in Databricks (db-demo) and one step to
-do all of the work shown below required to get a CDM instance OHDSI
-enabled.
-<ul>
-<!-- 
-    *
-    * create a demo_cdm test instance 
-    *
-    -->
-<br/>
-<li>
-<b>Create a test instance of the CDM in Databricks</b><br/> To create a
-test instance of the CDM in Databricks,
-<a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Download
-and Install Ponos</a> and the run the following:
-<pre class="pre-scrollable">
-run-ponos.bat db-demo
-</pre>
-The code that creates the demo_cdm in Databricks can be found in the
-fhir-to-omop
-<a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/BuildDemoCdmInDatabricks.java">BuildDemoCdmInDatabricks</a>
-class. The demo_cdm from the Broadsea distribution is created in
-Databricks using the Ponos tool. Data are sourced from .csv files
-included in the Ponos project that were created as a extract from a
-PostgreSql instance of the demo_cdm. This install includes the
-following:
-<ul>
-<li>
-Upload of .csv files for the CDM to the Databricks FileStore
-</li>
-<li>
-Creation of the CDM database in Databricks using the DDL files from the
-<a ref="https://github.com/OHDSI/CommonDataModel">Common Data Model
-(CDM)</a> (version 5.3 is used).
-</li>
-<li>
-Population of the CDM (including vocabulary tables) from the uploaded
-.csv files
-</li>
-</ul>
-</li>
-<!-- 
-    * 
-    * connect an existing instance 
-    * 
-    * -->
-<br/>
-<li>
-<b>Connect an Existing CDM Instance to OHDSI</b> <br/> To connect an
-existing CDM instance to OHDSI run the following:
-<pre class="pre-formatted">
-run-ponos.bat db-init
-</pre>
-The code that connects an existing CDM to OHDSI can be found in the
-<a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/OhdsiEnableExistingDatabricksCdm.java">OhdsiEnableExistingDatabricksCdm</a>
-class. This code does the following:
-<ul>
-<li>
-Create the OHDSI database instance in PostgreSql (this is the home for
-the webapi schema). The OHDSI PostgreSql instance is dropped if it
-already exists.
-</li>
-<li>
-Create the Atlas database users for the PostgreSql database and webapi
-schema
-</li>
-<li>
-Create the webapi schema
-</li>
-<li>
-Create the webapi tables and other database objects
-</li>
-<li>
-Create the Achilles results database in Databricks
-</li>
-<li>
-Create the tables in the Achilles database in Databricks
-</li>
-<li>
-Create the achilles_analysis table from the AchillesAnalysisDetails.csv
-file
-</li>
-<li>
-Run Achillies
-</li>
-<li>
-Create the appropriate source and source_daimon records in webapi. <br/>
-Note: The code executed here adds the “UseNative=1;” parameter to the
-JDBC URL inserted into the source table if it is not already there (as
-described in the
-<a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the
-Databricks URL, SSL, and UseNative</a> ). This allows the user to use
-the JDBC URL provided by Databricks “as-is”.
-</li>
-</ul>
-</li>
-</ul>
-<h2>
-Do It Yourself!
-</h2>
-To get your instance of OHDSI on Databricks up and running:
-<ul>
-<li>
-<a href="developer-how-tos_databricks-create-new-instance.html">Create a
-Trial Databricks Instance</a> <br/> Create a test instance of Databricks
-if you don’t already have one.
-</li>
-<li>
-<a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">Create
-DEMO_DB CDM instance in Databricks</a> <br/> Create a DEMO_DB instance
-of the CDM in Databricks if you do not have your own CDM instance to
-work with.
-</li>
-<li>
-<a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">Connect
-Databricks CDM to OHDSI</a> <br/> Connect your instance of the CDM in
-Databricks to OHDSI.
-</li>
-</ul>
-<br/> <br/> <br/> <br/>
 </p>
 
 

@@ -1,0 +1,14 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Notes on the Databricks URL, SSL, and UseNative</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+  <h2>Notes on the Databricks URL, SSL, and UseNative</h2>
+
+</p>
