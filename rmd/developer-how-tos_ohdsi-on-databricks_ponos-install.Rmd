@@ -10,8 +10,9 @@ output:
 
 <p>
   <h2>Introduction</h2>
-  This quick start guide gives the basics for how to create a test (demo_cdm) instnace of the CDM in Databricks 
-  and then how to get an existing CDM in Databricks connected to OHDSI. 
+  This guide gives the basics for how to download and install Ponos. 
+  Ponos is a tool that can be used to create a demo instance of the CDM 
+  and to connect an existing instance of a CDM to OHDSI. 
   <h2>Download and Install Ponos</h2>
   Ponos can be downloaded from <a ref="https://github.com/NACHC-CAD/ponos">https://github.com/NACHC-CAD/ponos</a>. 
   Click the "Latest" link under Releases and download the zip file found there (e.g. ponos-1.0.002.zip). 

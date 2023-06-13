@@ -325,7 +325,11 @@ A
 <a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">Quick
 Start Guide</a> is provided if you are just interested in running the
 Ponos tool to create a test instance of the CDM in Databricks and/or
-connect an existing instance of a CDM in Databricks to OHDSI.
+connect an existing instance of a CDM in Databricks to OHDSI. This quick
+start guide is for a standalone Tomcat instance of OHDSI (i.e. not
+Broadsea). For guidance on setting up a Databricks CDM instance using
+Broadsea, consult the <a href="developer-how-tos_broadsea.html">Broadsea
+Implementation Guide</a>.
 <h2>
 Introduction
 </h2>
@@ -376,18 +380,32 @@ actually optional, if you don’t have an existing CDM the Ponos tool can
 be used to generate a demo CDM)
 </li>
 <li>
-<i>PostgreSql</i><br/>A local instance of PostgreSql is used for the
+<i>PostgreSql</i><br/> A local instance of PostgreSql is used for the
 webapi schema
 </li>
 <li>
-<i>Basic developer software</i><br/>Java 11 is required. Other software
+<i>Basic developer software</i><br/> Java 11 is required. Other software
 such as Maven and an IDE are useful if your interested in the details of
 how everything works.
+</li>
+<li>
+<i>A Full Install of Atlas and Underlying Software</i><br/> A full
+install of Atlas is required as a prerequisite for this process. An
+automated process for installing Atlas and all of its dependencies is
+described
+<a href="https://nachc-cad.github.io/fhir-to-omop/pages/navbar/getting-started/start-here/StartHere.html">here</a>.
 </li>
 </ul>
 <h2>
 Overview
 </h2>
+Code for the Ponos project is open source (Apache 2 license) and is
+available in github at
+<a href="https://github.com/NACHC-CAD/ponos">https://github.com/NACHC-CAD/ponos</a>.
+This project is just the user interface for the actual functionality.
+The functionality for Ponos is implemented in the fhir-to-omop tool
+suite which is also open source (Apache 2 license) and is available at
+<a href="https://github.com/NACHC-CAD/fhir-to-omop">https://github.com/NACHC-CAD/fhir-to-omop</a>.
 Enabling an instance of a CDM consists of the following high level
 steps. Each of these steps are detailed in this guide. This entire
 process has been automated by the Ponos tool using two steps. One step
@@ -395,8 +413,62 @@ to create the DEMO_DB instance in Databricks (db-demo) and one step to
 do all of the work shown below required to get a CDM instance OHDSI
 enabled.
 <ul>
+<!-- 
+    *
+    * create a demo_cdm test instance 
+    *
+    -->
+<br/>
 <li>
-<b>Create a test instance of the CDM in Databricks</b><br/>
+<b>Create a test instance of the CDM in Databricks</b><br/> To create a
+test instance of the CDM in Databricks,
+<a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Download
+and Install Ponos</a> and the run the following:
+<pre class="pre-scrollable">
+run-ponos.bat db-demo
+</pre>
+The code that creates the demo_cdm in Databricks can be found in the
+fhir-to-omop
+<a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/BuildDemoCdmInDatabricks.java">BuildDemoCdmInDatabricks</a>
+class. The demo_cdm from the Broadsea distribution is created in
+Databricks using the Ponos tool. Data are sourced from .csv files
+included in the Ponos project that were created as a extract from a
+PostgreSql instance of the demo_cdm. This install includes the
+following:
+<ul>
+<li>
+Upload of .csv files for the CDM to the Databricks FileStore
+</li>
+<li>
+Creation of the CDM database in Databricks using the DDL files from the
+<a ref="https://github.com/OHDSI/CommonDataModel">Common Data Model
+(CDM)</a> (version 5.3 is used).
+</li>
+<li>
+Population of the CDM (including vocabulary tables) from the uploaded
+.csv files
+</li>
+</ul>
+</li>
+<!-- 
+    * 
+    * connect an existing instance 
+    * 
+    * -->
+<br/>
+<li>
+<b>Connect an Existing CDM Instance to OHDSI</b> <br/> To connect an
+existing CDM instance to OHDSI run the following:
+<pre class="pre-formatted">
+run-ponos.bat db-init
+</pre>
+The code that connects an existing CDM to OHDSI can be found in the
+<a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/OhdsiEnableExistingDatabricksCdm.java">OhdsiEnableExistingDatabricksCdm</a>
+class. This code does the following:
+<ul>
+<li>
+</li>
+</ul>
 </li>
 </ul>
 </p>

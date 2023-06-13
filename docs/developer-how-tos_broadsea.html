@@ -321,9 +321,7 @@ How-tos</h1>
 <h1>
 Implementing OHDSI on Databricks Using Broadsea
 </h1>
-<p>
-This is a DRAFT work in progress. <br/> <br/> This guide will walk
-through the creation of a new OHDSI stack using
+This guide will walk through the creation of a new OHDSI stack using
 <a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using
 Databricks for the CDM on Windows. This guide assumes that you have
 Docker installed and a CDM instance you can point to in Databricks.
@@ -374,8 +372,17 @@ Start Broadsea
 </h3>
 Start Broadsea in the ususal way. Open a cmd prompt, navigate to the
 Broadsea directory and execute
-<pre class="prescrollable">
+<pre class="pre-scrollable">
 docker compose pull && docker-compose --profile default up -d
+</pre>
+<h3>
+Connect Your Databricks CDM to OHDSI Using Ponos bs-init
+</h3>
+Use the following cmd from the location where you installed Ponos to
+connect your Databricks CDM to OHDSI.<br />
+
+<pre class="pre-scrollable">
+
 </pre>
 </p>
 

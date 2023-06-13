@@ -12,6 +12,11 @@ output:
   <h2>Introduction</h2>
   This quick start guide gives the basics for how to create a test (demo_cdm) instnace of the CDM in Databricks 
   and then how to get an existing CDM in Databricks connected to OHDSI. 
+  This guide is for a standalone Tomcat instance (i.e. not Broadsea). 
+  Ponos can also be used with Broadsea. 
+  See the 
+  <a href="./developer-how-tos_broadsea.html">Broadsea Implementation Guide</a> 
+  for guidance on setting up a Databricks CDM with Broadsea. 
   <h2>Download and Install Ponos</h2>
   Ponos is a tool that can be used to automate most of the processes required to get an instance of a CDM ready for OHDSI use. 
   Detailed instructions for downloading and installing Ponos can be found on the 
