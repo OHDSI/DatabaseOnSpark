@@ -467,10 +467,62 @@ The code that connects an existing CDM to OHDSI can be found in the
 class. This code does the following:
 <ul>
 <li>
+Create the OHDSI database instance in PostgreSql (this is the home for
+the webapi schema). The OHDSI PostgreSql instance is dropped if it
+already exists.
+</li>
+<li>
+Create the Atlas database users for the PostgreSql database and webapi
+schema
+</li>
+<li>
+Create the webapi schema
+</li>
+<li>
+Create the webapi tables and other database objects
+</li>
+<li>
+Create the Achilles results database in Databricks
+</li>
+<li>
+Create the tables in the Achilles database in Databricks
+</li>
+<li>
+Create the achilles_analysis table from the AchillesAnalysisDetails.csv
+file
+</li>
+<li>
+Run Achillies
+</li>
+<li>
+Create the appropriate source and source_daimon records in webapi
 </li>
 </ul>
 </li>
 </ul>
+<h2>
+Do It Yourself!
+</h2>
+To get your instance of OHDSI on Databricks up and running:
+<ul>
+<li>
+<a href="developer-how-tos_databricks-create-new-instance.html">Create a
+Trial Databricks Instance</a> <br/> Create a test instance of Databricks
+if you don’t already have one.
+</li>
+<li>
+<a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">Create
+DEMO_DB CDM instance in Databricks</a> <br/> Create a DEMO_DB instance
+of the CDM in Databricks if you do not have your own CDM instance to
+work with.
+</li>
+<li>
+<a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">Connect
+Databricks CDM to OHDSI</a> <br/> Connect your instance of the CDM in
+Databricks to OHDSI.
+</li>
+</ul>
+<br/> <br/> <br/> <br/>
 </p>
 
 
