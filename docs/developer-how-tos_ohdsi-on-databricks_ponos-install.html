@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group Developer How-tos: OHDSI on Databricks Quick Start Guide</title>
+<title>OHDSI Databricks User Group Developer How-tos: Download and Install Ponos</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -312,7 +312,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">OHDSI Databricks User Group Developer
-How-tos:<br/>OHDSI on Databricks Quick Start Guide</h1>
+How-tos:<br/>Download and Install Ponos</h1>
 
 </div>
 
@@ -327,50 +327,220 @@ existing CDM in Databricks connected to OHDSI.
 <h2>
 Download and Install Ponos
 </h2>
-<p>Ponos is a tool that can be used to automate most of the processes
-required to get an instance of a CDM ready for OHDSI use. Detailed
-instructions for downloading and installing Ponos can be found on the
-<a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Ponos
-Install</a> page.</p>
+Ponos can be downloaded from
+<a ref="https://github.com/NACHC-CAD/ponos">https://github.com/NACHC-CAD/ponos</a>.
+Click the “Latest” link under Releases and download the zip file found
+there (e.g. ponos-1.0.002.zip). <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-git.png" />
+<br/> <br/> Download and extract the zip file. After unzipping the file,
+you should have a ponos folder with and auth sub-folder and a lib
+sub-folder. The lib sub-folders should contain the database drivers for
+Databricks and PostgreSql. The auth folder should contain a single file
+called app-databricks.properties file. The app-databricks.properties
+file contains only the fully qualified path to the actual properties
+file to be used by the application. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-zip.png" />
+<br/> <br/> You will need your own properties file. Down load this
+<a download href="./img/developer-how-tos/ponos/quickstart/databricks-public-demo.properties">databricks-public-demo.properties</a>
+file as a starting point and modify to use your parameters. Modify the
+ponos/auth/app-databricks.properties file to point to the location of
+the properties file you intend to use (e.g. the
+databricks-public-demo.properties) we just downloaded. For this example,
+we’ve put the databricks-public-demo.properties file in the ponos
+directory and modified the auth/app-databricks.properties file
+accordingly. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-dir.png" />
+<br/> <br/> Our auth/app-databricks.properties file now looks like this:
+<br/>
+<pre class="prescrollable">
+D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+</pre>
+The databricks-public-demo.properties file looks like this:
+<pre class="pre-scrollable" style="max-height: 75vh">
+# ---
+#
+# DEMO
+# This config file points to a temporary free Databricks instance created for this demo.  
+#
+# ---
+
+# REST properties
+RestUrl=https://dbc-9c1b9c59-a942.cloud.databricks.com//api/2.0
+DatabricksUploadRoot=/FileStore/tables/prod
+DatabricksFilesRoot=ohdsi/ponos/demo_cdm
+
+# DB properties
+JdbcUrl=jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
+Token=dapi8ae48c35e859579a5531ff2005907544
+
+# Schema properties
+SchemaName=demo_cdm
+VocabSchemaName=demo_cdm
+AchillesTempSchemaName=demo_cdm_ach_tmp
+AchillesResultsSchemaName=demo_cdm_ach_res
+
+# WebApi properties 
+WebApiJdbcUrl=jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=ohdsi&currentSchema=OHDSI
+WebApiBootStrapJdbcUrl=jdbc:postgresql://localhost:5432/?user=postgres&password=ohdsi
+WebApiDatabase=OHDSI
+WebApiSchema=webapi
+WebApiKey=DATABRICKS_PUBLIC_DEMO
+WebApiName=Databricks Public Demo
+
+# WebApi users properties
+OhdsiAdminUserUid=ohdsi_admin_user
+OhdsiAdminUserPwd=app1
+OhdsiAdminUid=ohdsi_admin
+OhdsiAdminPwd=app1
+OhdsiAppUserUid=ohdsi_app_user
+OhdsiAppUserPwd=app1
+OhdsiAppUid=ohdsi_app
+OhdsiAppPwd=app1
+
+</pre>
 <h2>
-Create an Instance of the DEMO_DB CDM in Databricks
+Run Ponos
 </h2>
-To create an instance of the DEMO_DB CDM in Databricks, simply execute
-run-ponos.bat with the db-demo parameter as shown below:
-<pre class="pre-scroll">
-run-ponos.bat db-demo
-</pre>
-<p><br/> This will create a complete instance of the DEMO_DB instance in
-your Databricks instance as shown below. You can then use this instance
-as your CDM. When the process has completed, you should see something
-similar to the following (note that the process took about 6 min): <br/>
-<img src="img/developer-how-tos/ponos/quickstart/ponos-demo-db-cmd.png" />
-<br/> <br/> You should then be able to open a notebook in Databricks and
-query the new instance to confirm it was created. <br/>
-<img src="img/developer-how-tos/ponos/quickstart/ponos-demo-db-notebook.png" />
-<br/> <br/></p>
+<p>To run the Ponos application execute the run-ponos.bat script from a
+cmd line. Executing Ponos without any parameters will list the current
+options. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/run-ponos.png" /></p>
 <h2>
-Connect an Existing Databricks CDM to OHDSI
+View the Parameters of the Current Configuration
 </h2>
-To connect an existing CDM to OHDSI simply execute run-ponos.bat with
-the db-init parameter as shown below:
-<pre class="pre-scrollable">
-run-ponos.bat db-init
+To check that you are using the parameters file you think you are using
+execute run-ponos.bat with the db-params option:
+<pre class="prescrollable">
+run-ponos.bat db-params
 </pre>
-This will execute all of the steps required to make your Databricks CDM
-available to OHDSI. When this process has completed, you should see
-output similar to the following: <br/>
-<img src="img/developer-how-tos/ponos/quickstart/ponos-init-cmd.png" />
-<br/> <br/> You should then be able to start Tomacat and see your
-Databricks CDM instance in Atlas. Start Tomcat, open a browser, and
-navigate to:
-<pre class="pre-scrollable">
-http://localhost:8080/atlas
+<img src="img/developer-how-tos/ponos/quickstart/ponos-params.png" />
+<br/> <br/> Output from run-ponos.bat db-params should look similar to
+the following:
+<pre class="pre-scrollable" style="max-height: 75vh">
+D:\temp\ponos-1.0.002\ponos>run-ponos.bat db-params
+
+
+# ----------------------------------------
+#
+# Running Ponos
+#
+# ----------------------------------------
+
+2023-06-08 14:59:18,235 14:59:18.235 [main] INFO  (PonosMain.java:40) - Getting config file...
+2023-06-08 14:59:18,238 14:59:18.238 [main] INFO  (DatabricksProperties.java:54) - ------------
+2023-06-08 14:59:18,241 14:59:18.241 [main] INFO  (DatabricksProperties.java:55) - File: null
+2023-06-08 14:59:18,243 14:59:18.243 [main] INFO  (DatabricksProperties.java:56) - Exists: false
+2023-06-08 14:59:18,243 14:59:18.243 [main] INFO  (DatabricksProperties.java:57) - Could not load default properties.
+2023-06-08 14:59:18,243 14:59:18.243 [main] INFO  (DatabricksProperties.java:58) - A properties file will need to be provided by the user.
+2023-06-08 14:59:18,244 14:59:18.244 [main] INFO  (DatabricksProperties.java:59) - ------------
+2023-06-08 14:59:18,244 14:59:18.244 [main] INFO  (DatabricksProperties.java:77) - SETTING PROPS FROM:
+D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+2023-06-08 14:59:18,245 14:59:18.245 [main] INFO  (PonosMain.java:45) - CONFIG FILE SUCCESSFULY SET
+2023-06-08 14:59:18,245 14:59:18.245 [main] INFO  (TestDatabricksProperties.java:88) - Found pointer file: ./auth/app-databricks.properties
+2023-06-08 14:59:18,245 14:59:18.245 [main] INFO  (TestDatabricksProperties.java:89) - Pointer file points to config file:
+D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+2023-06-08 14:59:18,254 14:59:18.254 [main] INFO  (TestDatabricksProperties.java:76) -
+
+---------
+Databricks Configuration:
+Config File Name:   D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+Config File Path:   D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+Config File Exists: true
+---------
+
+
+2023-06-08 14:59:18,260 14:59:18.260 [main] INFO  (TestDatabricksProperties.java:109) -
+
+---------------------------
+START CONFIG FILE CONTENTS
+---------------------------
+
+# ---
+#
+# DEMO
+# This config file points to a temporary free Databricks instance created for this demo.
+#
+# ---
+
+# REST properties
+RestUrl=https://dbc-9c1b9c59-a942.cloud.databricks.com//api/2.0
+DatabricksUploadRoot=/FileStore/tables/prod
+DatabricksFilesRoot=ohdsi/ponos/demo_cdm
+
+# DB properties
+JdbcUrl=jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
+Token=dapi8ae48c35e859579a5531ff2005907544
+
+# Schema properties
+SchemaName=demo_cdm
+VocabSchemaName=demo_cdm
+AchillesTempSchemaName=demo_cdm_ach_tmp
+AchillesResultsSchemaName=demo_cdm_ach_res
+
+# WebApi properties
+WebApiJdbcUrl=jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=ohdsi&currentSchema=OHDSI
+WebApiBootStrapJdbcUrl=jdbc:postgresql://localhost:5432/?user=postgres&password=ohdsi
+WebApiDatabase=OHDSI
+WebApiSchema=webapi
+WebApiKey=DATABRICKS_PUBLIC_DEMO
+WebApiName=Databricks Public Demo
+
+# WebApi users properties
+OhdsiAdminUserUid=ohdsi_admin_user
+OhdsiAdminUserPwd=app1
+OhdsiAdminUid=ohdsi_admin
+OhdsiAdminPwd=app1
+OhdsiAppUserUid=ohdsi_app_user
+OhdsiAppUserPwd=app1
+OhdsiAppUid=ohdsi_app
+OhdsiAppPwd=app1
+
+---------------------------
+END CONFIG FILE CONTENTS
+---------------------------
+
+2023-06-08 14:59:18,273 14:59:18.273 [main] INFO  (TestDatabricksProperties.java:127) - Config parameters:
+
+---------------------------
+START CONFIG VALUES
+---------------------------
+AchillesResultsSchemaName     demo_cdm_ach_res
+AchillesTempSchemaName        demo_cdm_ach_tmp
+DatabricksFilesRoot           ohdsi/ponos/demo_cdm
+DatabricksUploadRoot          /FileStore/tables/prod
+JdbcUrl                       jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
+OhdsiAdminPwd                 app1
+OhdsiAdminUid                 ohdsi_admin
+OhdsiAdminUserPwd             app1
+OhdsiAdminUserUid             ohdsi_admin_user
+OhdsiAppPwd                   app1
+OhdsiAppUid                   ohdsi_app
+OhdsiAppUserPwd               app1
+OhdsiAppUserUid               ohdsi_app_user
+RestUrl                       https://dbc-9c1b9c59-a942.cloud.databricks.com//api/2.0
+SchemaName                    demo_cdm
+Token                         dapi8ae48c35e859579a5531ff2005907544
+VocabSchemaName               demo_cdm
+WebApiBootStrapJdbcUrl        jdbc:postgresql://localhost:5432/?user=postgres&password=ohdsi
+WebApiDatabase                OHDSI
+WebApiJdbcUrl                 jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=ohdsi&currentSchema=OHDSI
+WebApiKey                     DATABRICKS_PUBLIC_DEMO
+WebApiName                    Databricks Public Demo
+WebApiSchema                  webapi
+---------------------------
+END CONFIG VALUES
+---------------------------
+
+
+2023-06-08 14:59:18,274 14:59:18.274 [main] INFO  (PonosMain.java:35) - Done.
+
+
+Done.
+
+
+
+D:\temp\ponos-1.0.002\ponos>
 </pre>
-<p><br/> When you navigate to the Datasources tab and select the People
-report, you should see something similar to the following (this image
-shows data from the DEMO_CDM database).<br />
-<img src="img/developer-how-tos/ponos/quickstart/ponos-atlas.png" /></p>
 <br/><br/><br/><br/><br/> <br/><br/><br/><br/><br/>
 </p>
 

@@ -10,7 +10,7 @@ output:
 
 <p>
   <h2>Quick Start Guide</h2>
-  A <a href="./">Quick Start Guide</a> is provided if you are just interested in running the Ponos tool to create a test instance of the CDM in Databricks 
+  A <a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">Quick Start Guide</a> is provided if you are just interested in running the Ponos tool to create a test instance of the CDM in Databricks 
   and/or connect an existing instance of a CDM in Databricks to OHDSI. 
   <h2>Introduction</h2>
   This implementation guide demonstrates an end to end solution for connecting an existing Common Data Model (CDM) to OHDSI. 
