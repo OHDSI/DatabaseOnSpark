@@ -33,7 +33,7 @@ output:
   If you are manually creating the webapi.source record, please note the following: 
   <br/>
   <br/>
-  A Databricks JDBC URL provided by Databricks ususlly looks something like this:
+  A Databricks JDBC URL provided by Databricks usually looks something like this:
 <pre class="pre-scrollable">
 jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=dapi8ae48c35e859579a5531ff2005907544
 </pre>

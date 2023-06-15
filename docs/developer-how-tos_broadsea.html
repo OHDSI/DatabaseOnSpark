@@ -405,18 +405,18 @@ How-tos:<br/>Implementing OHDSI on Databricks Using Broadsea</h1>
   * INTRODUCTION
   *
   * * * -->
-<h3>
+<h2>
 Introduction
-</h3>
+</h2>
 This guide will walk through the creation of a new OHDSI stack using
 <a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using
 Databricks for the CDM on Windows. This guide assumes that you have
 Docker installed and a CDM instance you can point to in Databricks.
 <br/>
-<h3>
+<h2>
 Getting Started
-</h3>
-Before you get started, make sure you do not have a local instance of
+</h2>
+<p>Before you get started, make sure you do not have a local instance of
 PostgreSql running as a service. <br/>
 <img src="img/developer-how-tos/broadsea/00-check-postgres.png" /> <br/>
 <br/> To get started, it’s not a bad idea to clear out your Docker
@@ -431,15 +431,15 @@ containers, or images remaining in your Docker instance. <br/>
 comfimation that you really want to delete everything. <br/>
 <img src="img/developer-how-tos/broadsea/01-clean.png" /> <br/> <br/>
 The show script can be used to confirm there’s nothing left on Docker.
-<br/> <img src="img/developer-how-tos/broadsea/02-show.png" />
+<br/> <img src="img/developer-how-tos/broadsea/02-show.png" /></p>
 <!-- * * *
   *
   * CLONE FROM GITHUB
   *
   * * * -->
-<h3>
+<h2>
 Clone Broadsea from Github
-</h3>
+</h2>
 Clone Broadsea using: <br/>
 <pre class="prescrollable">git clone https://github.com/OHDSI/Broadsea</pre>
 <!-- * * *
@@ -447,9 +447,9 @@ Clone Broadsea using: <br/>
   * UPDATE BROADSEA
   *
   * * * -->
-<h3>
+<h2>
 Update Broadsea
-</h3>
+</h2>
 Next, copy the Spark JDBC Jar File and Update the docker-compose.yml
 file: <br/> Paste a copy of the spark JDBC driver you are using into
 your Broadsea directory (the directory that has the docker-compose.yml
@@ -462,17 +462,17 @@ ohdsi-webapi-from-image section.
     volumes:
       - ./SparkJDBC42.jar:/var/lib/ohdsi/webapi/WEB-INF/lib/SparkJDBC42.jar
 </pre>
-<br/> The Spark JDBC driver and new docker-compose.yml file should now
-be in the root directory of the Broadsea project as shown below. <br/>
-<img src="img/developer-how-tos/broadsea/03-copy-files.png" />
+<p><br/> The Spark JDBC driver and new docker-compose.yml file should
+now be in the root directory of the Broadsea project as shown below.
+<br/> <img src="img/developer-how-tos/broadsea/03-copy-files.png" /></p>
 <!-- * * *
   *
   * START BROADSEA
   *
   * * * -->
-<h3>
+<h2>
 Start Broadsea
-</h3>
+</h2>
 Start Broadsea in the ususal way. Open a cmd prompt, navigate to the
 Broadsea directory and execute
 <pre class="pre-scrollable">
@@ -483,13 +483,27 @@ docker compose pull && docker-compose --profile default up -d
   * CONNECT TO OHDSI
   *
   * * * -->
-<h3>
+<h2>
 Connect to OHDSI
+</h2>
+<p>The next step is to connect Your Databricks CDM to OHDSI. This can be
+done using Ponos bs-init. Instructions for downloading and installing
+Ponos can be found on the
+<a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Ponos
+Install</a> page.</p>
+<!-- * * *
+  *
+  * CONFIGURE PARAMETERS
+  *
+  * * * -->
+<h3>
+Configure Parametes
 </h3>
-The next step is to connect Your Databricks CDM to OHDSI. This can be
-done using Ponos bs-init. Use the following cmd from the location where
-you installed Ponos to connect your Databricks CDM to OHDSI.<br />
-
+After downloading and installing Ponos, edit the file found as
+./auth/bs-databricks-public-demo.properties to use your parameters.
+<img src="img/developer-how-tos/broadsea/07-params.png" /> <br/><br/>
+Use the following cmd from the location where you installed Ponos to
+connect your Databricks CDM to OHDSI.
 <pre class="pre-scrollable">
 run-ponos.bat bs-init
 </pre>
@@ -524,8 +538,8 @@ for the key in the properties file will be overwritten).
 <h3>
 Configure SSL and URL
 </h3>
-The next step is to configure the JDBC URL (UseNativeQuery) and SSL for
-Databricks: <br/> Most Databricks instances use SSL by default. A
+<p>The next step is to configure the JDBC URL (UseNativeQuery) and SSL
+for Databricks: <br/> Most Databricks instances use SSL by default. A
 Databricks instance that uses SSL will have “ssl=1;” as a parameter in
 the JDBC URL. To enable a connection that uses SSL, follow the
 instructions in the
@@ -537,7 +551,8 @@ using the Ponos application to create your OHDSI on Databricks instance,
 the Ponos application will add this to the URL if it is not already
 there. This is also described in the
 <a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the
-Databricks JDBC URL, SSL, and UseNativeQuery</a> page. <!-- 
+Databricks JDBC URL, SSL, and UseNativeQuery</a> page.</p>
+<!-- 
   * 
   * RESTART DOCKER AND LAUNCH ATLAS
   *
