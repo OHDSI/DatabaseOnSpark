@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group Developer How-tos: Notes on the Databricks URL, SSL, and UseNative</title>
+<title>OHDSI Databricks User Group Developer How-tos: Notes on the Databricks JDBC URL, SSL, and UseNativeQuery</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -223,6 +226,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -230,6 +302,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -312,19 +394,125 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">OHDSI Databricks User Group Developer
-How-tos:<br/>Notes on the Databricks URL, SSL, and UseNative</h1>
+How-tos:<br/>Notes on the Databricks JDBC URL, SSL, and
+UseNativeQuery</h1>
 
 </div>
 
 
 <p>
 <h2>
-Notes on the Databricks URL, SSL, and UseNative
+Introduction
 </h2>
+There are two configuration issues to be aware of when running OHDSI on
+Databricks.
+<ol>
+<li>
+<b>UseNativeQuery:</b> <br/> The “UseNativeQuery=1;” parameter needs to
+be added to the JDBC URL that is written to the webapi.source table.
+This is required for all instances of OHDSI on Databricks (i.e. this is
+required for both native Tomcat installations as well as Broadsea
+implementations).
+</li>
+<li>
+<b>SSL Configuration for Broadsea:</b> <br/> Broadsea requires some
+manual configuration to enable the SSL connection that is used by
+Databricks by default. Configuring Broadsea for SSL connections is
+described here.
+</li>
+</ol>
+<h2>
+UseNativeQuery
+</h2>
+The “UseNativeQuery=1;” parameter is set automatically by the Ponos
+install. To confirm this you can open pgAdmin and check the records
+created in the webapi.source table. If you are manually creating the
+webapi.source record, please note the following: <br/> <br/> A
+Databricks JDBC URL provided by Databricks ususlly looks something like
+this:
+<pre class="pre-scrollable">
+jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=dapi8ae48c35e859579a5531ff2005907544
+</pre>
+This URL needs to be modified by adding the “UseNativeQuery=1;”
+parameter to look like the following.
+<pre class="pre-scrollable">
+jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;UseNativeQuery=1;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=dapi8ae48c35e859579a5531ff2005907544
+</pre>
+<h2>
+Configure SSL
+</h2>
+A vaild cacerts file is required for Broadsea to work with Databricks. A
+valid cacerts file for your Databricks JDBC URL can be created according
+to the following.
+<h3>
+Get The Certificate
+</h3>
+Navigate to your Databricks instance from Chrome (or other browser of
+your choice, the instructions below are for Chrome, other browsers will
+vary in how the information is accessed). Use the location portion of
+your JDBC URL to find the page. The URL should look something like what
+is shown below. Be sure to use https.
+<pre class="pre-scrollable">
+https://dbc-9c1b9c59-a942.cloud.databricks.com/login.html
+</pre>
+<br/> Click on the lock icon to the left of the URL and select
+“Connection is Secutre” <br/>
+<img src="img/developer-how-tos/broadsea/ssl/01-click-on-lock.png" />
+<br/><br/> Select the “Certificate is valid” link. <br/>
+<img src="img/developer-how-tos/broadsea/ssl/02-cert-is-valid.png" />
+<br/><br/> Select the “Details” tab and the select “Export”. <br/>
+<img src="img/developer-how-tos/broadsea/ssl/03-export.png" />
+<br/><br/> This will download the certificat you will need. <br/>
+<img src="img/developer-how-tos/broadsea/ssl/04-cert.png" />
+<br/><br/>
+<h3>
+Create the cacerts File
+</h3>
+Navigate to the directory of the certificate file you just downloaded.
+Run java -version to confirm you are using Java 8 (cacerts file needs to
+be created with Java 8). Then execute the following cmd (you’ll probably
+need to change the file name and can change the password etc.).
+<pre class="pre-scrollable">
+java -version
+keytool -import -v -trustcacerts -alias server-alias -file _.cloud.databricks.com -keystore cacerts -keypass changeit -storepass changeit
+</pre>
+Output from the cmd should look similar to the following. <br/>
+<img src="img/developer-how-tos/broadsea/ssl/05-cert-cmd.png" />
+<br/><br/> After running the cmd there should be a cacerts file in the
+directory where you ran the cmd. <br/>
+<img src="img/developer-how-tos/broadsea/ssl/06-cert-created.png" />
+<br/><br/>
+<h3>
+Deploy cacerts to Broadsea
+</h3>
+Copy and paste this new file in the root directory of Broadsea
+(replacing the existing blank cacerts file). <br/>
+<img src="img/developer-how-tos/broadsea/ssl/07-cert-in-broadsea.png" />
+<br/><br/>
+<h3>
+Restart Broadsea
+</h3>
+Open a cmd window, navigate to the Broadsea directory and restart
+Broadsea.
+<pre class="prescrollable">
+docker compose --profile default down 
+docker compose pull && docker-compose --profile default up -d
+</pre>
+<p><br/> Open
+<a href="http://127.0.0.1/atlas">http://127.0.0.1/atlas</a> in a browser
+and navigate to Data Sources. Select your data source (in this case
+“Databricks Demo” and then select a report, the Person report is shown
+in the screen shot below). When you do this you should not see any
+errors in the Docker output for webapi as shown below. <br/>
+<img src="img/developer-how-tos/broadsea/05-person-report.png" /> <br/>
+<br/>
+<img src="img/developer-how-tos/broadsea/06-docker-after-loading-reports.png" /></p>
 </p>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -357,6 +545,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

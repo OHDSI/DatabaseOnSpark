@@ -1,15 +1,20 @@
 ---
-title: '<div>OHDSI Databricks User Group Developer How-tos</div>'
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Implementing OHDSI on Databricks Using Broadsea</div>'
 output:
   html_document:
-    toc: FALSE
+    toc: TRUE
     toc_depth: 3
     toc_float:
       collapsed: FALSE
 ---
 
 <p>
-  <h1>Implementing OHDSI on Databricks Using Broadsea</h1>
+  <!-- * * *
+  *
+  * INTRODUCTION
+  *
+  * * * -->
+  <h3>Introduction</h3>
   This guide will walk through the creation of a new OHDSI stack using 
   <a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using Databricks for the CDM on Windows. 
   This guide assumes that you have Docker installed and a CDM instance you can point to in Databricks. 
@@ -38,11 +43,23 @@ output:
   The show script can be used to confirm there's nothing left on Docker. 
   <br/>
   <img src="img/developer-how-tos/broadsea/02-show.png" />
-  <h3>Clone Broadsea</h3>
+  <!-- * * *
+  *
+  * CLONE FROM GITHUB
+  *
+  * * * -->
+  <h3>Clone Broadsea from Github</h3>
   Clone Broadsea using: 
   <br/>
   <pre class="prescrollable">git clone https://github.com/OHDSI/Broadsea</pre>
-  <h3>Copy the Spark JDBC Jar File and Update the docker-compose.yml file</h3>
+  <!-- * * *
+  *
+  * UPDATE BROADSEA
+  *
+  * * * -->
+  <h3>Update Broadsea</h3>
+  Next, copy the Spark JDBC Jar File and Update the docker-compose.yml file: 
+  <br/>
   Paste a copy of the spark JDBC driver you are using into your Broadsea directory 
   (the directory that has the docker-compose.yml file)
   Replace the existing docker-compose.yml file with this 
@@ -57,15 +74,89 @@ output:
   The Spark JDBC driver and new docker-compose.yml file should now be in the root directory of the Broadsea project as shown below. 
   <br/>
   <img src="img/developer-how-tos/broadsea/03-copy-files.png" />
+  <!-- * * *
+  *
+  * START BROADSEA
+  *
+  * * * -->
   <h3>Start Broadsea</h3>
   Start Broadsea in the ususal way. 
   Open a cmd prompt, navigate to the Broadsea directory and execute 
 <pre class="pre-scrollable">
 docker compose pull && docker-compose --profile default up -d
 </pre>
-  <h3>Connect Your Databricks CDM to OHDSI Using Ponos bs-init</h3>    
+  <!-- * * *
+  *
+  * CONNECT TO OHDSI
+  *
+  * * * -->
+  <h3>Connect to OHDSI</h3>
+  The next step is to connect Your Databricks CDM to OHDSI. This can be done using Ponos bs-init. 
   Use the following cmd from the location where you installed Ponos to connect your Databricks CDM to OHDSI.  
 <pre class="pre-scrollable">
-
+run-ponos.bat bs-init
 </pre>
+  The source for this process is in fhir-to-omop tool suite 
+  <a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/OhdsiEnableExistingBroadseaOnDatabricksCdm.java">OhdsiEnableExistingBroadseaOnDatabricksCdm</a> class. 
+  <br/>
+  This process will do the following:
+  <ul>
+    <li>
+      Create the Achilles results database in Databricks
+    </li>
+    <li>
+      Create the Achilles tables in Databricks
+    </li>
+    <li>
+      Create the achilles_analysis table from the AchillesAnalysisDetails.csv file
+    </li>
+    <li>
+      Run Achilles to populate the Achilles results tables
+    </li>
+    <li>
+      Create the appropriate source and source_daimon records in the PostgreSql instance of webapi included with Broadsea 
+      (existing records for the key in the properties file will be overwritten). 
+    </li>
+  </ul>
+  <!-- 
+  * 
+  * CONFIGURE SSL 
+  *
+  * -->
+  <h3>Configure SSL and URL</h3>
+  The next step is to configure the JDBC URL (UseNativeQuery) and SSL for Databricks:
+  <br/>
+  Most Databricks instances use SSL by default. 
+  A Databricks instance that uses SSL will have "ssl=1;" as a parameter in the JDBC URL. 
+  To enable a connection that uses SSL, follow the instructions in the 
+  <a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the Databricks JDBC URL, SSL, and UseNativeQuery</a> page. 
+  <br/>
+  It should also be noted that the parameter "UseNativeQuery=1;" needs to be added to the url that is inserted into the webapi.source table. 
+  If you are using the Ponos application to create your OHDSI on Databricks instance, the Ponos application will add this to the URL if it is not already there. 
+  This is also described in the 
+  <a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the Databricks JDBC URL, SSL, and UseNativeQuery</a> page. 
+  <!-- 
+  * 
+  * RESTART DOCKER AND LAUNCH ATLAS
+  *
+  * -->
+  <h3>Restart Docker and Launch Atlas</h3>
+  Restart Docker:
+<pre class="prescrollable">
+docker compose --profile default down 
+docker compose pull && docker-compose --profile default up -d
+</pre> 
+  <br/>
+  Open <a href="http://127.0.0.1/atlas">http://127.0.0.1/atlas</a> in a browser and navigate to Data Sources. 
+  Select your data source (in this case "Databricks Demo" and then select a report, the Person report is shown in the screen shot below). 
+  When you do this you should not see any errors in the Docker output for webapi as shown below. 
+  <br/>
+  <img src="img/developer-how-tos/broadsea/05-person-report.png" />
+  <br/>
+  <br/>
+  <img src="img/developer-how-tos/broadsea/06-docker-after-loading-reports.png" />
 </p>
+
+
+
+

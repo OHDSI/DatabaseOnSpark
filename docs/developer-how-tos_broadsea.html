@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group Developer How-tos</title>
+<title>OHDSI Databricks User Group Developer How-tos: Implementing OHDSI on Databricks Using Broadsea</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -223,6 +226,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -230,6 +302,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -312,15 +394,20 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">OHDSI Databricks User Group Developer
-How-tos</h1>
+How-tos:<br/>Implementing OHDSI on Databricks Using Broadsea</h1>
 
 </div>
 
 
 <p>
-<h1>
-Implementing OHDSI on Databricks Using Broadsea
-</h1>
+<!-- * * *
+  *
+  * INTRODUCTION
+  *
+  * * * -->
+<h3>
+Introduction
+</h3>
 This guide will walk through the creation of a new OHDSI stack using
 <a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using
 Databricks for the CDM on Windows. This guide assumes that you have
@@ -345,17 +432,28 @@ comfimation that you really want to delete everything. <br/>
 <img src="img/developer-how-tos/broadsea/01-clean.png" /> <br/> <br/>
 The show script can be used to confirm there’s nothing left on Docker.
 <br/> <img src="img/developer-how-tos/broadsea/02-show.png" />
+<!-- * * *
+  *
+  * CLONE FROM GITHUB
+  *
+  * * * -->
 <h3>
-Clone Broadsea
+Clone Broadsea from Github
 </h3>
 Clone Broadsea using: <br/>
 <pre class="prescrollable">git clone https://github.com/OHDSI/Broadsea</pre>
+<!-- * * *
+  *
+  * UPDATE BROADSEA
+  *
+  * * * -->
 <h3>
-Copy the Spark JDBC Jar File and Update the docker-compose.yml file
+Update Broadsea
 </h3>
-Paste a copy of the spark JDBC driver you are using into your Broadsea
-directory (the directory that has the docker-compose.yml file) Replace
-the existing docker-compose.yml file with this
+Next, copy the Spark JDBC Jar File and Update the docker-compose.yml
+file: <br/> Paste a copy of the spark JDBC driver you are using into
+your Broadsea directory (the directory that has the docker-compose.yml
+file) Replace the existing docker-compose.yml file with this
 <a download href="img/developer-how-tos/broadsea/scripts/docker-compose.yml">docker-compose.yml</a>
 file. (I usually backup the original as shown below). This new
 docker-compose.yml file simply adds the following lines to the
@@ -367,6 +465,11 @@ ohdsi-webapi-from-image section.
 <br/> The Spark JDBC driver and new docker-compose.yml file should now
 be in the root directory of the Broadsea project as shown below. <br/>
 <img src="img/developer-how-tos/broadsea/03-copy-files.png" />
+<!-- * * *
+  *
+  * START BROADSEA
+  *
+  * * * -->
 <h3>
 Start Broadsea
 </h3>
@@ -375,19 +478,92 @@ Broadsea directory and execute
 <pre class="pre-scrollable">
 docker compose pull && docker-compose --profile default up -d
 </pre>
+<!-- * * *
+  *
+  * CONNECT TO OHDSI
+  *
+  * * * -->
 <h3>
-Connect Your Databricks CDM to OHDSI Using Ponos bs-init
+Connect to OHDSI
 </h3>
-Use the following cmd from the location where you installed Ponos to
-connect your Databricks CDM to OHDSI.<br />
+The next step is to connect Your Databricks CDM to OHDSI. This can be
+done using Ponos bs-init. Use the following cmd from the location where
+you installed Ponos to connect your Databricks CDM to OHDSI.<br />
 
 <pre class="pre-scrollable">
-
+run-ponos.bat bs-init
 </pre>
+The source for this process is in fhir-to-omop tool suite
+<a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/OhdsiEnableExistingBroadseaOnDatabricksCdm.java">OhdsiEnableExistingBroadseaOnDatabricksCdm</a>
+class. <br/> This process will do the following:
+<ul>
+<li>
+Create the Achilles results database in Databricks
+</li>
+<li>
+Create the Achilles tables in Databricks
+</li>
+<li>
+Create the achilles_analysis table from the AchillesAnalysisDetails.csv
+file
+</li>
+<li>
+Run Achilles to populate the Achilles results tables
+</li>
+<li>
+Create the appropriate source and source_daimon records in the
+PostgreSql instance of webapi included with Broadsea (existing records
+for the key in the properties file will be overwritten).
+</li>
+</ul>
+<!-- 
+  * 
+  * CONFIGURE SSL 
+  *
+  * -->
+<h3>
+Configure SSL and URL
+</h3>
+The next step is to configure the JDBC URL (UseNativeQuery) and SSL for
+Databricks: <br/> Most Databricks instances use SSL by default. A
+Databricks instance that uses SSL will have “ssl=1;” as a parameter in
+the JDBC URL. To enable a connection that uses SSL, follow the
+instructions in the
+<a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the
+Databricks JDBC URL, SSL, and UseNativeQuery</a> page. <br/> It should
+also be noted that the parameter “UseNativeQuery=1;” needs to be added
+to the url that is inserted into the webapi.source table. If you are
+using the Ponos application to create your OHDSI on Databricks instance,
+the Ponos application will add this to the URL if it is not already
+there. This is also described in the
+<a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the
+Databricks JDBC URL, SSL, and UseNativeQuery</a> page. <!-- 
+  * 
+  * RESTART DOCKER AND LAUNCH ATLAS
+  *
+  * -->
+<h3>
+Restart Docker and Launch Atlas
+</h3>
+Restart Docker:
+<pre class="prescrollable">
+docker compose --profile default down 
+docker compose pull && docker-compose --profile default up -d
+</pre>
+<br/> Open <a href="http://127.0.0.1/atlas">http://127.0.0.1/atlas</a>
+in a browser and navigate to Data Sources. Select your data source (in
+this case “Databricks Demo” and then select a report, the Person report
+is shown in the screen shot below). When you do this you should not see
+any errors in the Docker output for webapi as shown below. <br/>
+<img src="img/developer-how-tos/broadsea/05-person-report.png" /> <br/>
+<br/>
+<img src="img/developer-how-tos/broadsea/06-docker-after-loading-reports.png" />
 </p>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -420,6 +596,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
