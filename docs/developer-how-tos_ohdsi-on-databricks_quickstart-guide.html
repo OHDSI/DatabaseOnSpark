@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group Developer How-tos: Implementing OHDSI on Databricks Using Broadsea</title>
+<title>OHDSI Databricks User Group Developer How-tos: OHDSI on Databricks Quick Start Guide</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -226,75 +223,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -302,16 +230,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -394,191 +312,74 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">OHDSI Databricks User Group Developer
-How-tos:<br/>Implementing OHDSI on Databricks Using Broadsea</h1>
+How-tos:<br/>OHDSI on Databricks Quick Start Guide</h1>
 
 </div>
 
 
 <p>
-<!-- * * *
-  *
-  * INTRODUCTION
-  *
-  * * * -->
 <h2>
 Introduction
 </h2>
-This guide will walk through the creation of a new OHDSI stack using
-<a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using
-Databricks for the CDM on Windows. This guide assumes that you have
-Docker installed and a CDM instance you can point to in Databricks.
-<br/>
+This quick start guide gives the basics for how to create a test
+(demo_cdm) instnace of the CDM in Databricks and then how to get an
+existing CDM in Databricks connected to OHDSI. This guide is for a
+standalone Tomcat instance (i.e. not Broadsea). Ponos can also be used
+with Broadsea. See the
+<a href="./developer-how-tos_broadsea.html">Broadsea Implementation
+Guide</a> for guidance on setting up a Databricks CDM with Broadsea.
 <h2>
-Getting Started
+Download and Install Ponos
 </h2>
-<p>Before you get started, make sure you do not have a local instance of
-PostgreSql running as a service. <br/>
-<img src="img/developer-how-tos/broadsea/00-check-postgres.png" /> <br/>
-<br/> To get started, it’s not a bad idea to clear out your Docker
-instance. The two scripts below can be run from PowerShell. The first
-script will delete all volumes, containers, and images from your Docker
-instance. The second script will show you if there are any volumes,
-containers, or images remaining in your Docker instance. <br/>
-<a href="img/developer-how-tos/broadsea/scripts/clean-docker.sh">clean-docker.sh</a>
-<br/>
-<a href="img/developer-how-tos/broadsea/scripts/show-docker.bat">show-docker.bat</a>
-<br/> <br/> The clean script will launch a bash window and ask for
-comfimation that you really want to delete everything. <br/>
-<img src="img/developer-how-tos/broadsea/01-clean.png" /> <br/> <br/>
-The show script can be used to confirm there’s nothing left on Docker.
-<br/> <img src="img/developer-how-tos/broadsea/02-show.png" /></p>
-<!-- * * *
-  *
-  * CLONE FROM GITHUB
-  *
-  * * * -->
-<h2>
-Clone Broadsea from Github
-</h2>
-Clone Broadsea using: <br/>
-<pre class="prescrollable">git clone https://github.com/OHDSI/Broadsea</pre>
-<!-- * * *
-  *
-  * UPDATE BROADSEA
-  *
-  * * * -->
-<h2>
-Update Broadsea
-</h2>
-Next, copy the Spark JDBC Jar File and Update the docker-compose.yml
-file: <br/> Paste a copy of the spark JDBC driver you are using into
-your Broadsea directory (the directory that has the docker-compose.yml
-file) Replace the existing docker-compose.yml file with this
-<a download href="img/developer-how-tos/broadsea/scripts/docker-compose.yml">docker-compose.yml</a>
-file. (I usually backup the original as shown below). This new
-docker-compose.yml file simply adds the following lines to the
-ohdsi-webapi-from-image section.
-<pre class="prescrollable">
-    volumes:
-      - ./SparkJDBC42.jar:/var/lib/ohdsi/webapi/WEB-INF/lib/SparkJDBC42.jar
-</pre>
-<p><br/> The Spark JDBC driver and new docker-compose.yml file should
-now be in the root directory of the Broadsea project as shown below.
-<br/> <img src="img/developer-how-tos/broadsea/03-copy-files.png" /></p>
-<!-- * * *
-  *
-  * START BROADSEA
-  *
-  * * * -->
-<h2>
-Start Broadsea
-</h2>
-Start Broadsea in the ususal way. Open a cmd prompt, navigate to the
-Broadsea directory and execute
-<pre class="pre-scrollable">
-docker compose pull && docker-compose --profile default up -d
-</pre>
-<!-- * * *
-  *
-  * CONNECT TO OHDSI
-  *
-  * * * -->
-<h2>
-Connect to OHDSI
-</h2>
-<p>The next step is to connect Your Databricks CDM to OHDSI. This can be
-done using Ponos bs-init. Instructions for downloading and installing
-Ponos can be found on the
+<p>Ponos is a tool that can be used to automate most of the processes
+required to get an instance of a CDM ready for OHDSI use. Detailed
+instructions for downloading and installing Ponos can be found on the
 <a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Ponos
 Install</a> page.</p>
-<!-- * * *
-  *
-  * CONFIGURE PARAMETERS
-  *
-  * * * -->
-<h3>
-Configure Parametes
-</h3>
-After downloading and installing Ponos, edit the file found as
-./auth/bs-databricks-public-demo.properties to use your parameters.
-<img src="img/developer-how-tos/broadsea/07-params.png" /> <br/><br/>
-Use the following cmd from the location where you installed Ponos to
-connect your Databricks CDM to OHDSI.
+<h2>
+Create an Instance of the DEMO_DB CDM in Databricks
+</h2>
+To create an instance of the DEMO_DB CDM in Databricks, simply execute
+run-ponos.bat with the db-demo parameter as shown below:
+<pre class="pre-scroll">
+run-ponos.bat db-demo
+</pre>
+<p><br/> This will create a complete instance of the DEMO_DB instance in
+your Databricks instance as shown below. You can then use this instance
+as your CDM. When the process has completed, you should see something
+similar to the following (note that the process took about 6 min): <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-demo-db-cmd.png" />
+<br/> <br/> You should then be able to open a notebook in Databricks and
+query the new instance to confirm it was created. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-demo-db-notebook.png" />
+<br/> <br/></p>
+<h2>
+Connect an Existing Databricks CDM to OHDSI
+</h2>
+To connect an existing CDM to OHDSI simply execute run-ponos.bat with
+the db-init parameter as shown below:
 <pre class="pre-scrollable">
-run-ponos.bat bs-init
+run-ponos.bat db-init
 </pre>
-The source for this process is in fhir-to-omop tool suite
-<a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/OhdsiEnableExistingBroadseaOnDatabricksCdm.java">OhdsiEnableExistingBroadseaOnDatabricksCdm</a>
-class. <br/> This process will do the following:
-<ul>
-<li>
-Create the Achilles results database in Databricks
-</li>
-<li>
-Create the Achilles tables in Databricks
-</li>
-<li>
-Create the achilles_analysis table from the AchillesAnalysisDetails.csv
-file
-</li>
-<li>
-Run Achilles to populate the Achilles results tables
-</li>
-<li>
-Create the appropriate source and source_daimon records in the
-PostgreSql instance of webapi included with Broadsea (existing records
-for the key in the properties file will be overwritten).
-</li>
-</ul>
-<!-- 
-  * 
-  * CONFIGURE SSL 
-  *
-  * -->
-<h3>
-Configure SSL and URL
-</h3>
-<p>The next step is to configure the JDBC URL (UseNativeQuery) and SSL
-for Databricks: <br/> Most Databricks instances use SSL by default. A
-Databricks instance that uses SSL will have “ssl=1;” as a parameter in
-the JDBC URL. To enable a connection that uses SSL, follow the
-instructions in the
-<a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the
-Databricks JDBC URL, SSL, and UseNativeQuery</a> page. <br/> It should
-also be noted that the parameter “UseNativeQuery=1;” needs to be added
-to the url that is inserted into the webapi.source table. If you are
-using the Ponos application to create your OHDSI on Databricks instance,
-the Ponos application will add this to the URL if it is not already
-there. This is also described in the
-<a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the
-Databricks JDBC URL, SSL, and UseNativeQuery</a> page.</p>
-<!-- 
-  * 
-  * RESTART DOCKER AND LAUNCH ATLAS
-  *
-  * -->
-<h3>
-Restart Docker and Launch Atlas
-</h3>
-Restart Docker:
-<pre class="prescrollable">
-docker compose --profile default down 
-docker compose pull && docker-compose --profile default up -d
+This will execute all of the steps required to make your Databricks CDM
+available to OHDSI. When this process has completed, you should see
+output similar to the following: <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-init-cmd.png" />
+<br/> <br/> You should then be able to start Tomacat and see your
+Databricks CDM instance in Atlas. Start Tomcat, open a browser, and
+navigate to:
+<pre class="pre-scrollable">
+http://localhost:8080/atlas
 </pre>
-<br/> Open <a href="http://127.0.0.1/atlas">http://127.0.0.1/atlas</a>
-in a browser and navigate to Data Sources. Select your data source (in
-this case “Databricks Demo” and then select a report, the Person report
-is shown in the screen shot below). When you do this you should not see
-any errors in the Docker output for webapi as shown below. <br/>
-<img src="img/developer-how-tos/broadsea/05-person-report.png" /> <br/>
-<br/>
-<img src="img/developer-how-tos/broadsea/06-docker-after-loading-reports.png" />
+<p><br/> When you navigate to the Datasources tab and select the People
+report, you should see something similar to the following (this image
+shows data from the DEMO_CDM database).<br />
+<img src="img/developer-how-tos/ponos/quickstart/ponos-atlas.png" /></p>
+<br/><br/><br/><br/><br/> <br/><br/><br/><br/><br/>
 </p>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -611,35 +412,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

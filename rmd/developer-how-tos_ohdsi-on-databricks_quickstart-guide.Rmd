@@ -1,0 +1,70 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>OHDSI on Databricks Quick Start Guide</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+  <h2>Introduction</h2>
+  This quick start guide gives the basics for how to create a test (demo_cdm) instnace of the CDM in Databricks 
+  and then how to get an existing CDM in Databricks connected to OHDSI. 
+  This guide is for a standalone Tomcat instance (i.e. not Broadsea). 
+  Ponos can also be used with Broadsea. 
+  See the 
+  <a href="./developer-how-tos_broadsea.html">Broadsea Implementation Guide</a> 
+  for guidance on setting up a Databricks CDM with Broadsea. 
+  <h2>Download and Install Ponos</h2>
+  Ponos is a tool that can be used to automate most of the processes required to get an instance of a CDM ready for OHDSI use. 
+  Detailed instructions for downloading and installing Ponos can be found on the 
+  <a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Ponos Install</a> page.  
+
+  <h2>Create an Instance of the DEMO_DB CDM in Databricks</h2>
+  To create an instance of the DEMO_DB CDM in Databricks, simply execute run-ponos.bat with the db-demo parameter as shown below:
+<pre class="pre-scroll">
+run-ponos.bat db-demo
+</pre>
+  <br/>
+  This will create a complete instance of the DEMO_DB instance in your Databricks instance as shown below. 
+  You can then use this instance as your CDM. When the process has completed, you should see something similar to the following 
+  (note that the process took about 6 min):
+  <br/>
+  <img src="./img/developer-how-tos/ponos/quickstart/ponos-demo-db-cmd.png" />
+  <br/>
+  <br/>
+  You should then be able to open a notebook in Databricks and query the new instance to confirm it was created. 
+  <br/>
+  <img src="./img/developer-how-tos/ponos/quickstart/ponos-demo-db-notebook.png" />
+  <br/>
+  <br/>
+
+  <h2>Connect an Existing Databricks CDM to OHDSI</h2>
+  To connect an existing CDM to OHDSI simply execute run-ponos.bat with the db-init parameter as shown below:
+<pre class="pre-scrollable">
+run-ponos.bat db-init
+</pre>
+  This will execute all of the steps required to make your Databricks CDM available to OHDSI.
+  When this process has completed, you should see output similar to the following:
+  <br/>
+  <img src="./img/developer-how-tos/ponos/quickstart/ponos-init-cmd.png" />
+  <br/>
+  <br/>
+  You should then be able to start Tomacat and see your Databricks CDM instance in Atlas. 
+  Start Tomcat, open a browser, and navigate to: 
+<pre class="pre-scrollable">
+http://localhost:8080/atlas
+</pre>
+  <br/>
+  When you navigate to the Datasources tab and select the People report, you should see something similar to the following 
+  (this image shows data from the DEMO_CDM database).  
+  <img src="./img/developer-how-tos/ponos/quickstart/ponos-atlas.png" />
+  
+  
+  
+  
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+</p>

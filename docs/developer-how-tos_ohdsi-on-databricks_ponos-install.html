@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>OHDSI Databricks User Group Developer How-tos: Download and Install Ponos</title>
+
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI Databricks User Group </div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="background.html">
+    <span class="fa fa-landmark"></span>
+     
+    Background
+  </a>
+</li>
+<li>
+  <a href="supported.html">
+    <span class="fa fa-list"></span>
+     
+    Supported OHDSI Tools
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-list"></span>
+     
+    Getting Started
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer-how-tos.html">Developer How-tos</a>
+    </li>
+    <li>
+      <a href="etl.html">ETL Conventions</a>
+    </li>
+    <li>
+      <a href="connecting.html">Connecting OHDSI Tools</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-list"></span>
+     
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="roster.html">Our Team</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/OHDSI/DatabaseOnSpark">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">OHDSI Databricks User Group Developer
+How-tos:<br/>Download and Install Ponos</h1>
+
+</div>
+
+
+<p>
+<h3>
+Introduction
+</h3>
+This guide gives the basics for how to download and install Ponos. Ponos
+is a tool that can be used to create a demo instance of the CDM and to
+connect an existing instance of a CDM to OHDSI.
+<h3>
+Download and Install Ponos
+</h3>
+Ponos can be downloaded from
+<a ref="https://github.com/NACHC-CAD/ponos">https://github.com/NACHC-CAD/ponos</a>.
+Click the “Latest” link under Releases and download the zip file found
+there (e.g. ponos-1.0.002.zip). <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-git.png" />
+<br/> <br/> Download and extract the zip file. After unzipping the file,
+you should have a ponos folder with and auth sub-folder and a lib
+sub-folder. The lib sub-folders should contain the database drivers for
+Databricks and PostgreSql. The auth folder should contain a single file
+called app-databricks.properties file. The app-databricks.properties
+file contains only the fully qualified path to the actual properties
+file to be used by the application. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-zip.png" />
+<br/> <br/> You will need your own properties file. Down load this
+<a download href="./img/developer-how-tos/ponos/quickstart/databricks-public-demo.properties">databricks-public-demo.properties</a>
+file as a starting point and modify to use your parameters. Modify the
+ponos/auth/app-databricks.properties file to point to the location of
+the properties file you intend to use (e.g. the
+databricks-public-demo.properties) we just downloaded. For this example,
+we’ve put the databricks-public-demo.properties file in the ponos
+directory and modified the auth/app-databricks.properties file
+accordingly. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-dir.png" />
+<br/> <br/> Our auth/app-databricks.properties file now looks like this:
+<br/>
+<pre class="prescrollable">
+D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+</pre>
+The databricks-public-demo.properties file looks like this:
+<pre class="pre-scrollable" style="max-height: 75vh">
+# ---
+#
+# DEMO
+# This config file points to a temporary free Databricks instance created for this demo.  
+#
+# ---
+
+# REST properties
+RestUrl=https://dbc-9c1b9c59-a942.cloud.databricks.com//api/2.0
+DatabricksUploadRoot=/FileStore/tables/prod
+DatabricksFilesRoot=ohdsi/ponos/demo_cdm
+
+# DB properties
+JdbcUrl=jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
+Token=dapi8ae48c35e859579a5531ff2005907544
+
+# Schema properties
+SchemaName=demo_cdm
+VocabSchemaName=demo_cdm
+AchillesTempSchemaName=demo_cdm_ach_tmp
+AchillesResultsSchemaName=demo_cdm_ach_res
+
+# WebApi properties 
+WebApiJdbcUrl=jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=ohdsi&currentSchema=OHDSI
+WebApiBootStrapJdbcUrl=jdbc:postgresql://localhost:5432/?user=postgres&password=ohdsi
+WebApiDatabase=OHDSI
+WebApiSchema=webapi
+WebApiKey=DATABRICKS_PUBLIC_DEMO
+WebApiName=Databricks Public Demo
+
+# WebApi users properties
+OhdsiAdminUserUid=ohdsi_admin_user
+OhdsiAdminUserPwd=app1
+OhdsiAdminUid=ohdsi_admin
+OhdsiAdminPwd=app1
+OhdsiAppUserUid=ohdsi_app_user
+OhdsiAppUserPwd=app1
+OhdsiAppUid=ohdsi_app
+OhdsiAppPwd=app1
+
+</pre>
+<h3>
+Run Ponos
+</h3>
+<p>To run the Ponos application execute the run-ponos.bat script from a
+cmd line. Executing Ponos without any parameters will list the current
+options. <br/>
+<img src="img/developer-how-tos/ponos/quickstart/run-ponos.png" /></p>
+<h3>
+View the Parameters of the Current Configuration
+</h3>
+To check that you are using the parameters file you think you are using
+execute run-ponos.bat with the db-params option:
+<pre class="prescrollable">
+run-ponos.bat db-params
+</pre>
+<img src="img/developer-how-tos/ponos/quickstart/ponos-params.png" />
+<br/> <br/> Output from run-ponos.bat db-params should look similar to
+the following:
+<pre class="pre-scrollable" style="max-height: 75vh">
+D:\temp\ponos-1.0.002\ponos>run-ponos.bat db-params
+
+
+# ----------------------------------------
+#
+# Running Ponos
+#
+# ----------------------------------------
+
+2023-06-08 14:59:18,235 14:59:18.235 [main] INFO  (PonosMain.java:40) - Getting config file...
+2023-06-08 14:59:18,238 14:59:18.238 [main] INFO  (DatabricksProperties.java:54) - ------------
+2023-06-08 14:59:18,241 14:59:18.241 [main] INFO  (DatabricksProperties.java:55) - File: null
+2023-06-08 14:59:18,243 14:59:18.243 [main] INFO  (DatabricksProperties.java:56) - Exists: false
+2023-06-08 14:59:18,243 14:59:18.243 [main] INFO  (DatabricksProperties.java:57) - Could not load default properties.
+2023-06-08 14:59:18,243 14:59:18.243 [main] INFO  (DatabricksProperties.java:58) - A properties file will need to be provided by the user.
+2023-06-08 14:59:18,244 14:59:18.244 [main] INFO  (DatabricksProperties.java:59) - ------------
+2023-06-08 14:59:18,244 14:59:18.244 [main] INFO  (DatabricksProperties.java:77) - SETTING PROPS FROM:
+D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+2023-06-08 14:59:18,245 14:59:18.245 [main] INFO  (PonosMain.java:45) - CONFIG FILE SUCCESSFULY SET
+2023-06-08 14:59:18,245 14:59:18.245 [main] INFO  (TestDatabricksProperties.java:88) - Found pointer file: ./auth/app-databricks.properties
+2023-06-08 14:59:18,245 14:59:18.245 [main] INFO  (TestDatabricksProperties.java:89) - Pointer file points to config file:
+D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+2023-06-08 14:59:18,254 14:59:18.254 [main] INFO  (TestDatabricksProperties.java:76) -
+
+---------
+Databricks Configuration:
+Config File Name:   D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+Config File Path:   D:\temp\ponos-1.0.002\ponos\databricks-public-demo.properties
+Config File Exists: true
+---------
+
+
+2023-06-08 14:59:18,260 14:59:18.260 [main] INFO  (TestDatabricksProperties.java:109) -
+
+---------------------------
+START CONFIG FILE CONTENTS
+---------------------------
+
+# ---
+#
+# DEMO
+# This config file points to a temporary free Databricks instance created for this demo.
+#
+# ---
+
+# REST properties
+RestUrl=https://dbc-9c1b9c59-a942.cloud.databricks.com//api/2.0
+DatabricksUploadRoot=/FileStore/tables/prod
+DatabricksFilesRoot=ohdsi/ponos/demo_cdm
+
+# DB properties
+JdbcUrl=jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
+Token=dapi8ae48c35e859579a5531ff2005907544
+
+# Schema properties
+SchemaName=demo_cdm
+VocabSchemaName=demo_cdm
+AchillesTempSchemaName=demo_cdm_ach_tmp
+AchillesResultsSchemaName=demo_cdm_ach_res
+
+# WebApi properties
+WebApiJdbcUrl=jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=ohdsi&currentSchema=OHDSI
+WebApiBootStrapJdbcUrl=jdbc:postgresql://localhost:5432/?user=postgres&password=ohdsi
+WebApiDatabase=OHDSI
+WebApiSchema=webapi
+WebApiKey=DATABRICKS_PUBLIC_DEMO
+WebApiName=Databricks Public Demo
+
+# WebApi users properties
+OhdsiAdminUserUid=ohdsi_admin_user
+OhdsiAdminUserPwd=app1
+OhdsiAdminUid=ohdsi_admin
+OhdsiAdminPwd=app1
+OhdsiAppUserUid=ohdsi_app_user
+OhdsiAppUserPwd=app1
+OhdsiAppUid=ohdsi_app
+OhdsiAppPwd=app1
+
+---------------------------
+END CONFIG FILE CONTENTS
+---------------------------
+
+2023-06-08 14:59:18,273 14:59:18.273 [main] INFO  (TestDatabricksProperties.java:127) - Config parameters:
+
+---------------------------
+START CONFIG VALUES
+---------------------------
+AchillesResultsSchemaName     demo_cdm_ach_res
+AchillesTempSchemaName        demo_cdm_ach_tmp
+DatabricksFilesRoot           ohdsi/ponos/demo_cdm
+DatabricksUploadRoot          /FileStore/tables/prod
+JdbcUrl                       jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
+OhdsiAdminPwd                 app1
+OhdsiAdminUid                 ohdsi_admin
+OhdsiAdminUserPwd             app1
+OhdsiAdminUserUid             ohdsi_admin_user
+OhdsiAppPwd                   app1
+OhdsiAppUid                   ohdsi_app
+OhdsiAppUserPwd               app1
+OhdsiAppUserUid               ohdsi_app_user
+RestUrl                       https://dbc-9c1b9c59-a942.cloud.databricks.com//api/2.0
+SchemaName                    demo_cdm
+Token                         dapi8ae48c35e859579a5531ff2005907544
+VocabSchemaName               demo_cdm
+WebApiBootStrapJdbcUrl        jdbc:postgresql://localhost:5432/?user=postgres&password=ohdsi
+WebApiDatabase                OHDSI
+WebApiJdbcUrl                 jdbc:postgresql://localhost:5432/OHDSI?user=postgres&password=ohdsi&currentSchema=OHDSI
+WebApiKey                     DATABRICKS_PUBLIC_DEMO
+WebApiName                    Databricks Public Demo
+WebApiSchema                  webapi
+---------------------------
+END CONFIG VALUES
+---------------------------
+
+
+2023-06-08 14:59:18,274 14:59:18.274 [main] INFO  (PonosMain.java:35) - Done.
+
+
+Done.
+
+
+
+D:\temp\ponos-1.0.002\ponos>
+</pre>
+<!-- * * *
+  *
+  * Default Parameters
+  *
+  * * * -->
+<h3>
+Default Parameters
+</h3>
+Ponos ships with a default parameters file and is configured to use this
+file by default. This is a configuration file for a Broadsea
+implementation and is included in the downloadable zip as
+./auth/bs-databricks-public-demo.properties. <br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
