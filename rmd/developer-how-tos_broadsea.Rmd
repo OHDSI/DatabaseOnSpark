@@ -21,11 +21,20 @@ output:
   This guide assumes that you have Docker installed and a CDM instance you can point to in Databricks. 
   <br/>
   <h2>Getting Started</h2>
+  <h3>Shutdown PostgreSql</h3>
   Before you get started, make sure you do not have a local instance of PostgreSql running as a service. 
   <br/>
   <img src="img/developer-how-tos/broadsea/00-check-postgres.png" />
   <br/>
   <br/>
+  <h3>Start Docker</h3>
+  If you do not have Docker Desktop you can download and install it from 
+  <a href="https://www.docker.com/products/docker-desktop/">https://www.docker.com/products/docker-desktop/</a>. 
+  Start Docker Desktop from either the short cut if it was installed 
+  or from the Windows search menu. 
+  <br/>
+  <br/>
+  <h3>Clean Docker</h3>
   To get started, it's not a bad idea to clear out your Docker instance. 
   The two scripts below can be run from PowerShell. 
   The first script will delete all volumes, containers, and images from your Docker instance. 
@@ -44,7 +53,12 @@ output:
   The show script can be used to confirm there's nothing left on Docker. 
   <br/>
   <img src="img/developer-how-tos/broadsea/02-show.png" />
-
+  <br/>
+  <br/>
+  <h3>Confirm Docker is Running</h3>
+  After Docker has been started and cleaned you should see something like what is shown below in Docker Desktop. 
+  <br/>
+  <img src="img/developer-how-tos/broadsea/docker-empty.png" />
   <!-- * * *
   *
   * CLONE FROM GITHUB
@@ -89,6 +103,12 @@ output:
 <pre class="pre-scrollable">
 docker compose pull && docker-compose --profile default up -d
 </pre>
+  
+  <h3>Confirm Broadsea</h3>
+  When Broadsea is running you should see something like what is shown below in the Docker Desktop application. 
+  <br/>
+  <br/>
+  <img src="img/developer-how-tos/broadsea/docker-broadsea.png" />
   
   <!-- * * *
   *
