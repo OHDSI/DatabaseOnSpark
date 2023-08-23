@@ -21,6 +21,46 @@ output:
   This guide assumes that you have Docker installed and a CDM instance you can point to in Databricks. 
   <br/>
   <h2>Getting Started</h2>
+  <h3>Install Ponos</h3>
+  <p>
+  Ponos is a java application that can be used to automate certian tasks associated with setting up a new OHDSI instance in databricks 
+  including tasks such as creating an instance of the Eunomia CDM test data set in Databricks 
+  and connecting an existing instance of the CDM in Databricks to OHDSI tools.  
+  </p>
+  Ponos can be downloaded directly from Github at 
+  <a href="https://github.com/NACHC-CAD/ponos">https://github.com/NACHC-CAD/ponos</a>. 
+  After downloading the zip file, unzip and update the ./auth/bs-databricks-public-demo.properties to use your specific configuration. 
+  More detailed instructions on downloading and installing Ponos are available on the 
+  <a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Ponos Install</a> page. 
+  <h3>Optional: Install Eunomia CDM</h3>
+  <p>
+  If you do not have an existing OHDSI CDM in Databricks you would like to use, you can install the Enomia CDM to use as a test case. 
+  </p>
+  <p>
+    To create a test instance of the CDM in Databricks, 
+    <a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Download and Install Ponos</a> 
+    and the run the following: 
+<pre class="pre-scrollable">
+run-ponos.bat db-demo
+</pre>
+    The code that creates the demo_cdm in Databricks can be found in the fhir-to-omop 
+    <a href="https://github.com/NACHC-CAD/fhir-to-omop/blob/main/src/main/java/org/nachc/tools/fhirtoomop/tools/databricks/BuildDemoCdmInDatabricks.java">BuildDemoCdmInDatabricks</a> class. 
+    The demo_cdm from the Broadsea distribution is created in Databricks using the Ponos tool. 
+    Data are sourced from .csv files included in the Ponos project that were created as a extract from a  PostgreSql instance of the demo_cdm. 
+    This install includes the following: 
+    <ul>
+      <li>
+        Upload of .csv files for the CDM to the Databricks FileStore
+      </li>
+      <li>
+        Creation of the CDM database in Databricks using the DDL files from the 
+        <a ref="https://github.com/OHDSI/CommonDataModel">Common Data Model (CDM)</a> (version 5.3 is used). 
+      </li>
+      <li>
+        Population of the CDM (including vocabulary tables) from the uploaded .csv files
+      </li>
+    </ul>
+  </p>
   <h3>Shutdown PostgreSql</h3>
   Before you get started, make sure you do not have a local instance of PostgreSql running as a service. 
   <br/>
@@ -117,6 +157,8 @@ docker compose pull && docker-compose --profile default up -d
   * * * -->
   <h2>Connect to OHDSI</h2>
   The next step is to connect Your Databricks CDM to OHDSI. This can be done using Ponos bs-init. 
+  <h3>Install Ponos</h3>
+  If you have not already, install and configure Ponos. 
   Instructions for downloading and installing Ponos can be found on the 
   <a href="./developer-how-tos_ohdsi-on-databricks_ponos-install.html">Ponos Install</a> page. 
 
@@ -163,16 +205,18 @@ run-ponos.bat bs-init
   * -->
   <h3>Configure SSL and URL</h3>
   The next step is to configure the JDBC URL (UseNativeQuery) and SSL for Databricks:
-  <br/>
+  <p>
   Most Databricks instances use SSL by default. 
   A Databricks instance that uses SSL will have "ssl=1;" as a parameter in the JDBC URL. 
   To enable a connection that uses SSL, follow the instructions in the 
   <a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the Databricks JDBC URL, SSL, and UseNativeQuery</a> page. 
-  <br/>
+  </p>
+  <p>
   It should also be noted that the parameter "UseNativeQuery=1;" needs to be added to the url that is inserted into the webapi.source table. 
   If you are using the Ponos application to create your OHDSI on Databricks instance, the Ponos application will add this to the URL if it is not already there. 
   This is also described in the 
   <a href="./developer-how-tos_ohdsi-on-databricks-url.html">Notes on the Databricks JDBC URL, SSL, and UseNativeQuery</a> page. 
+  </p>
 
   <!-- 
   * 

@@ -1,5 +1,5 @@
 ---
-title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Notes on the Databricks JDBC URL, SSL, and UseNativeQuery</div>'
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Notes on the Databricks JDBC URL, Parameterization of Token, UseNativeQuery, SocketTimeout, and SSL</div>'
 output:
   html_document:
     toc: TRUE
@@ -13,11 +13,23 @@ output:
   There are two configuration issues to be aware of when running OHDSI on Databricks. 
   <ol>
     <li>
+      <b>Paramterization of Token:</b>
+      <br/>
+      This process uses a parameterized Token (i.e. the token is not included in the URL but is only added in at the point where it is needed for security reasons). 
+      URLs used here should end with PWD= (i.e. not PWD=myToken). 
+    </li>
+    <li>
       <b>UseNativeQuery:</b>
       <br/>
       The "UseNativeQuery=1;" parameter needs to be added to the JDBC URL that is written to the webapi.source table. 
       This is required for all instances of OHDSI on Databricks 
       (i.e. this is required for both native Tomcat installations as well as Broadsea implementations). 
+    </li>
+    <li>
+      <b>SocketTimeout:</b>
+      <br/>
+      Some of the scripts required to get the OHDSI stack up and running take more time that the default timeout for a JDBC connection to Databricks. 
+      This issue can be resolved by adding the parameter "SocketTimeout" to the url use to run the scripts as shown below.  
     </li>
     <li>
       <b>SSL Configuration for Broadsea:</b>
@@ -26,7 +38,11 @@ output:
       Configuring Broadsea for SSL connections is described here. 
     </li>
   </ol>
-
+  <!-- 
+  *
+  * USE NATIVE QUERY
+  *
+  -->
   <h2>UseNativeQuery</h2>
   The "UseNativeQuery=1;" parameter is set automatically by the Ponos install. 
   To confirm this you can open pgAdmin and check the records created in the webapi.source table. 
@@ -35,12 +51,27 @@ output:
   <br/>
   A Databricks JDBC URL provided by Databricks usually looks something like this:
 <pre class="pre-scrollable">
-jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=dapi8ae48c35e859579a5531ff2005907544
+jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=
 </pre>
 This URL needs to be modified by adding the "UseNativeQuery=1;" parameter to look like the following.
 <pre class="pre-scrollable">
-jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;UseNativeQuery=1;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UID=token;PWD=dapi8ae48c35e859579a5531ff2005907544
+jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UseNativeQuery=1;UID=token;PWD=
 </pre>
+  <!-- 
+  *
+  * SOCKET TIMEOUT
+  *
+  -->
+  <h2>SocketTimeout</h2>
+  When you set the JDBC URL in the paramters file to run Ponos, include a SocketTimeout setting as shown below (we're using 60 minutes here). 
+<pre class="pre-scrollable">
+jdbc:spark://dbc-9c1b9c59-a942.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2010859959023967/0602-003109-756w8ulw;AuthMech=3;UseNativeQuery=1;SocketTimeout=3600;UID=token;PWD=
+</pre>
+  <!-- 
+  *
+  * CONFIGURE SSL
+  *
+  -->
   <h2>Configure SSL</h2>
   A vaild cacerts file is required for Broadsea to work with Databricks. 
   A valid cacerts file for your Databricks JDBC URL can be created according to the following. 
