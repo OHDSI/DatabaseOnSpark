@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group: Developer How-tos</title>
+<title>OHDSI Databricks User Group Developer How-tos</title>
 
 <script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -311,197 +311,70 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">OHDSI Databricks User Group: Developer
+<h1 class="title toc-ignore">OHDSI Databricks User Group Developer
 How-tos</h1>
 
 </div>
 
 
+<p>
 <h2>
-Developer How-tos
+Create an AWS Account
 </h2>
-<table class="table">
-<!--
-  *
-  * How to Add to this Documentation
-  *
-  * -->
-<tr>
-<td>
-Documentation
-</td>
-<td>
-<a href="developer-how-tos_documentation.html">How to Add to this
-Documentation</a><br/> This page describes how to add to the
-documentation for this project. This includes forking and cloning the
-project from Github, getting started using R Markup (Rmd), editing and
-previewing a new page, and committing the updated documentation back up
-to Github.<br />
-
-</td>
-</tr>
-<!--
-  *
-  * How to Create a New AWS Instance
-  *
-  * -->
-<tr>
-<td>
-AWS
-</td>
-<td>
-<a href="developer-how-tos_aws_setup.html"> How to Create a New Amazon
-Web Services (AWS) Instance </a> <br/> AWS provides free tier services
-and the ability to create a free AWS account. This guide will walk
-through the process to do this.
-</td>
-</tr>
-<!--
-  *
-  * How to Create a New Databricks Instance
-  *
-  * -->
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-create-new-instance.html"> How to
-Create a New Databricks Instance </a> <br/> Databricks provides a 14 day
-trial version of Databricks. This free version will require a host such
-as AWS, Azure, or Google Cloud. This documentation uses AWS but should
-be vaild for the most part for Azure and Google Cloud.
-</td>
-</tr>
-<!--
-  *
-  * Create a Databricks Token
-  *
-  * -->
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-token.html">Create a Databricks
-Token</a> <br/> Use this guide to create a Databricks token. This token
-will be used as a password for the URL we will use to connect to our
-Databricks instance using JDBC.
-</td>
-</tr>
-<!--
-  *
-  * Getting Started with JDBC
-  *
-  * -->
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-jdbc.html">Getting Started with
-JDBC</a> <br/> This guide shows where to find and how to use the JDBC
-connection string and other resources required to connect to Databricks
-using JDBC.
-</td>
-</tr>
-<!--
-  *
-  * Enable DBFS
-  *
-  * -->
-<tr>
-<td>
-Databricks
-</td>
-<td>
-<a href="developer-how-tos_databricks-enable-dbfs.html">Enable DBFS</a>
-<br/> By default, Databricks does not enable file browsing. We will want
-to browse the files we upload to make sure we’ve uploaded what we think
-we’ve uploaded. This guide shows how to enable file browsing.
-</td>
-</tr>
-<!--
-  *
-  * OHDSI on Databricks (Introduction and Documentation)
-  *
-  * -->
-<tr>
-<td>
-<nobr>OHDSI<br/>Documentation
-</td>
-<td>
-<a href="./developer-how-tos_ohdsi-on-databricks.html">OHDSI on
-Databricks (Introduction and Documentation)</a> <br/> This document
-gives and introduction and background on how to create a complete OHDSI
-on Databricks implementation. This can be used to create a demo CDM
-instance, or to connect an existing CDM instance (e.g. from your elt
-process). The implementation described here does not use Docker/Broadsea
-and assumes that you have installed basic development/implementation
-software such as Java and PostgreSql.
-</td>
-</tr>
-<!--
-  *
-  * OHDSI on Databricks (Standalone Implementation Guide)
-  *
-  * -->
-<tr>
-<td>
-<nobr>OHDSI<br/>Standalon (Tomcat)
-</td>
-<td>
-<a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">OHDSI
-on Databricks (Standalone Implementation Guide)</a> <br/> This quick
-start guide describes how to set up and instance of the OHDSI stack
-using a standalone Tomcat instance (i.e. not Broadsea).
-</td>
-</tr>
-<!--
-  *
-  * Broadsea on Databricks
-  *
-  * -->
-<tr>
-<td>
-<nobr>OHDSI<br/>Broadsea
-</td>
-<td>
-<a href="./developer-how-tos_broadsea.html">Broadsea on Databricks
-Implementation Guide</a> <br/> This document describes how to standup
-OHDSI on Databricks using
-<a href="https://github.com/OHDSI/Broadsea">Broadsea</a>.
-</td>
-</tr>
-<!--
-  *
-  * OHDSI on Databricks Configuration Notes
-  *
-  * -->
-<tr>
-<td>
-<nobr>OHDSI<br/>Configuration Notes
-</td>
-<td>
-<a href="./developer-how-tos_ohdsi-on-databricks-url.html">OHDSI on
-Databricks Configuration Notes</a> <br/> This document describes details
-on configuration required for a successful deployment of OHDSI on
-Databricks including details on the JDBC URL, Parameterization of the
-JDBC Token, UseNativeQuery, SocketTimeout, and SSL configuration.
-</td>
-</tr>
-<!--
-  *
-  * Blank row (to give line at the bottom of the table)
-  *
-  * -->
-<tr>
-<td>
-</td>
-<td>
-</td>
-</tr>
-</table>
+<p>
+This guide will walk you through the process of creating an Amazon Web
+Services (AWS) account that can be used to create a test instance of
+Databricks. You will need a credit card to create the account and the
+card will be charged if you do not close the account before the end of
+the trial period.
+</p>
+<!-- 01-aws-open -->
+<p>
+Navigate to <a href="https://aws.amazon.com">https://aws.amazon.com</a>
+and select Sign in to the Console. <br/>
+<img src="img/developer-how-tos/aws/01-aws-open.png" /> <br/> <br/>
+</p>
+<!-- 02-create-new -->
+<p>
+On this page select Create New AWS Account. <br/>
+<img src="img/developer-how-tos/aws/02-aws-create-new-aws.png" />
+<br/> <br/>
+</p>
+<!-- 03-sign-up -->
+<p>
+This will take you to the Sign-up page. Enter the information as shown
+below. You will need a credit card to create the account and the card
+will be charged if you do not close the account before the end of the
+trial period. <br/>
+<img src="img/developer-how-tos/aws/03-aws-sign-up.png" /> <br/> <br/>
+</p>
+<!-- SIGN UP -->
+<p>
+This will take you to the series of pages below that are used to create
+your account. <br/> <!-- pwd --> Create a password. <br/>
+<img src="img/developer-how-tos/aws/04-aws-pwd.png" /> <br/> <br/>
+<!-- personal-info --> Enter password. <br/>
+<img src="img/developer-how-tos/aws/05-aws-personal-info.png" /> <br/>
+<br/> <!-- credit-card  --> Enter your credit card information. <br/>
+<img src="img/developer-how-tos/aws/06-aws-credit-card.png" /> <br/>
+<br/> <!-- confirm-identity  --> Enter the information required to
+confirm your identity. <br/>
+<img src="img/developer-how-tos/aws/07-aws-confirm-identity.png" />
+<br/> <br/> <!-- confirm-identity-02  --> Confirm your identity. <br/>
+<img src="img/developer-how-tos/aws/08-aws-confirm-identity-02.png" />
+<br/> <br/> <!-- select plan  --> Select the free plan option (or other
+if you are setting up a production instance). <br/>
+<img src="img/developer-how-tos/aws/09-aws-select-plan.png" /> <br/>
+<br/> <!-- done  --> Your AWS has now been created.<br />
+<br/> <img src="img/developer-how-tos/aws/10-aws-done.png" /> <br/>
+<br/> <!-- log on  --> You can now log into your instance using the
+credentials you created. <br/>
+<img src="img/developer-how-tos/aws/11-aws-logon.png" /> <br/> <br/>
+<!-- success  --> A successful login should look similar to what is
+shown below. <br/>
+<img src="img/developer-how-tos/aws/12-aws-console.png" /> <br/> <br/>
+</p>
+</p>
 
 
 
