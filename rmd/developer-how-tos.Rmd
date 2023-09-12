@@ -29,6 +29,22 @@ output:
   </tr>
   <!--
   *
+  * How to Create a New AWS Instance
+  *
+  * -->
+  <tr>
+    <td>AWS</td>
+    <td>
+      <a href="developer-how-tos_aws_setup.html">
+        How to Create a New Amazon Web Services (AWS) Instance
+      </a>
+      <br/>
+      AWS provides free tier services and the ability to create a free AWS account. 
+      This guide will walk through the process to do this. 
+    </td>
+  </tr>
+  <!--
+  *
   * How to Create a New Databricks Instance
   *
   * -->
