@@ -52,6 +52,15 @@ run-ponos.bat db-init
   <img src="./img/developer-how-tos/ponos/quickstart/ponos-init-cmd.png" />
   <br/>
   <br/>
+  <h3>Install the Required Software for Atlas Running on Standalone Tomcat</h3>
+  Detailed istructions for installing and configuring all of the software required to run Atlas as a standalone application 
+  (i.e. not in a Docker container using Broadsea) 
+  are available at 
+  <a href="https://nachc-cad.github.io/fhir-to-omop/pages/navbar/how-tos/developer-how-tos/install-eclipse-yes/InstallEclipseYes.html">https://nachc-cad.github.io/fhir-to-omop/pages/navbar/how-tos/developer-how-tos/install-eclipse-yes/InstallEclipseYes.html</a>
+  <h3>Inatall, Configure, and Run Atlas</h3>
+  Detailed instructions for installing and configuring Atlas as a standalone Tomcat application can be found at 
+  <a href="https://nachc-cad.github.io/fhir-to-omop/pages/navbar/ohdsi-tools/atlas/Atlas.html">https://nachc-cad.github.io/fhir-to-omop/pages/navbar/ohdsi-tools/atlas/Atlas.html</a>
+  <h3>Start Tomcat and Navigate to Atlas</h3>
   You should then be able to start Tomacat and see your Databricks CDM instance in Atlas. 
   Start Tomcat, open a browser, and navigate to: 
 <pre class="pre-scrollable">
