@@ -130,6 +130,8 @@ output:
     <a href="./developer-how-tos_ohdsi-on-databricks_quickstart-guide.html">OHDSI on Databricks (Standalone Implementation Guide)</a>
     <br/>
       This quick start guide describes how to set up and instance of the OHDSI stack using a standalone Tomcat instance (i.e. not Broadsea). 
+      Running Atlas as a standalone application is NOT the preferred method to run Atlas as this method requires the instalation and cofiguration of a large amount of software that is automated using 
+      <a href="./developer-how-tos_broadsea.html">Broadsea on Databricks Implementation Guide">Broadsea</a>
     </td>
   </tr>
   <!--
