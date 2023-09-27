@@ -11,7 +11,7 @@
 
 
 
-<title>How to checkout, run, debug, and contribute to Data Quality Dashboard</title>
+<title>Implementing OHDSI on Databricks Using Broadsea</title>
 
 <script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -223,6 +226,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -230,6 +302,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -314,88 +396,129 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">How to checkout, run, debug, and contribute
-to Data Quality Dashboard</h1>
+<h1 class="title toc-ignore">Implementing OHDSI on Databricks Using
+Broadsea</h1>
 
 </div>
 
 
-<!--
-*
-* Introduction
-*
--->
+<p>
+<!-- * * *
+  *
+  * INTRODUCTION
+  *
+  * * * -->
 <h3>
 Introduction
 </h3>
-This document provides a complete example of how to
-<ul>
-<li>
-Download, install, and run Broadsea (including the Eunomia test CDM)
-</li>
-<li>
-Fork, create a branch, clone, and check out the Data Quality Dashboard
-from GitHub
-</li>
-<li>
-Install your local copy of the Data Quality Dashboard as the
-DataQualityDashboard R-Library
-</li>
-<li>
-Use the SosRunDataQualityDashboard project to configure, run, and debug
-Data Quality Dashboard
-</li>
-</ul>
-<!--
-*
-* Broadsea
-*
--->
+This guide will walk through the creation of a new OHDSI stack using
+<a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using
+Databricks for the CDM on Windows. This guide assumes that you have
+Docker installed and a CDM instance you can point to in Databricks.
+<br/> <!--
+  *
+  * Shutdown postgres
+  *
+  -->
 <h3>
-Broadsea
+Shutdown PostgreSql
 </h3>
-<p>
-Broadsea is a complete solution for running OHDSI tools that runs in a
-<a href="https://www.docker.com/">Docker</a> container. Complete
-instructions for installing and running Broadsea are here:
-<a href="developer-how-tos_gen_dev_broadsea.html">Install and Run
-Broadsea</a>
-</p>
+Before you get started, make sure you do not have a local instance of
+PostgreSql running as a service. <br/>
+<img src="img/developer-how-tos/broadsea/00-check-postgres.png" /> <br/>
 <!--
-*
-* Download SosRunDataqualityDashbosard
-*
--->
+  *
+  * Start Docker
+  *
+  -->
 <h3>
-Download and Initialize the SosRunDataQualityDashboard project
+Start Docker
 </h3>
-<p>
-The SosRunDataQualityDashboard provides some simple scripts that can be
-used to:
-<ul>
-<li>
-Install the R libraries required for DQD
-</li>
-<li>
-Create the configuration to run DQD
-</li>
-<li>
-Run DQD
-</li>
-<li>
-View the results of DQD
-</li>
-</ul>
-<p>
-Clone the SosRunDataQualityDashboard using the following:
+If you do not have Docker Desktop you can download and install it from
+<a href="https://www.docker.com/products/docker-desktop/">https://www.docker.com/products/docker-desktop/</a>.
+Start Docker Desktop from either the short cut if it was installed or
+from the Windows search menu. <br/> <!--
+  *
+  * clear docker
+  *
+  -->
+<h3>
+Clean Docker
+</h3>
+To get started, it’s not a bad idea to clear out your Docker instance.
+The two scripts below can be run from PowerShell. The first script will
+delete all volumes, containers, and images from your Docker instance.
+The second script will show you if there are any volumes, containers, or
+images remaining in your Docker instance. <br/>
+<a href="img/developer-how-tos/broadsea/scripts/clean-docker.sh">clean-docker.sh</a>
+<br/>
+<a href="img/developer-how-tos/broadsea/scripts/show-docker.bat">show-docker.bat</a>
+<br/> <br/> The clean script will launch a bash window and ask for
+comfimation that you really want to delete everything. <br/>
+<img src="img/developer-how-tos/broadsea/01-clean.png" /> <br/> <br/>
+The show script can be used to confirm there’s nothing left on Docker.
+<br/> <img src="img/developer-how-tos/broadsea/02-show.png" /> <br/>
+<br/>
+<h3>
+Confirm Docker is Running
+</h3>
+After Docker has been started and cleaned you should see something like
+what is shown below in Docker Desktop. <br/>
+<img src="img/developer-how-tos/broadsea/docker-empty.png" /> <!-- * * *
+  *
+  * CLONE FROM GITHUB
+  *
+  * * * -->
+<h3>
+Clone Broadsea from Github
+</h3>
+Clone Broadsea using: <br/>
+<pre class="prescrollable">git clone https://github.com/OHDSI/Broadsea</pre>
+<!-- * * *
+  *
+  * START BROADSEA
+  *
+  * * * -->
+<h3>
+Start Broadsea
+</h3>
+Start Broadsea in the ususal way. Open a cmd prompt, navigate to the
+Broadsea directory and execute
 <pre class="pre-scrollable">
-git clone https://github.com/NACHC-CAD/SosRunDataQualityDashboard
+docker compose pull && docker-compose --profile default up -d
 </pre>
+<h3>
+Confirm Broadsea
+</h3>
+When Broadsea is running you should see something like what is shown
+below in the Docker Desktop application. <br/> <br/>
+<img src="img/developer-how-tos/broadsea/docker-broadsea.png" /> <!-- 
+  * 
+  * RESTART DOCKER AND LAUNCH ATLAS
+  *
+  * -->
+<h3>
+Restart Docker and Launch Atlas
+</h3>
+Restart Docker:
+<pre class="prescrollable">
+docker compose --profile default down 
+docker compose pull && docker-compose --profile default up -d
+</pre>
+<br/> Open <a href="http://127.0.0.1/atlas">http://127.0.0.1/atlas</a>
+in a browser and navigate to Data Sources. Select your data source (in
+this case “Databricks Demo” and then select a report, the Person report
+is shown in the screen shot below). When you do this you should not see
+any errors in the Docker output for webapi as shown below. <br/>
+<img src="img/developer-how-tos/broadsea/05-person-report.png" /> <br/>
+<br/>
+<img src="img/developer-how-tos/broadsea/06-docker-after-loading-reports.png" />
 </p>
-</p>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -428,6 +551,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

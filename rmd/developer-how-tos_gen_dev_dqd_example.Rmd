@@ -34,3 +34,28 @@ This document provides a complete example of how to
   Complete instructions for installing and running Broadsea are here: 
   <a href="developer-how-tos_gen_dev_broadsea.html">Install and Run Broadsea</a>
 </p>
+
+<!--
+*
+* Download SosRunDataqualityDashbosard
+*
+-->
+<h3>Download and Initialize the SosRunDataQualityDashboard project</h3>
+<p>
+  The SosRunDataQualityDashboard provides some simple scripts that can be used to: 
+  <ul>
+    <li>Install the R libraries required for DQD</li>
+    <li>Create the configuration to run DQD</li>
+    <li>Run DQD</li>
+    <li>View the results of DQD</li>
+  </ul>
+  <p>
+  Clone the SosRunDataQualityDashboard using the following:
+<pre class="pre-scrollable">
+git clone https://github.com/NACHC-CAD/SosRunDataQualityDashboard
+</pre>  
+  </p>
+</p>
+
+
+
