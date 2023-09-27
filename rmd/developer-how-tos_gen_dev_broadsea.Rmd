@@ -1,0 +1,124 @@
+---
+title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Implementing OHDSI on Databricks Using Broadsea</div>'
+output:
+  html_document:
+    toc: TRUE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<p>
+
+  <!-- * * *
+  *
+  * INTRODUCTION
+  *
+  * * * -->
+  <h3>Introduction</h3>
+  This guide will walk through the creation of a new OHDSI stack using 
+  <a href="https://github.com/OHDSI/Broadsea">Broadsea</a> and using Databricks for the CDM on Windows. 
+  This guide assumes that you have Docker installed and a CDM instance you can point to in Databricks. 
+  <br/>
+  <!--
+  *
+  * Shutdown postgres
+  *
+  --> 
+  <h3>Shutdown PostgreSql</h3>
+  Before you get started, make sure you do not have a local instance of PostgreSql running as a service. 
+  <br/>
+  <img src="img/developer-how-tos/broadsea/00-check-postgres.png" />
+  <br/>
+  <!--
+  *
+  * Start Docker
+  *
+  --> 
+  <h3>Start Docker</h3>
+  If you do not have Docker Desktop you can download and install it from 
+  <a href="https://www.docker.com/products/docker-desktop/">https://www.docker.com/products/docker-desktop/</a>. 
+  Start Docker Desktop from either the short cut if it was installed 
+  or from the Windows search menu. 
+  <br/>
+  <!--
+  *
+  * clear docker
+  *
+  --> 
+  <h3>Clean Docker</h3>
+  To get started, it's not a bad idea to clear out your Docker instance. 
+  The two scripts below can be run from PowerShell. 
+  The first script will delete all volumes, containers, and images from your Docker instance. 
+  The second script will show you if there are any volumes, containers, or images remaining in your Docker instance.
+  <br/>
+  <a href="img/developer-how-tos/broadsea/scripts/clean-docker.sh">clean-docker.sh</a>
+  <br/>
+  <a href="img/developer-how-tos/broadsea/scripts/show-docker.bat">show-docker.bat</a>
+  <br/>
+  <br/>
+  The clean script will launch a bash window and ask for comfimation that you really want to delete everything. 
+  <br/>
+  <img src="img/developer-how-tos/broadsea/01-clean.png" />
+  <br/>
+  <br/>
+  The show script can be used to confirm there's nothing left on Docker. 
+  <br/>
+  <img src="img/developer-how-tos/broadsea/02-show.png" />
+  <br/>
+  <br/>
+  <h3>Confirm Docker is Running</h3>
+  After Docker has been started and cleaned you should see something like what is shown below in Docker Desktop. 
+  <br/>
+  <img src="img/developer-how-tos/broadsea/docker-empty.png" />
+  <!-- * * *
+  *
+  * CLONE FROM GITHUB
+  *
+  * * * -->
+  <h3>Clone Broadsea from Github</h3>
+  Clone Broadsea using: 
+  <br/>
+  <pre class="prescrollable">git clone https://github.com/OHDSI/Broadsea</pre>
+  <!-- * * *
+  *
+  * START BROADSEA
+  *
+  * * * -->
+  <h3>Start Broadsea</h3>
+  Start Broadsea in the ususal way. 
+  Open a cmd prompt, navigate to the Broadsea directory and execute 
+<pre class="pre-scrollable">
+docker compose pull && docker-compose --profile default up -d
+</pre>
+  
+  <h3>Confirm Broadsea</h3>
+  When Broadsea is running you should see something like what is shown below in the Docker Desktop application. 
+  <br/>
+  <br/>
+  <img src="img/developer-how-tos/broadsea/docker-broadsea.png" />
+  <!-- 
+  * 
+  * RESTART DOCKER AND LAUNCH ATLAS
+  *
+  * -->
+  <h3>Restart Docker and Launch Atlas</h3>
+  Restart Docker:
+<pre class="prescrollable">
+docker compose --profile default down 
+docker compose pull && docker-compose --profile default up -d
+</pre> 
+  <br/>
+  Open <a href="http://127.0.0.1/atlas">http://127.0.0.1/atlas</a> in a browser and navigate to Data Sources. 
+  Select your data source (in this case "Databricks Demo" and then select a report, the Person report is shown in the screen shot below). 
+  When you do this you should not see any errors in the Docker output for webapi as shown below. 
+  <br/>
+  <img src="img/developer-how-tos/broadsea/05-person-report.png" />
+  <br/>
+  <br/>
+  <img src="img/developer-how-tos/broadsea/06-docker-after-loading-reports.png" />
+</p>
+
+
+
+

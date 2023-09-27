@@ -1,0 +1,36 @@
+---
+title: '<div>How to checkout, run, debug, and contribute to Data Quality Dashboard</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<!--
+*
+* Introduction
+*
+-->
+<h3>Introduction</h3>
+This document provides a complete example of how to 
+<ul>
+  <li>Download, install, and run Broadsea (including the Eunomia test CDM)</li>
+  <li>Fork, create a branch, clone, and check out the Data Quality Dashboard from GitHub</li>
+  <li>Install your local copy of the Data Quality Dashboard as the DataQualityDashboard R-Library</li>
+  <li>Use the SosRunDataQualityDashboard project to configure, run, and debug Data Quality Dashboard</li>
+</ul>
+
+<!--
+*
+* Broadsea
+*
+-->
+<h3>Broadsea</h3>
+<p>
+  Broadsea is a complete solution for running OHDSI tools that runs in a 
+  <a href="https://www.docker.com/">Docker</a> container. 
+  Complete instructions for installing and running Broadsea are here: 
+  <a href="developer-how-tos_gen_dev_broadsea.html">Install and Run Broadsea</a>
+</p>
