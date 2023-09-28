@@ -11,7 +11,7 @@
 
 
 
-<title> OHDSI Databricks User Group</title>
+<title>How to checkout, run, debug, and contribute to Data Quality Dashboard</title>
 
 <script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -226,75 +223,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -302,16 +230,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -396,20 +314,190 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI
-Databricks User Group</h1>
+<h1 class="title toc-ignore">How to checkout, run, debug, and contribute
+to Data Quality Dashboard</h1>
 
 </div>
 
 
-<div id="connecting-ohdsi-tools" class="section level1">
-<h1>Connecting OHDSI Tools</h1>
-</div>
+<!--
+*
+* Introduction
+*
+-->
+<h3>
+Introduction
+</h3>
+This document provides a complete example of how to
+<ul>
+<li>
+Download, install, and run Broadsea (including the Eunomia test CDM)
+</li>
+<li>
+Fork, create a branch, clone, and check out the Data Quality Dashboard
+from GitHub
+</li>
+<li>
+Install your local copy of the Data Quality Dashboard as the
+DataQualityDashboard R-Library
+</li>
+<li>
+Use the SosRunDataQualityDashboard project to configure, run, and debug
+Data Quality Dashboard
+</li>
+</ul>
+<!--
+*
+* Broadsea
+*
+-->
+<h3>
+Broadsea
+</h3>
+<p>
+Broadsea is a complete solution for running OHDSI tools that runs in a
+<a href="https://www.docker.com/">Docker</a> container. Complete
+instructions for installing and running Broadsea are here:
+<a href="developer-how-tos_gen_dev_broadsea.html">Install and Run
+Broadsea</a>
+</p>
+<!--
+*
+* Download SosRunDataqualityDashbosard
+*
+-->
+<h3>
+Download and Initialize the SosRunDataQualityDashboard project
+</h3>
+<p>
+The SosRunDataQualityDashboard provides some simple scripts that can be
+used to:
+<ul>
+<li>
+Install the R libraries required for DQD
+</li>
+<li>
+Create the configuration to run DQD
+</li>
+<li>
+Run DQD
+</li>
+<li>
+View the results of DQD
+</li>
+</ul>
+<p>
+Clone the SosRunDataQualityDashboard using the following:
+<pre class="pre-scrollable">
+git clone https://github.com/NACHC-CAD/SosRunDataQualityDashboard
+</pre>
+Open ./SosRunDataQualityDashboard/SosRunDataQualityDashboard.Rproj and
+then open and run 01_install-dqd.r. This will install the packages and
+libraries required for DQD. When asked to restart R select “No”. When
+asked “Which would you like to update?” enter 1 (for all).
+</p>
+<img src="img/gen-dev/dqd-example/01_install.png" />
+</p>
+<!--
+*
+* Download DQD
+*
+-->
+<h3>
+Download and Install the Data Quality Dashboard project
+</h3>
+<p>
+Clone the DataQualityDashboard using the following:
+<pre class="pre-scrollable">
+git clone https://github.com/OHDSI/DataQualityDashboard
+</pre>
+Open ./DataQualityDashboard/DataQualityDashboard.Rproj in RStudio. In
+the upper right hand corner, select the build tab and then select the
+Install button. This will install your local copy of the DQD code as the
+package and library for R. <br/>
+<img src="img/gen-dev/dqd-example/02_install-DQD.png" />
+</p>
+<!--
+*
+* Debug DQD
+*
+-->
+<h3>
+Run/Debug DQD
+</h3>
+<p>
+Go back to the SosRunDataQualityDashboard project. Edit and run the
+02_init-params-for-dqd.r script. You should now be able to run DQD by
+running the 03_run-dqd.r script. You should be able to debug DQD by
+running the ./debug/03_debug-dqd.r script. When you run this script,
+RStudio will stop at the browse() statement. You can then use the
+navigation buttons towards the bottom of the screen (at the top of the
+Console pain) to
+<ul>
+<li>
+Run the current line of code (step over)
+</li>
+<li>
+Step in to the next function
+</li>
+<li>
+Continue: run to the end of the current function
+</li>
+<li>
+Stop: stop running the script
+</li>
+</ul>
+<img src= "img/gen-dev/dqd-example/03_debug-controls.png" /> <br/>
+<br/> You can now get into and debug the source code for DQD by doing
+the following:
+<ul>
+<li>
+Selecting “Step into” ONCE should bring you to the “browse()” line.
+</li>
+<li>
+Selecting “Step over” TWICE should bring you to the
+“DataQualityDashboard::executeDqChecks” line
+</li>
+<li>
+Selecting “Step into” ONCE should drop you into the source code for
+DataQualityDashboard::executeDqChecks
+</li>
+</ul>
+You can then set a break point by single clicking in the space to the
+left of the line numbers. You might need to set the break point in the
+DQD code, stop the script, and then restart the script and select
+“Continue” when you hit the “browser()” line. You can then run to that
+break point by selecting “Continue”. You can do this for as many
+breakpoints as you like. <br/>
+<img src= "img/gen-dev/dqd-example/04_debug-set-breakpoint.png" />
+</p>
+<!--
+*
+* Edit and run modified code
+*
+-->
+<h3>
+Edit and Run Modified DQD Code
+</h3>
+<p>
+We can now edit the DQD code and then run the modified code.
+<p>
+IMPORTANT: After editing the code, you will need to rerun the install as
+described above and shown in the image below.
+</p>
+<p>
+IMPORTANT: Before rerunning the debug code, you need to restart the R
+session to pick up the modified DQD code.
+</p>
+<img src= "img/gen-dev/dqd-example/05_modify-code.png" /> <br/> <br/>
+Rerunning the debug script should now execute the modified code. Again,
+you might need to step into the DQD code, set the break point, and then
+rerun the debug code.
+<img src= "img/gen-dev/dqd-example/06_debug-modified-code.png" />
+</p>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -442,35 +530,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
