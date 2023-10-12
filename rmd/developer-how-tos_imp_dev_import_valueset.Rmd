@@ -1,5 +1,11 @@
+<!--
+*
+* HOW TO: Import and Export Concept Sets
+*
+--> 
+
 ---
-title: '<div>How to checkout, run, debug, and contribute to Data Quality Dashboard</div>'
+title: '<div>How to Import and Export Concept Sets in Atlas</div>'
 output:
   html_document:
     toc: FALSE
@@ -18,6 +24,14 @@ This document provides a complete example of how to import and export a value se
 
 <!--
 *
+* Import
+*
+-->
+<h2>Importing Concept Sets</h2>
+This section will cover how to import a concept set from a json file representation of that concept set. 
+
+<!--
+*
 * Source Files
 *
 -->
@@ -29,4 +43,72 @@ Download these files to the machine you will be using to access Atlas.
   <br/>
   <a href="./img/imp-dev/value-set-cohort/not-homeless-concept-set.json" download>not-homeless-concept-set.json</a>
 </p>
+<p>
+  Open Atlas and navigate to the Concept Sets tab on the left side menu. 
+  <br/>
+  <img src="./img/imp-dev/value-set-cohort/01-concept-set-page.png" />
+  <br/>
+  <br/>
+  Enter a name for the concept set and select the Import tab. 
+  <br/>
+  <img src="./img/imp-dev/value-set-cohort/02-new-concept-set.png" />
+  <br/>
+  <br/>
+  Under the Import tab, select the Concept Set tab. 
+  Paste the contents of the source file (for this example, the homeless-concept-set.json file). 
+  Select the Overwrite Concept Set Expression button in the lower right corner of the screen. 
+  Select the Concept Set Expression tab to view the results of the import. 
+  <br/>
+  <img src="./img/imp-dev/value-set-cohort/03-overwrite.png" />
+  <br/>
+  <br/>
+  On the Concept Set Expression tab, select the green save icon in upper right corner. 
+  Selecting the blue close (x) button will return you to the Concept Set home page (the list of existing concept sets). 
+  <br/>
+  <img src="./img/imp-dev/value-set-cohort/04-save.png" />
+  <br/>
+  <br/>
+  The new concept set will now appear on this page. 
+  We can now repete the process for the not-homeless-concept-set.json file. 
+  <br/>
+  <img src="./img/imp-dev/value-set-cohort/05-done.png" />
+  <br/>
+  <br/>
+  After importing the not-homeless-concept-set file both concept sets will appear on the main concept sets page. 
+  <br/>
+  <img src="./img/imp-dev/value-set-cohort/06-done.png" />
+  <br/>
+  <br/>
+</p>
+
+  <!--
+  *
+  * Export
+  *
+  -->
+  <h2>Exporting Concept Sets</h2>
+  <p>
+    This section will cover how to export a concept set to a json file representation of that concept set. 
+  </p>
+  <p>
+    Select the Concept Sets tab from the left hand menu. 
+    Select the Concept Set to be exported. 
+    <br/>
+    <img src="./img/imp-dev/value-set-cohort/07-select-for-export.png" />
+    <br/>
+    <br/>
+    Select the export tab.
+    <br/>
+    <img src="./img/imp-dev/value-set-cohort/08-select-export.png" />
+    <br/>
+    <br/>
+    Select the clipboard icon to copy the contents of the json representation of the concept set to the clip board. 
+    Paste the copied content into a text file. 
+    <br/>
+    <img src="./img/imp-dev/value-set-cohort/09-copy.png" />
+    <br/>
+    <br/>
+  </p>
+
+
 
