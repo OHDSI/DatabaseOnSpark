@@ -1,0 +1,2 @@
+2023-10-11 11:50:24	[Main thread]	INFO	Achilles	achilles	All Achilles SQL scripts can be found in folder: output/achilles.sql
+2023-10-11 11:50:24	[Main thread]	INFO	Achilles	achilles	[Total Runtime] 8.562484 secs

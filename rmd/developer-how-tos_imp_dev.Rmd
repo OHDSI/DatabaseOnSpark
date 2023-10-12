@@ -1,0 +1,34 @@
+---
+title: '<div>General Implementer How-tos (Imp Dev)</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<table class="table">
+  <!--
+  *
+  * Import/Export Value Sets
+  *
+  * -->
+  <tr>
+    <td>Import/Export Value Sets</td>
+    <td>
+      <a href="developer-how-tos_imp_dev_import_valueset.html">Import/Export Value Sets in Atlas</a>
+      <br/>
+        This document provides a complete example of how to import and export a value set in Atlas
+    </td>
+  </tr>
+  <!--
+  *
+  * Blank Line
+  *
+  * -->
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
