@@ -11,7 +11,7 @@
 
 
 
-<title>How to Import and Export Concept Sets in Atlas</title>
+<title>How to Import and Export Cohort Definitions in Atlas</title>
 
 <script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -317,15 +317,15 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">How to Import and Export Concept Sets in
-Atlas</h1>
+<h1 class="title toc-ignore">How to Import and Export Cohort Definitions
+in Atlas</h1>
 
 </div>
 
 
 <!--
 *
-* HOW TO: Import and Export Concept Sets
+* HOW TO: Import and Export Cohorts
 *
 -->
 <!--
@@ -337,17 +337,17 @@ Atlas</h1>
 Introduction
 </h3>
 <p>This document provides a complete example of how to import and export
-a value set in Atlas.</p>
+a cohort in Atlas.</p>
 <!--
 *
 * Import
 *
 -->
 <h2>
-Importing Concept Sets
+Importing Cohorts
 </h2>
-<p>This section will cover how to import a concept set from a json file
-representation of that concept set.</p>
+<p>This section will cover how to import a cohort from a json file
+representation of that cohort.</p>
 <!--
 *
 * Source Files
@@ -359,31 +359,35 @@ Source Files
 We will be using the following two source files for this example.
 Download these files to the machine you will be using to access Atlas.
 <p>
-<a href="./img/imp-dev/value-set/homeless-concept-set.json" download>homeless-concept-set.json</a>
+<a href="./img/imp-dev/cohort/homeless-past-6-months-cohort.json" download>homeless-past-6-months-cohort.json</a>
 <br/>
-<a href="./img/imp-dev/value-set/not-homeless-concept-set.json" download>not-homeless-concept-set.json</a>
+<a href="./img/imp-dev/cohort/not-homeless-past-6-months-cohort.json" download>not-homeless-past-6-months-cohort.json</a>
 </p>
 <p>
-Open Atlas and navigate to the Concept Sets tab on the left side menu.
-<br/> <img src="img/imp-dev/value-set/01-concept-set-page.png" />
-<br/> <br/> Enter a name for the concept set and select the Import tab.
-<br/> <img src="img/imp-dev/value-set/02-new-concept-set.png" /> <br/>
-<br/> Under the Import tab, select the Concept Set tab. Paste the
-contents of the source file (for this example, the
-homeless-concept-set.json file). Select the Overwrite Concept Set
-Expression button in the lower right corner of the screen. Select the
-Concept Set Expression tab to view the results of the import. <br/>
-<img src="img/imp-dev/value-set/03-overwrite.png" /> <br/> <br/> On
-the Concept Set Expression tab, select the green save icon in upper
-right corner. Selecting the blue close (x) button will return you to the
-Concept Set home page (the list of existing concept sets). <br/>
-<img src="img/imp-dev/value-set/04-save.png" /> <br/> <br/> The new
-concept set will now appear on this page. We can now repete the process
-for the not-homeless-concept-set.json file. <br/>
-<img src="img/imp-dev/value-set/05-done.png" /> <br/> <br/> After
-importing the not-homeless-concept-set file both concept sets will
-appear on the main concept sets page. <br/>
-<img src="img/imp-dev/value-set/06-done.png" /> <br/> <br/>
+Open Atlas and navigate to the Cohort Definitions tab on the left side
+menu. Select the New Cohort button in the upper right section of the
+screen. <br/> <img src="img/imp-dev/cohort/01-cohort-def.png" /> <br/>
+<br/> Enter a name for the cohort. Select the Export tab (Yes, not a
+typo, we select the Export tab to Import) <br/>
+<img src="img/imp-dev/cohort/02-name.png" /> <br/> <br/> Under the
+Eport tab, select the JSON tab. Paste the contents of the json file (in
+this case, homeless-past-6-months-cohort.json) in the text area. Select
+the reload button in the bottom right of the screen. Selecting the
+Definition tab will take us back to the definition of the cohort. <br/>
+<img src="img/imp-dev/cohort/03-export.png" /> <br/> <br/> If we
+scroll down a little bit on the Definition tab, we can see that the
+cohort has indeed been imported. <br/>
+<img src="img/imp-dev/cohort/04-done.png" /> <br/> <br/> Scroll back
+to the top of the Definition tab. Select the save icon (green button in
+the upper right corner of the screen). Select the close button (x) to
+return to the list of existing cohort definitions. <br/>
+<img src="img/imp-dev/cohort/05-save.png" /> <br/> <br/> We should now
+see the cohort definition we just imported in the list. <br/>
+<img src="img/imp-dev/cohort/06-done.png" /> <br/> <br/> We can now
+repeat the process for the not-homeless-past-6-months-cohort.json file.
+After importing the not-homeless-past-6-months-cohort.json file both
+concept sets will appear on the main concept sets page. <br/>
+<img src="img/imp-dev/cohort/07-done.png" /> <br/> <br/>
 </p>
 <!--
   *
@@ -400,13 +404,13 @@ representation of that concept set.
 <p>
 Select the Concept Sets tab from the left hand menu. Select the Concept
 Set to be exported. <br/>
-<img src="img/imp-dev/value-set/07-select-for-export.png" /> <br/>
-<br/> Select the export tab. <br/>
-<img src="img/imp-dev/value-set/08-select-export.png" /> <br/> <br/>
+<img src="./img/imp-dev/cohort/07-select-for-export.png" /> <br/> <br/>
+Select the export tab. <br/>
+<img src="./img/imp-dev/cohort/08-select-export.png" /> <br/> <br/>
 Select the clipboard icon to copy the contents of the json
 representation of the concept set to the clip board. Paste the copied
 content into a text file. <br/>
-<img src="img/imp-dev/value-set/09-copy.png" /> <br/> <br/>
+<img src="./img/imp-dev/cohort/09-copy.png" /> <br/> <br/>
 </p>
 
 

@@ -1,0 +1,123 @@
+<!--
+*
+* HOW TO: Import and Export Cohorts
+*
+--> 
+
+---
+title: '<div>How to Import and Export Cohort Definitions in Atlas</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<!--
+*
+* Introduction
+*
+-->
+<h3>Introduction</h3>
+This document provides a complete example of how to import and export a cohort in Atlas. 
+
+<!--
+*
+* Import
+*
+-->
+<h2>Importing Cohorts</h2>
+This section will cover how to import a cohort from a json file representation of that cohort. 
+
+<!--
+*
+* Source Files
+*
+-->
+<h3>Source Files</h3>
+We will be using the following two source files for this example. 
+Download these files to the machine you will be using to access Atlas. 
+<p>
+  <a href="./img/imp-dev/cohort/homeless-past-6-months-cohort.json" download>homeless-past-6-months-cohort.json</a>
+  <br/>
+  <a href="./img/imp-dev/cohort/not-homeless-past-6-months-cohort.json" download>not-homeless-past-6-months-cohort.json</a>
+</p>
+<p>
+  Open Atlas and navigate to the Cohort Definitions tab on the left side menu. 
+  Select the New Cohort button in the upper right section of the screen. 
+  <br/>
+  <img src="./img/imp-dev/cohort/01-cohort-def.png" />
+  <br/>
+  <br/>
+  Enter a name for the cohort. 
+  Select the Export tab (Yes, not a typo, we select the Export tab to Import)
+  <br/>
+  <img src="./img/imp-dev/cohort/02-name.png" />
+  <br/>
+  <br/>
+  Under the Eport tab, select the JSON tab. 
+  Paste the contents of the json file (in this case, homeless-past-6-months-cohort.json) in the text area. 
+  Select the reload button in the bottom right of the screen. 
+  Selecting the Definition tab will take us back to the definition of the cohort. 
+  <br/>
+  <img src="./img/imp-dev/cohort/03-export.png" />
+  <br/>
+  <br/>
+  If we scroll down a little bit on the Definition tab, we can see that the cohort has indeed been imported. 
+  <br/>
+  <img src="./img/imp-dev/cohort/04-done.png" />
+  <br/>
+  <br/>
+  Scroll back to the top of the Definition tab. 
+  Select the save icon (green button in the upper right corner of the screen). 
+  Select the close button (x) to return to the list of existing cohort definitions. 
+  <br/>
+  <img src="./img/imp-dev/cohort/05-save.png" />
+  <br/>
+  <br/>
+  We should now see the cohort definition we just imported in the list. 
+  <br/>
+  <img src="./img/imp-dev/cohort/06-done.png" />
+  <br/>
+  <br/>
+  We can now repeat the process for the not-homeless-past-6-months-cohort.json file. 
+  After importing the not-homeless-past-6-months-cohort.json file 
+  both concept sets will appear on the main concept sets page. 
+  <br/>
+  <img src="./img/imp-dev/cohort/07-done.png" />
+  <br/>
+  <br/>
+</p>
+
+  <!--
+  *
+  * Export
+  *
+  -->
+  <h2>Exporting Concept Sets</h2>
+  <p>
+    This section will cover how to export a concept set to a json file representation of that concept set. 
+  </p>
+  <p>
+    Select the Concept Sets tab from the left hand menu. 
+    Select the Concept Set to be exported. 
+    <br/>
+    <img src="./img/imp-dev/cohort/07-select-for-export.png" />
+    <br/>
+    <br/>
+    Select the export tab.
+    <br/>
+    <img src="./img/imp-dev/cohort/08-select-export.png" />
+    <br/>
+    <br/>
+    Select the clipboard icon to copy the contents of the json representation of the concept set to the clip board. 
+    Paste the copied content into a text file. 
+    <br/>
+    <img src="./img/imp-dev/cohort/09-copy.png" />
+    <br/>
+    <br/>
+  </p>
+
+
+
