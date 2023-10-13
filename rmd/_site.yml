@@ -26,6 +26,8 @@ navbar:
           href: developer-how-tos.html
         - text: "Gen Dev"
           href: developer-how-tos_gen_dev.html
+        - text: "Imp Dev"
+          href: developer-how-tos_imp_dev.html
         - text: "ETL Conventions"
           href: etl.html
         - text: "Connecting OHDSI Tools"
