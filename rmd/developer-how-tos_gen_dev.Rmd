@@ -30,6 +30,40 @@ output:
   </tr>
   <!--
   *
+  * DQD Example
+  *
+  * -->
+  <tr>
+    <td>Install GitHub Token in R</td>
+    <td>
+      Many of the OHDSI R projects will require multiple installs from GitHub. 
+      GitHub allows for installs as is but only up to a certian limit if you do not have a GitHub token installed in your R environment. 
+      If this limit is exceeded, installs will fail and you won't have a good time. 
+      Instructions for installing the R token are available at 
+      <a href="https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_gen_dev.html">https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_gen_dev.html</a>. 
+      The process is basically this:
+      <ul>
+        <li>
+          Create the token in GitHub (the token does not require any of the permissions listed, so leave all the checkboxes unchecked) 
+          <a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a>. 
+        </li>
+        <li>
+          Edit the .Renviron file by running the following
+<pre class="r">
+install.packages("usethis")
+library(usethis)
+edit_r_environ()
+</pre>
+          Add the following line to your .Renviron file (where @MY_TOKEN is the token you just created).
+        </li>
+<pre class="r">
+GITHUB_PAT = '@MY_TOKEN'
+</pre>
+      </ul>
+    </td>
+  </tr>
+  <!--
+  *
   * Blank Line
   *
   * -->
