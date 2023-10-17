@@ -1,0 +1,118 @@
+---
+title: '<div>General Developer How-tos (Gen Dev)</div>'
+output:
+  html_document:
+    toc: FALSE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<h3>Introduction</h3>
+<b>This is a one-time activity that will persist your credentials to your localhost permanently.</b> 
+<br/>
+<p>
+More information is available at 
+<a href="https://ras44.github.io/blog/2019/01/19/keeping-credentials-secret-with-keyrings-in-r.html">https://ras44.github.io/blog/2019/01/19/keeping-credentials-secret-with-keyrings-in-r.html</a>. 
+</p>
+We often need to provide credentials to access resources such as databases. 
+Hardcoding these credentials is frowned upon as it could lead to these credentials being exposed 
+(e.g. committed to GitHub). 
+To protect this information, we can store passwords, tokens, and other sensitive information in a keyring 
+using the keyring library. 
+The code presented below is available in GitHub at 
+<a href="https://github.com/NACHC-CAD/r-keyring">https://github.com/NACHC-CAD/r-keyring</a>.
+
+<h3>Store a value in a keyring</h3>
+The following code shows the create_keyring function defined in the r-keyring project. 
+
+<pre class="r">
+# ---
+#
+# function to create a keyring
+#
+# ---
+
+# installs
+# install.packages("keyring")
+
+# libraries
+library(keyring)
+
+# create the key ring
+create_keyring <- function(kr_name, kr_service, kr_username) {
+  kb <- keyring::backend_file$new()
+  kb$keyring_create(kr_name)
+  kb$set(kr_service, username = kr_username, keyring = kr_name)
+  kb$keyring_lock(kr_name)
+}
+</pre>
+
+When this code is call, you will be asked to enter a keyring password. 
+This is the password that you use when you want to retrieve your password or token. 
+In this example we use "foo". 
+<br/>
+<img width="350px" src="./img/gen-dev/keyring/01-keyring-password.png" />
+<br/>
+
+You will then be asked to enter a password. 
+<br/>
+<img width="350px" src="./img/gen-dev/keyring/02-user-password.png" />
+<br/>
+
+This is the password or token for your database. 
+In this example we entered "asdf1098743n12lkjj5-MY_TOKEN-aoipuoi19087mnoipuasddf".
+<br/>
+
+After you have stored your password/token in the keyring it can be fetched using the code below. 
+<pre class="r">
+# get the password from the keyring
+keyring::backend_file$new()$get(
+  service = kr_service,
+  user = kr_username,
+  keyring = kr_name
+)
+</pre>
+When you execute this code you will be asked for the password for the keyring (in this example we used "foo"). 
+
+This code will output the following. 
+<pre class="r">
+&gt; # get the password from the keyring
+&gt; keyring::backend_file$new()$get(
++   service = kr_service,
++   user = kr_username,
++   keyring = kr_name
++ )
+[1] "asdf1098743n12lkjj5-MY_TOKEN-aoipuoi19087mnoipuasddf"
+</pre>
+<br/>
+We can then use something like the following to securely create a url to connect to Databricks. 
+<pre class="r">
+#
+# functions to get databricks token (user will be prompted for keyring password)
+#
+
+getToken <- function () {
+  return (
+    keyring::backend_file$new()$get(
+      service = "databricks",
+      user = "token",
+      keyring = "databricks_keyring"
+    )
+  )
+}
+
+#
+# functions to get databricks token (user will be prompted for keyring password)
+#
+
+getUrl <- function () {
+  url <- "jdbc:databricks://nachc-databricks.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/3956472157536757/0123-223459-leafy532;AuthMech=3;UseNativeQuery=1;UID=token;PWD="
+  return (
+    paste(url, getToken(), sep = "")
+  )  
+}
+</pre>
+
+
+

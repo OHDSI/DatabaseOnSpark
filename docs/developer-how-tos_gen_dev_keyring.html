@@ -322,121 +322,109 @@ $(document).ready(function () {
 </div>
 
 
-<table class="table">
-<!--
-  *
-  * DQD Example
-  *
-  * -->
-<tr>
-<td>
-Run/Debug R-code Example
-</td>
-<td>
-<a href="developer-how-tos_gen_dev_dqd_example.html">Data Quality
-Dashboard Example</a> <br/> This document provides a complete example of
-how to
-<ul>
-<li>
-Download, install, and run Broadsea (including the Eunomia test CDM)
-</li>
-<li>
-Fork, create a branch, clone, and check out the Data Quality Dashboard
-from GitHub
-</li>
-<li>
-Install your local copy of the Data Quality Dashboard as the
-DataQualityDashboard R-Library
-</li>
-<li>
-Use the SosRunDataQualityDashboard project to configure, run, and debug
-Data Quality Dashboard
-</li>
-</ul>
-</td>
-</tr>
-<!--
-  *
-  * Install GitHub Token
-  *
-  * -->
-<tr>
-<td>
-Install GitHub Token in R
-</td>
-<td>
-Many of the OHDSI R projects will require multiple installs from GitHub.
-GitHub allows for installs as is but only up to a certian limit if you
-do not have a GitHub token installed in your R environment. If this
-limit is exceeded, installs will fail and you won’t have a good time.
-Instructions for installing the R token are available at
-<a href="https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_gen_dev.html">https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_gen_dev.html</a>.
-The process is basically this:
-<ul>
-<li>
-Create the token in GitHub (the token does not require any of the
-permissions listed, so leave all the checkboxes unchecked)
-<a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a>.
-</li>
-<li>
-Edit the .Renviron file by running the following
+<h3>
+Introduction
+</h3>
+<b>This is a one-time activity that will persist your credentials to
+your localhost permanently.</b> <br/>
+<p>
+More information is available at
+<a href="https://ras44.github.io/blog/2019/01/19/keeping-credentials-secret-with-keyrings-in-r.html">https://ras44.github.io/blog/2019/01/19/keeping-credentials-secret-with-keyrings-in-r.html</a>.
+</p>
+<p>We often need to provide credentials to access resources such as
+databases. Hardcoding these credentials is frowned upon as it could lead
+to these credentials being exposed (e.g. committed to GitHub). To
+protect this information, we can store passwords, tokens, and other
+sensitive information in a keyring using the keyring library. The code
+presented below is available in GitHub at
+<a href="https://github.com/NACHC-CAD/r-keyring">https://github.com/NACHC-CAD/r-keyring</a>.</p>
+<h3>
+Store a value in a keyring
+</h3>
+<p>The following code shows the create_keyring function defined in the
+r-keyring project.</p>
 <pre class="r">
-install.packages("usethis")
-library(usethis)
-edit_r_environ()
+# ---
+#
+# function to create a keyring
+#
+# ---
+
+# installs
+# install.packages("keyring")
+
+# libraries
+library(keyring)
+
+# create the key ring
+create_keyring <- function(kr_name, kr_service, kr_username) {
+  kb <- keyring::backend_file$new()
+  kb$keyring_create(kr_name)
+  kb$set(kr_service, username = kr_username, keyring = kr_name)
+  kb$keyring_lock(kr_name)
+}
 </pre>
-Add the following line to your .Renviron file (where <span
-class="citation">@MY_TOKEN</span> is the token you just created).
-</li>
+<p>When this code is call, you will be asked to enter a keyring
+password. This is the password that you use when you want to retrieve
+your password or token. In this example we use “foo”. <br/>
+<img width="350px" src="img/gen-dev/keyring/01-keyring-password.png" />
+<br/></p>
+<p>You will then be asked to enter a password. <br/>
+<img width="350px" src="img/gen-dev/keyring/02-user-password.png" />
+<br/></p>
+<p>This is the password or token for your database. In this example we
+entered “asdf1098743n12lkjj5-MY_TOKEN-aoipuoi19087mnoipuasddf”.
+<br/></p>
+After you have stored your password/token in the keyring it can be
+fetched using the code below.
 <pre class="r">
-GITHUB_PAT = '@MY_TOKEN'
+# get the password from the keyring
+keyring::backend_file$new()$get(
+  service = kr_service,
+  user = kr_username,
+  keyring = kr_name
+)
 </pre>
-</ul>
-</td>
-</tr>
-<!--
-  *
-  * Store Password in keyring
-  *
-  * -->
-<tr>
-<td>
-Store Passwords/Tokens in keyring in R
-</td>
-<td>
-<a href="developer-how-tos_gen_dev_keyring.html">Data Quality Dashboard
-Example</a> <br/> This document provides a complete example of how to
-<ul>
-<li>
-Download, install, and run Broadsea (including the Eunomia test CDM)
-</li>
-<li>
-Fork, create a branch, clone, and check out the Data Quality Dashboard
-from GitHub
-</li>
-<li>
-Install your local copy of the Data Quality Dashboard as the
-DataQualityDashboard R-Library
-</li>
-<li>
-Use the SosRunDataQualityDashboard project to configure, run, and debug
-Data Quality Dashboard
-</li>
-</ul>
-</td>
-</tr>
-<!--
-  *
-  * Blank Line
-  *
-  * -->
-<tr>
-<td>
-</td>
-<td>
-</td>
-</tr>
-</table>
+<p>When you execute this code you will be asked for the password for the
+keyring (in this example we used “foo”).</p>
+This code will output the following.
+<pre class="r">
+&gt; # get the password from the keyring
+&gt; keyring::backend_file$new()$get(
++   service = kr_service,
++   user = kr_username,
++   keyring = kr_name
++ )
+[1] "asdf1098743n12lkjj5-MY_TOKEN-aoipuoi19087mnoipuasddf"
+</pre>
+<br/> We can then use something like the following to securely create a
+url to connect to Databricks.
+<pre class="r">
+#
+# functions to get databricks token (user will be prompted for keyring password)
+#
+
+getToken <- function () {
+  return (
+    keyring::backend_file$new()$get(
+      service = "databricks",
+      user = "token",
+      keyring = "databricks_keyring"
+    )
+  )
+}
+
+#
+# functions to get databricks token (user will be prompted for keyring password)
+#
+
+getUrl <- function () {
+  url <- "jdbc:databricks://nachc-databricks.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/3956472157536757/0123-223459-leafy532;AuthMech=3;UseNativeQuery=1;UID=token;PWD="
+  return (
+    paste(url, getToken(), sep = "")
+  )  
+}
+</pre>
 
 
 
