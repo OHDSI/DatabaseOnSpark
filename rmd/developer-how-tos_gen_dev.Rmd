@@ -30,7 +30,7 @@ output:
   </tr>
   <!--
   *
-  * DQD Example
+  * Install GitHub Token
   *
   * -->
   <tr>
@@ -60,6 +60,25 @@ edit_r_environ()
 GITHUB_PAT = '@MY_TOKEN'
 </pre>
       </ul>
+    </td>
+  </tr>
+  <!--
+  *
+  * Store Password in keyring
+  *
+  * -->
+  <tr>
+    <td>Store Passwords/Tokens in keyring in R</td>
+    <td>
+      <a href="developer-how-tos_gen_dev_keyring.html">Data Quality Dashboard Example</a>
+      <br/>
+        This document provides a complete example of how to 
+        <ul>
+          <li>Download, install, and run Broadsea (including the Eunomia test CDM)</li>
+          <li>Fork, create a branch, clone, and check out the Data Quality Dashboard from GitHub</li>
+          <li>Install your local copy of the Data Quality Dashboard as the DataQualityDashboard R-Library</li>
+          <li>Use the SosRunDataQualityDashboard project to configure, run, and debug Data Quality Dashboard</li>
+        </ul>
     </td>
   </tr>
   <!--
