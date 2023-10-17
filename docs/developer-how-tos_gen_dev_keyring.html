@@ -425,6 +425,54 @@ getUrl <- function () {
   )  
 }
 </pre>
+<h3>
+Putting it All Together
+</h3>
+<p>You should be able to run the code in the <a href="">r-keyring</a>
+project shown below as is to store your Databricks token. You will be
+asked to enter a password for the keyring and your Databricks token.
+<br/></p>
+<pre>
+# ---
+#
+# example script to create/delete a keyring
+#
+# ---
+
+# installs
+# install.packages("keyring")
+
+# libraries
+library(keyring)
+
+# source 
+source("CreateKeyRing.R")
+source("DeleteKeyRing.R")
+
+# variables
+kr_name <- "databricks_keyring"
+kr_service <- "production"
+kr_username <- "token"
+
+kb <- keyring::backend_file$new()
+
+# list existing keyrings (before)
+kb$keyring_list()
+
+# delete existing
+delete_keyring(kr_name)
+create_keyring(kr_name,kr_service,kr_username)
+
+# list existing keyrings (after)
+kb$keyring_list()
+
+# get the token
+keyring::backend_file$new()$get(
+  service = kr_service,
+  user = kr_username,
+  keyring = kr_name
+)
+</pre>
 
 
 
