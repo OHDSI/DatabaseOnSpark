@@ -161,3 +161,26 @@ keyring::backend_file$new()$get(
   keyring = kr_name
 )
 </pre>
+
+<h3>Optional: Only Create the Key Ring if it Does Not Exist</h3>
+
+<p>
+  The code can be modified as shown below so that the key ring is only created if it does not exist. 
+</p>
+
+<pre class="r">
+createDatabaseKeyRing <- function(kr_name, kr_service, kr_username) {
+  kb <- keyring::backend_file$new()
+  # Get a list of existing keyrings
+  existing_keyrings <- kb$keyring_list()
+  # Check if the keyring already exists
+  if (!(kr_name %in% existing_keyrings$keyring)) {
+    kb$keyring_create(kr_name)
+    kb$set(kr_service, username = kr_username, keyring = kr_name)
+    kb$keyring_lock(kr_name)
+  } else {
+    print(paste("Keyring already exists for: ", kr_name))
+  }
+}
+</pre>
+
