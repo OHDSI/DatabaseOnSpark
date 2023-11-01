@@ -1,5 +1,5 @@
 ---
-title: '<div>OHDSI Databricks User Group Developer How-tos:<br/>Implementing OHDSI on Databricks Using Broadsea</div>'
+title: '<div>Implementing OHDSI on Databricks Using Broadsea</div>'
 output:
   html_document:
     toc: TRUE
