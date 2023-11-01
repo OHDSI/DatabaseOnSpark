@@ -1,5 +1,5 @@
 ---
-title: '<div>General Developer How-tos (Gen Dev)</div>'
+title: '<div>How to Store Credentials in an Encrypted Key Ring</div>'
 output:
   html_document:
     toc: FALSE
@@ -9,7 +9,7 @@ output:
 ---
 
 <h3>Introduction</h3>
-<b>This is a one-time activity that will persist your credentials to your localhost permanently.</b> 
+<b>This is a one-time activity that will persist your credentials to your localhost until you delete them.</b> 
 <br/>
 <p>
 More information is available at 
