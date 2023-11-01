@@ -40,7 +40,7 @@ output:
       GitHub allows for installs as is but only up to a certian limit if you do not have a GitHub token installed in your R environment. 
       If this limit is exceeded, installs will fail and you won't have a good time. 
       Instructions for installing the R token are available at 
-      <a href="https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_gen_dev.html">https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_gen_dev.html</a>. 
+      <a href="https://ohdsi.github.io/Hades/rSetup.html#GitHub_Personal_Access_Token">here</a>. 
       The process is basically this:
       <ul>
         <li>
@@ -64,13 +64,26 @@ GITHUB_PAT = '@MY_TOKEN'
   </tr>
   <!--
   *
-  * Store Password in keyring
+  * Store your database credentials in an encrypted keyring
   *
   * -->
   <tr>
-    <td>Store Passwords/Tokens in keyring in R</td>
+    <td>Create a Key Ring</td>
     <td>
-      <a href="developer-how-tos_gen_dev_keyring.html">Data Quality Dashboard Example</a>
+      <a href="developer-how-tos_gen_dev_keyring.html">How to Store Your Database Credentials in an Encrypted Key Ring</a>
+      <br/>
+        This document provides a complete example of how to use a key ring to store your database credentials. 
+    </td>
+  </tr>
+  <!--
+  *
+  * Data Quality Dashboard Example
+  *
+  * -->
+  <tr>
+    <td>Debugging Code in RStudio Example</td>
+    <td>
+      <a href="./developer-how-tos_gen_dev_dqd_example.html">Data Quality Dashboard Example</a>
       <br/>
         This document provides a complete example of how to 
         <ul>
