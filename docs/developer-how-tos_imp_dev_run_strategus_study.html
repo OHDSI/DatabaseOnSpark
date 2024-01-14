@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -223,6 +226,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -230,6 +302,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -332,9 +414,9 @@ $(document).ready(function () {
 * Introduction
 *
 -->
-<h3>
+<h2>
 Introduction
-</h3>
+</h2>
 <p>This document provides a complete example of how to run a Strategus
 study.</p>
 <!--
@@ -343,7 +425,7 @@ study.</p>
 *
 -->
 <h2>
-Identify or create the data source to use
+Identify or create CDM
 </h2>
 <p>Before starting, identify the datasource to be used as the CDM. If
 you do not have a data source, you can create an instance of the Eunomia
@@ -351,9 +433,62 @@ CDM by following the instructions in the
 <a href="./developer-how-tos_ohdsi-on-databricks.html">OHDSI on
 databricks guide</a> in the “Create a test instance of the CDM in
 Databricks” section.</p>
+<!--
+*
+* Installation of R and RTools
+*
+-->
+<h2>
+Installation of R and RTools
+</h2>
+R 4.2.3 and RTools 4.2 are used here. These are the versions that were
+used for testing and validation. R 4.2.3 can be downloaded from
+<a href="https://cran.r-project.org/bin/windows/base/">https://cran.r-project.org/bin/windows/base/</a>.
+<br/> <br/> RTools 4.2 can be downloaded from
+<nobr><a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html</a></nobr>
+<br/> <br/> Or the windows installer for each can be directly downloaded
+here:
+<ul>
+<li>
+<a download href="https://www.dropbox.com/scl/fi/2ao0wbi49ic19jcxk8lf0/R-4.2.3-win.exe?rlkey=3qlk90ugzx7q9ym2z3yjqmhl5&dl=1">R
+4.2.3</a>
+</li>
+<li>
+<a download href="https://www.dropbox.com/scl/fi/1xi8asmak0u6foi6b5mgc/rtools42-5355-5357.exe?rlkey=r0psxd9e5gv1vk8rkm7pasmad&dl=1">RTools
+4.2</a>
+</li>
+</ul>
+<p>Run the R installer executable.<br />
+Set the LibPath as described below.<br />
+Then run the RTools installer.</p>
+<!--
+*
+* Set LibPaths
+*
+-->
+<h2>
+Set LibPaths
+</h2>
+Strategus uses the .libPaths() setting shown below. In order for
+libriaries to all be placed in the correct place, the default for
+.libPaths() needs to be set. Edit the .Renviron file by running the
+following.<br />
+
+<pre class="r">
+install.packages("usethis")
+library(usethis)
+edit_r_environ()
+</pre>
+Add the following line to your .Renviron file.<br />
+
+<pre class="r">
+R_LIBS_USER="C:/Program Files/R/R-4.2.3/library"
+</pre>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -386,6 +521,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
