@@ -1,0 +1,39 @@
+<!--
+*
+* HOW TO: Import and Export Concept Sets
+*
+--> 
+
+---
+title: '<div>How to Run a Strategus study</div>'
+output:
+  html_document:
+    toc: TRUE
+    toc_depth: 3
+    toc_float:
+    collapsed: false
+---
+
+<!--
+*
+* Introduction
+*
+-->
+
+<h3>Introduction</h3>
+This document provides a complete example of how to run a Strategus study. 
+
+<!--
+*
+* Identify CDM data source
+*
+-->
+
+<h2>Identify or create the data source to use</h2>
+Before starting, identify the datasource to be used as the CDM. 
+If you do not have a data source, 
+you can create an instance of the Eunomia CDM 
+by following the instructions in the 
+<a href="./developer-how-tos_ohdsi-on-databricks.html">OHDSI on databricks guide</a> 
+in the "Create a test instance of the CDM in Databricks" section.  
+

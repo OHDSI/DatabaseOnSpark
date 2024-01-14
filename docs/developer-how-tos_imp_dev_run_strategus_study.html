@@ -11,7 +11,7 @@
 
 
 
-<title>OHDSI Databricks User Group Developer How-tos</title>
+<title>How to Run a Strategus study</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -317,70 +317,40 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">OHDSI Databricks User Group Developer
-How-tos</h1>
+<h1 class="title toc-ignore">How to Run a Strategus study</h1>
 
 </div>
 
 
-<p>
+<!--
+*
+* HOW TO: Import and Export Concept Sets
+*
+-->
+<!--
+*
+* Introduction
+*
+-->
+<h3>
+Introduction
+</h3>
+<p>This document provides a complete example of how to run a Strategus
+study.</p>
+<!--
+*
+* Identify CDM data source
+*
+-->
 <h2>
-Create an AWS Account
+Identify or create the data source to use
 </h2>
-<p>
-This guide will walk you through the process of creating an Amazon Web
-Services (AWS) account that can be used to create a test instance of
-Databricks. You will need a credit card to create the account and the
-card will be charged if you do not close the account before the end of
-the trial period.
-</p>
-<!-- 01-aws-open -->
-<p>
-Navigate to <a href="https://aws.amazon.com">https://aws.amazon.com</a>
-and select Sign in to the Console. <br/>
-<img src="img/developer-how-tos/aws/01-aws-open.png" /> <br/> <br/>
-</p>
-<!-- 02-create-new -->
-<p>
-On this page select Create New AWS Account. <br/>
-<img src="img/developer-how-tos/aws/02-aws-create-new-aws.png" />
-<br/> <br/>
-</p>
-<!-- 03-sign-up -->
-<p>
-This will take you to the Sign-up page. Enter the information as shown
-below. You will need a credit card to create the account and the card
-will be charged if you do not close the account before the end of the
-trial period. <br/>
-<img src="img/developer-how-tos/aws/03-aws-sign-up.png" /> <br/> <br/>
-</p>
-<!-- SIGN UP -->
-<p>
-This will take you to the series of pages below that are used to create
-your account. <br/> <!-- pwd --> Create a password. <br/>
-<img src="img/developer-how-tos/aws/04-aws-pwd.png" /> <br/> <br/>
-<!-- personal-info --> Enter password. <br/>
-<img src="img/developer-how-tos/aws/05-aws-personal-info.png" /> <br/>
-<br/> <!-- credit-card  --> Enter your credit card information. <br/>
-<img src="img/developer-how-tos/aws/06-aws-credit-card.png" /> <br/>
-<br/> <!-- confirm-identity  --> Enter the information required to
-confirm your identity. <br/>
-<img src="img/developer-how-tos/aws/07-aws-confirm-identity.png" />
-<br/> <br/> <!-- confirm-identity-02  --> Confirm your identity. <br/>
-<img src="img/developer-how-tos/aws/08-aws-confirm-identity-02.png" />
-<br/> <br/> <!-- select plan  --> Select the free plan option (or other
-if you are setting up a production instance). <br/>
-<img src="img/developer-how-tos/aws/09-aws-select-plan.png" /> <br/>
-<br/> <!-- done  --> Your AWS has now been created.<br />
-<br/> <img src="img/developer-how-tos/aws/10-aws-done.png" /> <br/>
-<br/> <!-- log on  --> You can now log into your instance using the
-credentials you created. <br/>
-<img src="img/developer-how-tos/aws/11-aws-logon.png" /> <br/> <br/>
-<!-- success  --> A successful login should look similar to what is
-shown below. <br/>
-<img src="img/developer-how-tos/aws/12-aws-console.png" /> <br/> <br/>
-</p>
-</p>
+<p>Before starting, identify the datasource to be used as the CDM. If
+you do not have a data source, you can create an instance of the Eunomia
+CDM by following the instructions in the
+<a href="./developer-how-tos_ohdsi-on-databricks.html">OHDSI on
+databricks guide</a> in the “Create a test instance of the CDM in
+Databricks” section.</p>
 
 
 
