@@ -442,12 +442,15 @@ Databricks” section.</p>
 Installation of R and RTools
 </h2>
 R 4.2.3 and RTools 4.2 are used here. These are the versions that were
-used for testing and validation. R 4.2.3 can be downloaded from
+used for testing and validation.
+<p>
+R 4.2.3 can be downloaded from
 <a href="https://cran.r-project.org/bin/windows/base/">https://cran.r-project.org/bin/windows/base/</a>.
-<br/> <br/> RTools 4.2 can be downloaded from
+<br/> RTools 4.2 can be downloaded from
 <nobr><a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html</a></nobr>
-<br/> <br/> Or the windows installer for each can be directly downloaded
-here:
+</p>
+<p>
+Or the windows installer for each can be directly downloaded here:
 <ul>
 <li>
 <a download href="https://www.dropbox.com/scl/fi/2ao0wbi49ic19jcxk8lf0/R-4.2.3-win.exe?rlkey=3qlk90ugzx7q9ym2z3yjqmhl5&dl=1">R
@@ -458,9 +461,19 @@ here:
 4.2</a>
 </li>
 </ul>
-<p>Run the R installer executable.<br />
-Set the LibPath as described below.<br />
-Then run the RTools installer.</p>
+</p>
+After downloading the installers perform these steps in order:
+<ul>
+<li>
+Run the R installer executable.
+</li>
+<li>
+Set the LibPath as described below.
+</li>
+<li>
+Then run the RTools installer.
+</li>
+</ul>
 <!--
 *
 * Set LibPaths
@@ -484,6 +497,86 @@ Add the following line to your .Renviron file.<br />
 <pre class="r">
 R_LIBS_USER="C:/Program Files/R/R-4.2.3/library"
 </pre>
+<!--
+*
+* Download Client
+*
+-->
+<h2>
+Download Client
+</h2>
+<p>To run our Strategus study we will be using a Strategus client called
+Ergasia (named after the Greek god of light work… or so I’ve been told
+by ChatGPT). Clone the project and check out the desired version as
+shown below (this documentation was created for the v0.0.1 version).</p>
+<pre class="r">
+git clone https://github.com/NACHC-CAD/ergasia
+cd ergasia
+git checkout v0.0.1
+</pre>
+<p>
+Note that the Ergasia project is somewhat object oriented. Files are
+best browsed in a tool that supports file browsing a little bit better
+than RStudio. Here, we will be using Visual Studio Code (VSC) to browse
+files and RStudio to execute code.
+</p>
+<!--
+*
+* Download Client
+*
+-->
+<h2>
+Bootstrap
+</h2>
+<p>
+Strategus (an R in general) has requirements for version configuration.
+Before we can run our study, we need to make sure we have the correct
+libraries and the correct versions of these libraries installed. This
+can be done by simply running the Bootstrap.R script found in
+./_StartHere/Bootstrap. Open this script in RStudio and execute the
+entire script (e.g. <Shift><Ctrl><Enter>). This will install the correct
+version of all of the required R libraries. This script can be run
+multiple times (install is skipped if the correct version is found).
+<br/> <img src="img/imp-dev/strategus/01-run-bootstrap.png"/>
+</p>
+<!--
+*
+* Resources and Configuration
+*
+-->
+<h2>
+Resources and Configuration
+</h2>
+<p>
+All of the resources you will normally need to run a study are in the
+_StartHere folder including all of the configurations you will need to
+edit or otherwise define.
+</p>
+<p>
+To run a study, we will need the following:
+<ul>
+<li>
+Connection Details for the CDM
+</li>
+<li>
+Connection Details for the reporting database (postgres)
+</li>
+<li>
+The Strategus study definitions for the studies you are going to run
+</li>
+<li>
+A configuration file that pulls everything together
+</li>
+</ul>
+<p>Details for each of these are given individually below. Test/example
+versions of each of these are provided except for the CDM database
+details. There is an example given and you sould be able to create your
+own based on this example. The example CDM connection details are for a
+Databricks database and use the keyring pattern defined in the
+<a href="./developer-how-tos_gen_dev_keyring.html">key ring example</a>.
+Location of these resources is shown below. <br/>
+<img src="img/imp-dev/strategus/02-resources.png"/></p>
+</p>
 
 
 
