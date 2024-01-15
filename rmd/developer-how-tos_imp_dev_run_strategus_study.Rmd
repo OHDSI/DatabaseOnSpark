@@ -151,8 +151,8 @@ git checkout v0.0.1
 <p>
   To run a study, we will need the following:
   <ul>
-    <li>Connection Details for the CDM</li>
     <li>Connection Details for the reporting database (postgres)</li>
+    <li>Connection Details for the CDM</li>
     <li>The Strategus study definitions for the studies you are going to run</li>
     <li>A configuration file that pulls everything together</li>
   </ul>
@@ -164,7 +164,106 @@ git checkout v0.0.1
   Location of these resources is shown below. 
   <br/>
   <img src="./img/imp-dev/strategus/02-resources.png"/>
+</p>
 
+<!--
+*
+* Connection Details: Reporting
+*
+-->
+
+<h3>Connection Details: Reporting</h3>
+<p>
+  Connection details for your reporting (postgres) instance can be configured by editing:
+  <br/>
+  ./_StartHere/ConnectionDetails/Results/ConnectionDetailsForResults.R
+  <br/>
+  The contents of the existing ConnectionDetailsForCdm.R file are shown below. 
+<pre class="pre-scrollable" height="100">
+# ---
+# 
+# ConnectionDetailsFactoryForResults.R
+# This script creates the DatabaseConnector connectionDetails objects used for reporting results. 
+# Use this code as is or substitute with your own. 
+#
+# ---
+
+ConnectionDetailsForResults <- {}
+
+ConnectionDetailsForResults$createConnectionDetails <- function() {
+  resultsDatabaseConnectionDetails <- DatabaseConnector::createConnectionDetails(
+    dbms = "postgresql",
+    connectionString = "jdbc:postgresql://localhost:5432/STRAT_RESULTS?user=postgres&password=ohdsi&currentSchema=STRAT_RESULTS",
+    pathToDriver = "D:/_YES/databases/postgres/drivers/42.3.3"
+  )
+  return(resultsDatabaseConnectionDetails)
+}
+
+</pre>
+</p>
+
+<!--
+*
+* Connection Details: CDM
+*
+-->
+
+<h3>Connection Details: CDM</h3>
+<p>
+  Connection details for your CDM instance can be configured by editing:
+  <br/>
+  ./_StartHere/ConnectionDetails/CDM/ConnectionDetailsForCdm.R
+  <br/>
+  Instructions for setting up the keychain used here can be found in the 
+  <a href="./developer-how-tos_gen_dev_keyring.html">key ring example</a>.
+  The contents of the existing ConnectionDetailsForCdm.R file are shown below. 
+<pre class="pre-scrollable" height="100">
+# ---
+#
+# Implementation of ConnectionDetailsForCdm that returns a Databricks connection
+# and uses a keyring to store secret information.  
+#
+# ---
+
+ConnectionDetailsForCdm <- {}
+
+ConnectionDetailsForCdm$get <- function() {
+  
+  #
+  # functions to get databricks token (user will be prompted for keyring password)
+  #
+  
+  getToken <- function () {
+    return (
+      keyring::backend_file$new()$get(
+        service = "production",
+        user = "token",
+        keyring = "databricks_keyring"
+      )
+    )
+  }
+  
+  #
+  # functions to get url with the token included
+  #
+  
+  getUrl <- function () {
+    url <- "jdbc:databricks://nachc-databricks.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/3956472157536757/0123-223459-leafy532;AuthMech=3;UseNativeQuery=1;UID=token;PWD="
+    return (
+      paste(url, getToken(), sep = "")
+    )  
+  }
+  
+  connectionDetails <- DatabaseConnector::createConnectionDetails (
+    dbms = "spark",
+    connectionString = getUrl(),
+    pathToDriver="D:\\_YES_2023-05-28\\workspace\\SosExamples\\_COVID\\02-data-diagnostics\\drivers\\databricks\\"
+  )
+
+  return(connectionDetails)  
+  
+}
+</pre>
 </p>
 
 
