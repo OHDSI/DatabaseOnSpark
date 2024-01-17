@@ -1,0 +1,437 @@
+---
+title: '<div>How to Run a Strategus study using Ergasia</div>'
+output:
+  html_document:
+    toc: TRUE
+    toc_depth: 3
+    toc_float:
+      collapsed: FALSE
+---
+
+<!--
+*
+* HOW TO: Import and Export Concept Sets
+*
+--> 
+
+<!--
+*
+* Introduction
+*
+-->
+
+<h2>Introduction</h2>
+This document provides a complete example of how to run a Strategus study using the Strategus client Ergasia 
+<nobr>(<a href="https://github.com/NACHC-CAD/ergasia">https://github.com/NACHC-CAD/ergasia</a>).</nobr>
+<!--
+*
+* Identify CDM data source
+*
+-->
+
+<h2>Identify or create CDM</h2>
+Before starting, identify the datasource to be used as the CDM. 
+If you do not have a data source, 
+you can create an instance of the Eunomia CDM 
+by following the instructions in the 
+<a href="./developer-how-tos_ohdsi-on-databricks.html">OHDSI on databricks guide</a> 
+in the "Create a test instance of the CDM in Databricks" section.  
+
+<!--
+*
+* Installation of R and RTools
+*
+-->
+
+<h2>Installation of R and RTools</h2>
+R 4.2.3 and RTools 4.2 are used here. 
+These are the versions that were used for testing and validation. 
+<p>
+R 4.2.3 can be downloaded from 
+<a href="https://cran.r-project.org/bin/windows/base/">https://cran.r-project.org/bin/windows/base/</a>. 
+<br/>
+RTools 4.2 can be downloaded from 
+<nobr><a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html</a></nobr> 
+</p>
+<p>
+Or the windows installer for each can be directly downloaded here:
+<ul>
+  <li>
+    <a download href="https://www.dropbox.com/scl/fi/2ao0wbi49ic19jcxk8lf0/R-4.2.3-win.exe?rlkey=3qlk90ugzx7q9ym2z3yjqmhl5&dl=1">R 4.2.3</a>
+  </li>
+  <li>
+    <a download href="https://www.dropbox.com/scl/fi/1xi8asmak0u6foi6b5mgc/rtools42-5355-5357.exe?rlkey=r0psxd9e5gv1vk8rkm7pasmad&dl=1">RTools 4.2</a>
+  </li>
+</ul>
+</p>
+
+After downloading the installers perform these steps in order:
+<ul>
+  <li>Run the R installer executable.</li> 
+  <li>Set the LibPath as described below.</li>  
+  <li>Then run the RTools installer.</li>
+</ul>
+
+<!--
+*
+* Set LibPaths
+*
+-->
+
+<h2>Set LibPaths</h2>
+Strategus uses the .libPaths() setting shown below. 
+In order for libriaries to all be placed in the correct place, 
+the default for .libPaths() needs to be set. 
+Edit the .Renviron file by running the following.  
+<pre class="r">
+install.packages("usethis")
+library(usethis)
+edit_r_environ()
+</pre>
+Add the following line to your .Renviron file.  
+<pre class="r">
+R_LIBS_USER="C:/Program Files/R/R-4.2.3/library"
+</pre>
+
+<!--
+*
+* Download Client
+*
+-->
+
+<h2>Download Client</h2>
+To run our Strategus study we will be using a Strategus client called Ergasia 
+(named after the Greek god of light work... or so I've been told by ChatGPT). 
+Clone the project and check out the desired version as shown below 
+(this documentation was created for the v0.0.1 version). 
+
+<pre class="r">
+git clone https://github.com/NACHC-CAD/ergasia
+cd ergasia
+git checkout v0.0.1
+</pre>
+
+<p>
+  Note that the Ergasia project is somewhat object oriented. 
+  Files are best browsed in a tool that supports file browsing a little bit better than RStudio. 
+  Here, we will be using Visual Studio Code (VSC) to browse files and RStudio to execute code. 
+</p>
+
+
+<!--
+*
+* Download Client
+*
+-->
+
+<h2>Bootstrap</h2>
+<p>
+  Strategus (an R in general) has requirements for version configuration. 
+  Before we can run our study, we need to make sure we have the correct libraries 
+  and the correct versions of these libraries installed. 
+  This can be done by simply running the Bootstrap.R script found in ./_StartHere/Bootstrap. 
+  Open this script in RStudio and execute the entire script (e.g. <Shift><Ctrl><Enter>). 
+  This will install the correct version of all of the required R libraries. 
+  This script can be run multiple times (install is skipped if the correct version is found). 
+  <br/>
+  <img src="./img/imp-dev/strategus/01-run-bootstrap.png"/>
+</p>
+
+<!--
+*
+* Testing Resources
+*
+-->
+
+<h2>Testing Resources</h2>
+<p>
+  The Ergasia project includes everything required to run included test studies... 
+  except for the connection details for the CDM database connection. 
+  Future releases will include connection details to a default install of Braodsea. 
+  To run a test study, simply create your CDM connection details (as described below),  
+  edit the ./_StartHere/Configuration/configuration.json file (as described below), 
+  and then run ./_StartHere/01-RunStudies.R script. 
+</p>
+
+<!--
+*
+* Resources and Configuration
+*
+-->
+
+<h2>Resources and Configuration</h2>
+<p>
+  All of the resources you will normally need to run a study are in the _StartHere folder 
+  including all of the configurations you will need to edit or otherwise define. 
+</p>
+<p>
+  To run a study, we will need the following:
+  <ul>
+    <li>Connection Details for the reporting database (postgres)</li>
+    <li>Connection Details for the CDM</li>
+    <li>The Strategus study definitions for the studies you are going to run</li>
+    <li>A configuration file that pulls everything together</li>
+  </ul>
+  Details for each of these are given individually below. 
+  Test/example versions of each of these are provided except for the CDM database details. 
+  There is an example given and you sould be able to create your own based on this example. 
+  The example CDM connection details are for a Databricks database and use the keyring pattern defined in the 
+  <a href="./developer-how-tos_gen_dev_keyring.html">key ring example</a>.
+  Location of these resources is shown below. 
+  <br/>
+  <img src="./img/imp-dev/strategus/02-resources.png"/>
+</p>
+
+<!--
+*
+* Connection Details: Reporting
+*
+-->
+
+<h3>Connection Details: Reporting</h3>
+<p>
+  Connection details for your reporting (postgres) instance can be configured by editing:
+  <br/>
+  ./_StartHere/ConnectionDetails/Results/ConnectionDetailsForResults.R
+  <br/>
+  The contents of the existing ConnectionDetailsForCdm.R file are shown below. 
+<pre class="pre-scrollable" height="100">
+# ---
+# 
+# ConnectionDetailsFactoryForResults.R
+# This script creates the DatabaseConnector connectionDetails objects used for reporting results. 
+# Use this code as is or substitute with your own. 
+#
+# ---
+
+ConnectionDetailsForResults <- {}
+
+ConnectionDetailsForResults$createConnectionDetails <- function() {
+  resultsDatabaseConnectionDetails <- DatabaseConnector::createConnectionDetails(
+    dbms = "postgresql",
+    connectionString = "jdbc:postgresql://localhost:5432/STRAT_RESULTS?user=postgres&password=ohdsi&currentSchema=STRAT_RESULTS",
+    pathToDriver = "D:/_YES/databases/postgres/drivers/42.3.3"
+  )
+  return(resultsDatabaseConnectionDetails)
+}
+
+</pre>
+</p>
+
+<!--
+*
+* Connection Details: CDM
+*
+-->
+
+<h3>Connection Details: CDM</h3>
+<p>
+  Connection details for your CDM instance can be configured by editing:
+  <br/>
+  ./_StartHere/ConnectionDetails/CDM/ConnectionDetailsForCdm.R
+  <br/>
+  Instructions for setting up the keychain used here can be found in the 
+  <a href="./developer-how-tos_gen_dev_keyring.html">key ring example</a>.
+  The contents of the existing ConnectionDetailsForCdm.R file are shown below. 
+<pre class="pre-scrollable" height="100">
+# ---
+#
+# Implementation of ConnectionDetailsForCdm that returns a Databricks connection
+# and uses a keyring to store secret information.  
+#
+# ---
+
+ConnectionDetailsForCdm <- {}
+
+ConnectionDetailsForCdm$get <- function() {
+  
+  #
+  # functions to get databricks token (user will be prompted for keyring password)
+  #
+  
+  getToken <- function () {
+    return (
+      keyring::backend_file$new()$get(
+        service = "production",
+        user = "token",
+        keyring = "databricks_keyring"
+      )
+    )
+  }
+  
+  #
+  # functions to get url with the token included
+  #
+  
+  getUrl <- function () {
+    url <- "jdbc:databricks://nachc-databricks.cloud.databricks.com:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/3956472157536757/0123-223459-leafy532;AuthMech=3;UseNativeQuery=1;UID=token;PWD="
+    return (
+      paste(url, getToken(), sep = "")
+    )  
+  }
+  
+  connectionDetails <- DatabaseConnector::createConnectionDetails (
+    dbms = "spark",
+    connectionString = getUrl(),
+    pathToDriver="D:\\_YES_2023-05-28\\workspace\\SosExamples\\_COVID\\02-data-diagnostics\\drivers\\databricks\\"
+  )
+
+  return(connectionDetails)  
+  
+}
+</pre>
+</p>
+
+<!--
+*
+* Strategus study definition
+*
+-->
+
+<h3>Strategus Study Definition</h3>
+<p>
+  The Ergasia project assumes you have created your Strategus study definition. 
+  Study definitions that can be used for testing and validation 
+  can be found in the ./_StartHere/Studies folder. 
+  The process for creating a Strategus study is currently documented at 
+  <a href="https://ohdsi.github.io/Strategus/articles/CreatingAnalysisSpecification.html">https://ohdsi.github.io/Strategus/articles/CreatingAnalysisSpecification.html</a>
+</p>
+
+<!--
+*
+* Configuration file
+*
+-->
+
+<h3>Configuration File</h3>
+<p>
+  A sample configuration file that can be used for testing can be found at ./_StartHere/Configuration/configuration.json. 
+  The contents of this file are shown below. 
+<pre class="pre-scrollable" height="100">
+{
+    "libPath": "",
+    "dbms": "spark",
+    "resultsDatabaseName": "EUNOMIA_RESULTS",
+    "outputDir": "C:/temp/ergasia/EUNOMIA",
+    "logDir": "C:/temp/ergasia/log",
+    "pathToDriver": "./etc/database/postgres/42.3.3", 
+    "cdmSchema": "demo_cdm",
+    "workSchema": "demo_work",
+    "tempSchema": "demo_temp",
+    "resultsSchemaPrefix": "demo_",
+    "cohortTableName": "demo_cohort",
+    "studyNameList": [],
+    "resultsFilter": [],
+    "databaseFilter": [],
+    "minCellCount": 5,
+    "studiesToRun": [
+        ["./_StartHere/Studies/Test/howoften/howoften_andreas.json", "andreas"],
+        ["./_StartHere/Studies/Test/howoften/howoften_azza.json", "azza"],
+        ["./_StartHere/Studies/Test/howoften/howoften_evan.json", "evan"],
+        ["./_StartHere/Studies/Test/howoften/howoften_george.json", "george"],
+        ["./_StartHere/Studies/Test/howoften/howoften_gowza.json", "gowza"],
+        ["./_StartHere/Studies/Test/howoften/howoften_joel.json", "joel"],
+        ["./_StartHere/Studies/Test/howoften/howoften_overall.json", "overall"]
+    ]
+}
+
+
+
+</pre>
+
+  Each of these parameters are described below.  
+  
+  <!--
+  *
+  * Parameter Details
+  *
+  -->
+
+  <h3>Parameter Details</h3>
+  This section describes the parameters defined in the ./_StartHere/Configuration/configuration.json file. 
+  The next section ("Run Studies") will describe the end to end process to run a study.   
+
+  <!-- libPath -->
+  <h4>libPath</h4>
+  This parameter is no longer used and is in the process of being refactored out. 
+  
+  <!-- dbms -->
+  <h4>dbms</h4>
+  The dmbs of your CDM (e.g. "spark", "postgres", etc.
+  
+  <!-- resultsDatabaseName -->
+  <h4>resultsDatabaseName</h4>
+  This is the name of the Postgres Database where the results will be stored. 
+  This database needs to be created before running a study. 
+  
+  <!-- outputDir -->
+  <h4>outputDir</h4>
+  The root directory where the study results will be written.  
+  
+  <!-- logDir -->
+  <h4>logDir</h4>
+  The directory where logging output will be directed. 
+  
+  <!-- pathToDriver -->
+  <h4>pathToDriver</h4>
+  The path to where the jdbc driver for your Postgres database can be found. 
+  This diretory should only contain the driver and no other files. 
+  
+  <!-- cdmschema -->
+  <h4>cdmSchema</h4>
+  The name of the schema that contains the CDM to be used for the study. 
+  
+  <!-- workSchema -->
+  <h4>workSchema</h4>
+  This is a schema in the same dbms system that will be used as a workspace by Strategus. 
+  This schema needs to be created before running a study. 
+  
+  <!-- dbms -->
+  <h4>tempSchema</h4>
+  This is a schema in the same dbms system that will be used as a workspace by Strategus. 
+  This schema needs to be created before running a study. 
+  
+  <!-- dbms -->
+  <h4>resultsSchemaPrefix</h4>
+  This is used to name the schema where the results of a study will be store. 
+  For example, if we run the study called "andreas" (described below), 
+  the results of the run will be written to a schema called "demo_andreas". 
+  
+  <!-- dbms -->
+  <h4>cohortTableName</h4>
+  Strategus needs this. Pick a name that make sense to you. 
+  I have not yet needed to access this table (i.e. it seems to be used primarily internally). 
+  
+  <!-- lists -->
+  <h4>lists</h4>
+  studyNameList, resultsFilter, and databseFilter are currently not used. 
+  
+  <!-- minCellCount -->
+  <h4>minCellCount</h4>
+  This is a value used to supress the creation of small sets of patients to protect privacy. 
+  
+  <!-- studiesToRun -->
+  <h4>studiesToRun</h4>
+  This is a list of the studies that will be run. 
+  Each item in this list contains the name of the file that contains the Strategus definition for the study 
+  and the name to be used for the study. 
+  
+</p>
+
+<h2>Run A Study</h2>
+In this section we will give a detailed description of each of the steps used to run a study. 
+The following steps are described. 
+<ul>
+  <li>Create the Postgres Database to hold the results</li>
+  <li>Create the work/temp schema in the same dbms as your CDM that will be used by Strategus</li>
+  <li>Delete the remains of any previous run</li>
+  <li>Initialize the R libraries (Bootstrap)</li>
+  <li>Run the study</li>
+  <li>Create the tables where the results will be stored</li>
+  <li>Upload the results</li>
+  <li>View the results</li>
+</ul>
+
+COMMING SOON :) :) :)
+
+
