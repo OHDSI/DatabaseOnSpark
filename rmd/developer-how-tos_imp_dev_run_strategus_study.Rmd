@@ -139,6 +139,22 @@ git checkout v0.0.1
 
 <!--
 *
+* Testing Resources
+*
+-->
+
+<h2>Testing Resources</h2>
+<p>
+  The Ergasia project includes everything required to run included test studies... 
+  except for the connection details for the CDM database connection. 
+  Future releases will include connection details to a default install of Braodsea. 
+  To run a test study, simply create your CDM connection details (as described below),  
+  edit the ./_StartHere/Configuration/configuration.json file (as described below), 
+  and then run ./_StartHere/01-RunStudies.R script. 
+</p>
+
+<!--
+*
 * Resources and Configuration
 *
 -->
@@ -266,7 +282,141 @@ ConnectionDetailsForCdm$get <- function() {
 </pre>
 </p>
 
+<!--
+*
+* Strategus study definition
+*
+-->
 
+<h3>Strategus Study Definition</h3>
+<p>
+  The Ergasia project assumes you have created your Strategus study definition. 
+  Study definitions that can be used for testing and validation 
+  can be found in the ./_StartHere/Studies folder. 
+  The process for creating a Strategus study is currently documented at 
+  <a href="https://ohdsi.github.io/Strategus/articles/CreatingAnalysisSpecification.html">https://ohdsi.github.io/Strategus/articles/CreatingAnalysisSpecification.html</a>
+</p>
+
+<!--
+*
+* Configuration file
+*
+-->
+
+<h3>Configuration File</h3>
+<p>
+  A sample configuration file that can be used for testing can be found at ./_StartHere/Configuration/configuration.json. 
+  The contents of this file are shown below. 
+<pre class="pre-scrollable" height="100">
+{
+    "libPath": "",
+    "dbms": "spark",
+    "resultsDatabaseName": "EUNOMIA_RESULTS",
+    "outputDir": "C:/temp/ergasia/EUNOMIA",
+    "logDir": "C:/temp/ergasia/log",
+    "pathToDriver": "./etc/database/postgres/42.3.3", 
+    "cdmSchema": "demo_cdm",
+    "workSchema": "demo_work",
+    "tempSchema": "demo_temp",
+    "resultsSchemaPrefix": "demo_",
+    "cohortTableName": "demo_cohort",
+    "studyNameList": [],
+    "resultsFilter": [],
+    "databaseFilter": [],
+    "minCellCount": 5,
+    "studiesToRun": [
+        ["./_StartHere/Studies/Test/howoften/howoften_andreas.json", "andreas"],
+        ["./_StartHere/Studies/Test/howoften/howoften_azza.json", "azza"],
+        ["./_StartHere/Studies/Test/howoften/howoften_evan.json", "evan"],
+        ["./_StartHere/Studies/Test/howoften/howoften_george.json", "george"],
+        ["./_StartHere/Studies/Test/howoften/howoften_gowza.json", "gowza"],
+        ["./_StartHere/Studies/Test/howoften/howoften_joel.json", "joel"],
+        ["./_StartHere/Studies/Test/howoften/howoften_overall.json", "overall"]
+    ]
+}
+
+
+
+</pre>
+
+  Each of these parameters are described below.  
+  
+  <!--
+  *
+  * Parameter Details
+  *
+  -->
+
+  <h3>Parameter Details</h3>
+  This section describes the parameters defined in the ./_StartHere/Configuration/configuration.json file. 
+  The next section ("Run Studies") will describe the end to end process to run a study.   
+
+  <!-- libPath -->
+  <h4>libPath</h4>
+  This parameter is no longer used and is in the process of being refactored out. 
+  
+  <!-- dbms -->
+  <h4>dbms</h4>
+  The dmbs of your CDM (e.g. "spark", "postgres", etc.
+  
+  <!-- resultsDatabaseName -->
+  <h4>resultsDatabaseName</h4>
+  This is the name of the Postgres Database where the results will be stored. 
+  This database needs to be created before running a study. 
+  
+  <!-- outputDir -->
+  <h4>outputDir</h4>
+  The root directory where the study results will be written.  
+  
+  <!-- logDir -->
+  <h4>logDir</h4>
+  The directory where logging output will be directed. 
+  
+  <!-- pathToDriver -->
+  <h4>pathToDriver</h4>
+  The path to where the jdbc driver for your Postgres database can be found. 
+  This diretory should only contain the driver and no other files. 
+  
+  <!-- cdmschema -->
+  <h4>cdmSchema</h4>
+  The name of the schema that contains the CDM to be used for the study. 
+  
+  <!-- workSchema -->
+  <h4>workSchema</h4>
+  This is a schema in the same dbms system that will be used as a workspace by Strategus. 
+  This schema needs to be created before running a study. 
+  
+  <!-- dbms -->
+  <h4>tempSchema</h4>
+  This is a schema in the same dbms system that will be used as a workspace by Strategus. 
+  This schema needs to be created before running a study. 
+  
+  <!-- dbms -->
+  <h4>resultsSchemaPrefix</h4>
+  This is used to name the schema where the results of a study will be store. 
+  For example, if we run the study called "andreas" (described below), 
+  the results of the run will be written to a schema called "demo_andreas". 
+  
+  <!-- dbms -->
+  <h4>cohortTableName</h4>
+  Strategus needs this. Pick a name that make sense to you. 
+  I have not yet needed to access this table (i.e. it seems to be used primarily internally). 
+  
+  <!-- lists -->
+  <h4>lists</h4>
+  studyNameList, resultsFilter, and databseFilter are currently not used. 
+  
+  <!-- minCellCount -->
+  <h4>minCellCount</h4>
+  This is a value used to supress the creation of small sets of patients to protect privacy. 
+  
+  <!-- studiesToRun -->
+  <h4>studiesToRun</h4>
+  This is a list of the studies that will be run. 
+  Each item in this list contains the name of the file that contains the Strategus definition for the study 
+  and the name to be used for the study. 
+  
+</p>
 
 
 
