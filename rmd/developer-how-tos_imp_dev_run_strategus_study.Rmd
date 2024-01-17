@@ -1,5 +1,5 @@
 ---
-title: '<div>How to Run a Strategus study</div>'
+title: '<div>How to Run a Strategus study using Ergasia</div>'
 output:
   html_document:
     toc: TRUE
@@ -21,8 +21,8 @@ output:
 -->
 
 <h2>Introduction</h2>
-This document provides a complete example of how to run a Strategus study. 
-
+This document provides a complete example of how to run a Strategus study using the Strategus client Ergasia 
+<nobr>(<a href="https://github.com/NACHC-CAD/ergasia">https://github.com/NACHC-CAD/ergasia</a>).</nobr>
 <!--
 *
 * Identify CDM data source
@@ -418,6 +418,20 @@ ConnectionDetailsForCdm$get <- function() {
   
 </p>
 
+<h2>Run A Study</h2>
+In this section we will give a detailed description of each of the steps used to run a study. 
+The following steps are described. 
+<ul>
+  <li>Create the Postgres Database to hold the results</li>
+  <li>Create the work/temp schema in the same dbms as your CDM that will be used by Strategus</li>
+  <li>Delete the remains of any previous run</li>
+  <li>Initialize the R libraries (Bootstrap)</li>
+  <li>Run the study</li>
+  <li>Create the tables where the results will be stored</li>
+  <li>Upload the results</li>
+  <li>View the results</li>
+</ul>
 
+COMMING SOON :) :) :)
 
 

@@ -11,7 +11,7 @@
 
 
 
-<title>How to Run a Strategus study</title>
+<title>How to Run a Strategus study using Ergasia</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -399,7 +399,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">How to Run a Strategus study</h1>
+<h1 class="title toc-ignore">How to Run a Strategus study using
+Ergasia</h1>
 
 </div>
 
@@ -418,12 +419,13 @@ div.tocify {
 Introduction
 </h2>
 <p>This document provides a complete example of how to run a Strategus
-study.</p>
+study using the Strategus client Ergasia
+<nobr>(<a href="https://github.com/NACHC-CAD/ergasia">https://github.com/NACHC-CAD/ergasia</a>).</nobr>
 <!--
 *
 * Identify CDM data source
 *
--->
+--></p>
 <h2>
 Identify or create CDM
 </h2>
@@ -792,7 +794,7 @@ logDir
 <p>The directory where logging output will be directed.</p>
 <!-- pathToDriver -->
 <h4>
-pathToDrive
+pathToDriver
 </h4>
 <p>The path to where the jdbc driver for your Postgres database can be
 found. This diretory should only contain the driver and no other
@@ -852,6 +854,39 @@ studiesToRun
 list contains the name of the file that contains the Strategus
 definition for the study and the name to be used for the study.</p>
 </p>
+<h2>
+Run A Study
+</h2>
+In this section we will give a detailed description of each of the steps
+used to run a study. The following steps are described.
+<ul>
+<li>
+Create the Postgres Database to hold the results
+</li>
+<li>
+Create the work/temp schema in the same dbms as your CDM that will be
+used by Strategus
+</li>
+<li>
+Delete the remains of any previous run
+</li>
+<li>
+Initialize the R libraries (Bootstrap)
+</li>
+<li>
+Run the study
+</li>
+<li>
+Create the tables where the results will be stored
+</li>
+<li>
+Upload the results
+</li>
+<li>
+View the results
+</li>
+</ul>
+<p>COMMING SOON :) :) :)</p>
 
 
 
