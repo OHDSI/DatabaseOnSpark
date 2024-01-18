@@ -140,7 +140,14 @@ git checkout v0.0.1
 
 <h2>Bootstrap</h2>
 <p>
-  Strategus (an R in general) has requirements for version configuration. 
+  <b>Note for Windows users:</b>
+  <br/>
+  Currently Strategus uses C:/Program Files/R/R-4.2.3/library as the location for R library files. 
+  This directory is often restricted to the admin user for write access. 
+  To ensure everything runs smoothly, it is recommended that you <b>Start RStudio as admin user for all Strategus work.</b> 
+</p>
+<p>
+  Strategus (and R in general) has requirements for version configuration. 
   Before we can run our study, we need to make sure we have the correct libraries 
   and the correct versions of these libraries installed. 
   This can be done by simply running the Bootstrap.R script found in ./_StartHere/Bootstrap. 
@@ -447,12 +454,19 @@ The following steps are described.
   <li>Create the Postgres Database to hold the results</li>
   <li>Create the work/temp/cohort schemas in the same dbms as your CDM that will be used by Strategus</li>
   <li>Delete the remains of any previous run</li>
+  <li>Edit .Renviron</li>
   <li>Initialize the R libraries (Bootstrap)</li>
   <li>Run the study</li>
   <li>Create the tables where the results will be stored</li>
   <li>Upload the results</li>
   <li>View the results</li>
 </ul>
+
+<b>Note for Windows users:</b>
+<br/>
+Currently Strategus uses C:/Program Files/R/R-4.2.3/library as the location for R library files. 
+This directory is often restricted to the admin user for write access. 
+To ensure everything runs smoothly, it is recommended that you <b>Start RStudio as admin user for all Strategus work.</b> 
 
   <!--
   *
@@ -537,6 +551,154 @@ drop database if exists demo_cohort cascade;
 create database demo_cohort;
 
 </pre>
+    Update the ./_StartHere/Configuration/configuration.json file 
+    to reflect the names of the databases we just created as shown below. 
+    Also, set the "resultsSchemaPrefix", this parameter is used to name the results of each indidual study. 
+    Also, set the "cohortTableName", in this case we are going with "demo_cohort". 
+    I haven't yet had the need to find this table (this parameters seems to be an internal configuration). 
+    You probably don't need to worry too much about this parameter unless you are in an environment with multiple teams and users. 
+    <img
+      src="./img/imp-dev/strategus/details/04-update-parameters.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/04-update-parameters.png')" 
+      title="Double click to see full size."
+    />
+
+  <!--
+  *
+  * Delete Previous Run
+  *
+  -->
+  
+    <h3>Delete Previous Run</h3>
+    Navigate to the folder defined in connfiguration.json as the "outputDir" (in this case C:\temp\ergasia\ERG_DEMO). 
+    Delete all but the _MODULES dir (the _MODULES dir is where the Strategus libries will be places, 
+    this is defined in the .Renviron file as described below). 
+    You can also delete the _MODULES directory if you are getting errors and think that the Strategus build/environment is not clean. 
+    This will cause the Strategus dependencies to be downloaded again the next time Strategus is run. 
+    <br/>
+    <img
+      src="./img/imp-dev/strategus/details/05-clean-dirs.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/05-clean-dirs.png')" 
+      title="Double click to see full size."
+    />
+
+  <!--
+  *
+  * Edit .Renviron
+  *
+  -->
+
+    <h3>Edit .Renviron</h3>
+    Edit your .Renviron file by executing the following:
+<pre class="r">
+install.packages("usethis")
+library(usethis)
+usethis::edit_r_environ()
+</pre>
+
+
+    Add the following to the .Renviron file:
+    <ul>
+      <li>
+        INSTANTIATED_MODULES_FOLDER
+        <br/>
+        This is the folder where Strategus will put its dependencies (the _MODULES folder mentioned above). 
+      </li>
+      <li>
+        GITHUB_PAT
+        <br/>
+        This is your github token. 
+        For more information on this including how to generate a token go to 
+        <a href="https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_git-create-token.html">https://ohdsi.github.io/DatabaseOnSpark/developer-how-tos_git-create-token.html</a>
+      </li>
+        STRATEGUS_KEYRING_PASSWORD
+        <br/>
+        This can be hard coded to 'sos'
+      <li>
+        R_LIBS_USER
+        <br/>
+        This is where the R libraries will be placed. 
+        Set this to C:/Program Files/R/R-4.2.3/library for windows. 
+      </li>
+    </ul>
+
+<pre class="r">
+INSTANTIATED_MODULES_FOLDER='C:/temp/ergasia/ERG_DEMO'
+GITHUB_PAT='&lt;YOUR_GITHUB_TOKEN&gt;'
+STRATEGUS_KEYRING_PASSWORD='sos'
+R_LIBS_USER="C:/Program Files/R/R-4.2.3/library"
+</pre>
+
+
+    <br/>
+    <img
+      src="./img/imp-dev/strategus/details/06-update-renviron.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/06-update-renviron.png')" 
+      title="Double click to see full size."
+    />
+    Save and close the .Renviron file. 
+
+  <!--
+  *
+  * Initialize the R Libraries
+  *
+  -->
+
+    <h3>Initialize R Libraries</h3>
+    Open RStudio (using run as admin user). 
+    Open the ergasia.Rproj. 
+    Open ./_StartHere/Bootstrap/Bootstrap.R. 
+    Execute this script. 
+    <br/>
+    <img
+      src="./img/imp-dev/strategus/details/07-bootstrap.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/07-bootstrap.png')" 
+      title="Double click to see full size."
+    />
+
+  <!--
+  *
+  * Run the Study
+  *
+  -->
+
+    <h3>Run the Study</h3>
+    Open ./_StartHere/01-RunStudies.R and execute this script. 
+    <br/>
+    <img
+      src="./img/imp-dev/strategus/details/08-run-study.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/08-run-study.png')" 
+      title="Double click to see full size."
+    />
+
+  <!--
+  *
+  * Create Tables
+  *
+  -->
+  <h3>Create Results Tables</h3>
+  Comming soon...
+
+  <!--
+  *
+  * Upload Results
+  *
+  -->
+  <h3>Upload Results</h3>
+  Comming soon...
+
+
+  <!--
+  *
+  * View Results
+  *
+  -->
+  <h3>View Results</h3>
+  Comming soon...
+
+
+
+
 
   </p>
   
@@ -544,10 +706,11 @@ create database demo_cohort;
 <br/>
 <br/>
 <br/>
+<!--
     <img
       src="./img/imp-dev/strategus/details/" 
       ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/')" 
       title="Double click to see full size."
     />
-
+-->
 
