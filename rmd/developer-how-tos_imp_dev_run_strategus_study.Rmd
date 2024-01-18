@@ -445,7 +445,7 @@ In this section we will give a detailed description of each of the steps used to
 The following steps are described. 
 <ul>
   <li>Create the Postgres Database to hold the results</li>
-  <li>Create the work/temp schema in the same dbms as your CDM that will be used by Strategus</li>
+  <li>Create the work/temp/cohort schemas in the same dbms as your CDM that will be used by Strategus</li>
   <li>Delete the remains of any previous run</li>
   <li>Initialize the R libraries (Bootstrap)</li>
   <li>Run the study</li>
@@ -463,6 +463,12 @@ The following steps are described.
   <h2>Run a Study Details</h2>
   In this section end-to-end detailed instructions to run a study are given. 
   
+  <!--
+  *
+  * Create the Results Database
+  *
+  -->
+
   <h3>Create the Results Database</h3>
   <p>
     Results for a study are stored in a PostgreSql database. 
@@ -502,6 +508,37 @@ The following steps are described.
 
   </p>
   
+  <!--
+  *
+  * Create Working Databases
+  *
+  -->
+
+  <h3>Create Working Databases</h3>
+  <p>
+    Strategus uses three databases to run a study: 
+    a working schema, a temp schema, and a cohort schema. 
+    These databases will be in the same RDMS as your CDM 
+    (in this case, Databricks). 
+    The empty shells of these databases need to be created before running a study. 
+    An example script that will create the instances of these schemas used by this example is given below. 
+<pre class="pre-scrollable" height="100">
+
+-- the work schema
+drop database if exists demo_work cascade; 
+create database demo_work;
+
+-- the temp schema
+drop database if exists demo_temp cascade; 
+create database demo_temp;
+
+-- the cohort schema
+drop database if exists demo_cohort cascade; 
+create database demo_cohort;
+
+</pre>
+
+  </p>
   
 <br/>
 <br/>
