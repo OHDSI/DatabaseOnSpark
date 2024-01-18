@@ -412,6 +412,17 @@ Ergasia</h1>
 -->
 <!--
 *
+* javascript
+*
+* -->
+<script>
+  function openFullSizeImage(imageSrc) {
+    // Open a new window with the full-size image
+    window.open(imageSrc, '_blank', 'width=auto,height=auto');
+  }
+</script>
+<!--
+*
 * Introduction
 *
 -->
@@ -539,7 +550,11 @@ can be done by simply running the Bootstrap.R script found in
 entire script (e.g. <Shift><Ctrl><Enter>). This will install the correct
 version of all of the required R libraries. This script can be run
 multiple times (install is skipped if the correct version is found).
-<br/> <img src="img/imp-dev/strategus/01-run-bootstrap.png"/>
+<br/> <img 
+    src="img/imp-dev/strategus/01-run-bootstrap.png" 
+    ondblclick="openFullSizeImage('./img/imp-dev/strategus/01-run-bootstrap.png')" 
+    title="Double click to see full size."
+  />
 </p>
 <!--
 *
@@ -593,8 +608,11 @@ details. There is an example given and you sould be able to create your
 own based on this example. The example CDM connection details are for a
 Databricks database and use the keyring pattern defined in the
 <a href="./developer-how-tos_gen_dev_keyring.html">key ring example</a>.
-Location of these resources is shown below. <br/>
-<img src="img/imp-dev/strategus/02-resources.png"/>
+Location of these resources is shown below. <br/> <img 
+    src="img/imp-dev/strategus/02-resources.png"
+    ondblclick="openFullSizeImage('./img/imp-dev/strategus/02-resources.png')" 
+    title="Double click to see full size."
+  />
 </p>
 <!--
 *
@@ -886,7 +904,49 @@ Upload the results
 View the results
 </li>
 </ul>
-<p>COMMING SOON :) :) :)</p>
+<p><!--
+  *
+  * Run a Study Details
+  *
+  --></p>
+<h2>
+Run a Study Details
+</h2>
+<p>In this section end-to-end detailed instructions to run a study are
+given.</p>
+<h3>
+Create the Results Database
+</h3>
+<p>
+Results for a study are stored in a PostgreSql database. The empty shell
+of the database needs to be created. The tables will be created after
+the study is run using the ./_StartHere/02-CreateResultsTables.R script.
+</p>
+<p>
+<p>To create the PostgreSql database, open PgAdmin, select your host,
+right click on Databases, and select Create &gt; Database… <br/> <img
+      src="img/imp-dev/strategus/details/01-create-database.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/01-create-database.png')" 
+      title="Double click to see full size."
+    /> <br/> <br/> Enter a name for your database (ERG_DEMO will be used
+here) and select Save. <br/> <img
+      src="img/imp-dev/strategus/details/02-create-database.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/02-create-database.png')" 
+      title="Double click to see full size."
+    /> <br/> <br/> Open the
+./_StartHere/Configuration/configuration.json file and edit the
+“resultsDatabaseName” parameter to point to the new database (in this
+case ERG_DEMO). <img
+      src="img/imp-dev/strategus/details/03-update-parameters.png" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/03-update-parameters.png')" 
+      title="Double click to see full size."
+    /></p>
+</p>
+<p><br/> <br/> <br/> <br/> <img
+      src="img/imp-dev/strategus/details" 
+      ondblclick="openFullSizeImage('./img/imp-dev/strategus/details/')" 
+      title="Double click to see full size."
+    /></p>
 
 
 
